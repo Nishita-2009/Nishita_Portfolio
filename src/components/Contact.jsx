@@ -6,6 +6,7 @@ import {
   Copy, 
   Check, 
   FileDown, 
+  ExternalLink,
   Send, 
   ArrowUpRight
 } from 'lucide-react';
@@ -134,7 +135,7 @@ export default function Contact() {
                 </div>
               </div>
 
-              {/* Direct Mail Action Buttons */}
+              {/* Direct Mail & Resume Action Buttons */}
               <div className="contact-actions">
                 <a
                   href={`mailto:${personalInfo.email}`}
@@ -145,12 +146,26 @@ export default function Contact() {
                   <span>Compose Email</span>
                 </a>
 
+                {/* View Resume button opens in a new tab */}
+                <a
+                  href={personalInfo.resumePath}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  id="contact-view-resume-btn"
+                  className="btn btn-secondary"
+                  title="Open Resume in a new browser tab"
+                >
+                  <ExternalLink size={16} />
+                  <span>View Resume</span>
+                </a>
+
+                {/* Download Resume button downloads the PDF as Gottipati_Nishita_Sri_Resume.pdf */}
                 <a
                   href={personalInfo.resumePath}
                   download="Gottipati_Nishita_Sri_Resume.pdf"
                   id="contact-download-resume-btn"
                   className="btn btn-resume"
-                  title="Download Resume in PDF format"
+                  title="Download Resume as Gottipati_Nishita_Sri_Resume.pdf"
                 >
                   <FileDown size={16} />
                   <span>Download Resume</span>

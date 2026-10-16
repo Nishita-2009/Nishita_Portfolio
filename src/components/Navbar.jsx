@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, FileDown } from 'lucide-react';
+import { Menu, X, FileDown, ExternalLink } from 'lucide-react';
 import { personalInfo, navLinks } from '../data/portfolioData';
 
 export default function Navbar() {
@@ -66,14 +66,16 @@ export default function Navbar() {
 
         {/* Desktop Action Buttons */}
         <div className="nav-actions">
+          {/* Resume button opens /resume.pdf in a new browser tab */}
           <a
             href={personalInfo.resumePath}
-            download="Gottipati_Nishita_Sri_Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             id="nav-resume-btn"
             className="btn btn-resume btn-sm"
-            title="Download Gottipati Nishita Sri's Resume"
+            title="Open Gottipati Nishita Sri's Resume in a new tab"
           >
-            <FileDown size={15} />
+            <ExternalLink size={15} />
             <span>Resume</span>
           </a>
           
@@ -112,6 +114,20 @@ export default function Navbar() {
           </nav>
           
           <div className="mobile-drawer-footer">
+            {/* View Resume button opens in new tab */}
+            <a
+              href={personalInfo.resumePath}
+              target="_blank"
+              rel="noopener noreferrer"
+              id="mobile-nav-view-resume-btn"
+              className="btn btn-secondary btn-full"
+              onClick={closeMenu}
+            >
+              <ExternalLink size={17} />
+              <span>View Resume</span>
+            </a>
+
+            {/* Download Resume button downloads the PDF as Gottipati_Nishita_Sri_Resume.pdf */}
             <a
               href={personalInfo.resumePath}
               download="Gottipati_Nishita_Sri_Resume.pdf"
@@ -122,6 +138,7 @@ export default function Navbar() {
               <FileDown size={17} />
               <span>Download Resume</span>
             </a>
+
             <div className="mobile-socials">
               <a
                 href={personalInfo.github}
