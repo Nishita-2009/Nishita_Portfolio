@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ExternalLink } from 'lucide-react';
+import { Menu, X, ExternalLink, FileDown } from 'lucide-react';
 import { personalInfo, navLinks } from '../data/portfolioData';
 
 export default function Navbar() {
@@ -7,11 +7,11 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
 
+  // Handle active navigation item based on scroll position
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
 
-      // Determine active section
       const sections = navLinks.map(link => link.href.substring(1));
       const scrollPos = window.scrollY + 120;
 
@@ -32,6 +32,23 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Lock body scroll and listen for Escape key when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+      const handleKeyDown = (e) => {
+        if (e.key === 'Escape') setIsOpen(false);
+      };
+      window.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.body.style.overflow = '';
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [isOpen]);
+
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
 
@@ -39,7 +56,7 @@ export default function Navbar() {
     <header className={`navbar-wrapper ${isScrolled ? 'scrolled' : ''}`}>
       <div className="container nav-container">
         {/* Brand Logo */}
-        <a href="#hero" className="brand-logo" id="nav-brand-link" aria-label="Gottipati Nishita Sri Portfolio">
+        <a href="#hero" className="brand-logo" id="nav-brand-link" aria-label="Gottipati Nishita Sri Portfolio" onClick={closeMenu}>
           <div className="brand-monogram">NS</div>
           <div className="brand-text">
             <span className="brand-name">{personalInfo.shortName}</span>
@@ -66,7 +83,6 @@ export default function Navbar() {
 
         {/* Desktop Action Buttons */}
         <div className="nav-actions">
-          {/* View Resume button opens /resume.pdf in a new browser tab */}
           <a
             href={personalInfo.resumePath}
             target="_blank"
@@ -76,7 +92,7 @@ export default function Navbar() {
             title="Open Gottipati Nishita Sri's Resume in a new tab"
           >
             <ExternalLink size={15} />
-            <span>View Resume</span>
+            <span>Resume</span>
           </a>
           
           {/* Mobile Menu Toggle Button */}
@@ -86,6 +102,7 @@ export default function Navbar() {
             id="mobile-menu-toggle"
             onClick={toggleMenu}
             aria-expanded={isOpen}
+            aria-controls="mobile-nav-drawer"
             aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
           >
             {isOpen ? <X size={22} /> : <Menu size={22} />}
@@ -94,7 +111,7 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Drawer Navigation */}
-      <div className={`mobile-drawer ${isOpen ? 'open' : ''}`} id="mobile-nav-drawer">
+      <div className={`mobile-drawer ${isOpen ? 'open' : ''}`} id="mobile-nav-drawer" aria-hidden={!isOpen}>
         <div className="mobile-drawer-inner">
           <nav aria-label="Mobile Navigation">
             <ul className="mobile-nav-list">
@@ -114,17 +131,27 @@ export default function Navbar() {
           </nav>
           
           <div className="mobile-drawer-footer">
-            {/* View Resume button opens in new tab */}
             <a
               href={personalInfo.resumePath}
               target="_blank"
               rel="noopener noreferrer"
               id="mobile-nav-view-resume-btn"
+              className="btn btn-secondary btn-full"
+              onClick={closeMenu}
+            >
+              <ExternalLink size={16} />
+              <span>View Resume</span>
+            </a>
+
+            <a
+              href={personalInfo.resumePath}
+              download="Gottipati_Nishita_Sri_Resume.pdf"
+              id="mobile-nav-download-resume-btn"
               className="btn btn-resume btn-full"
               onClick={closeMenu}
             >
-              <ExternalLink size={17} />
-              <span>View Resume</span>
+              <FileDown size={16} />
+              <span>Download Resume</span>
             </a>
 
             <div className="mobile-socials">

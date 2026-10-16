@@ -1,6 +1,7 @@
 /* Modern Developer Portfolio CSS Design System
    Gottipati Nishita Sri
    Color Theme: Dark Charcoal, Off-White, Subtle Blue/Violet Accents
+   Fully Mobile-First, Responsive & Accessible (320px to 1440px+)
 */
 
 :root {
@@ -9,7 +10,7 @@
   --bg-tertiary: #171b2b;
   --bg-card: rgba(18, 22, 35, 0.75);
   --bg-card-hover: rgba(24, 30, 48, 0.9);
-  --bg-glass: rgba(18, 22, 36, 0.85);
+  --bg-glass: rgba(18, 22, 36, 0.88);
 
   --text-primary: #f8fafc;
   --text-secondary: #cbd5e1;
@@ -53,6 +54,12 @@
   --max-width: 1200px;
 }
 
+@media (max-width: 768px) {
+  :root {
+    --header-height: 64px;
+  }
+}
+
 /* Reset and base */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -62,8 +69,9 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: calc(var(--header-height) + 20px);
+  scroll-padding-top: calc(var(--header-height) + 16px);
   color-scheme: dark;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -76,6 +84,7 @@ body {
   overflow-x: hidden;
   position: relative;
   min-height: 100vh;
+  width: 100%;
 }
 
 /* Ambient subtle background lighting */
@@ -102,6 +111,7 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.02em;
   font-weight: 700;
   line-height: 1.25;
+  overflow-wrap: break-word;
 }
 
 p {
@@ -116,11 +126,17 @@ a {
   color: inherit;
   text-decoration: none;
   transition: color var(--transition-fast);
+  touch-action: manipulation;
 }
 
 a:focus-visible, button:focus-visible {
   outline: 2px solid var(--accent-indigo);
   outline-offset: 3px;
+}
+
+button {
+  touch-action: manipulation;
+  font-family: inherit;
 }
 
 ul {
@@ -142,16 +158,45 @@ img, svg {
   padding-right: 1.5rem;
 }
 
+@media (max-width: 640px) {
+  .container {
+    padding-left: 1.125rem;
+    padding-right: 1.125rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .container {
+    padding-left: 0.875rem;
+    padding-right: 0.875rem;
+  }
+}
+
 .section {
   padding-top: 5.5rem;
   padding-bottom: 5.5rem;
   position: relative;
+  scroll-margin-top: calc(var(--header-height) + 16px);
+}
+
+@media (max-width: 1024px) {
+  .section {
+    padding-top: 4.25rem;
+    padding-bottom: 4.25rem;
+  }
 }
 
 @media (max-width: 768px) {
   .section {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
+    padding-top: 3.25rem;
+    padding-bottom: 3.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding-top: 2.75rem;
+    padding-bottom: 2.75rem;
   }
 }
 
@@ -159,6 +204,18 @@ img, svg {
   text-align: center;
   max-width: 680px;
   margin: 0 auto 3.5rem auto;
+}
+
+@media (max-width: 768px) {
+  .section-header {
+    margin-bottom: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-header {
+    margin-bottom: 1.75rem;
+  }
 }
 
 .section-badge {
@@ -170,24 +227,25 @@ img, svg {
   border: 1px solid rgba(139, 92, 246, 0.25);
   border-radius: var(--radius-full);
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 500;
   color: var(--accent-blue);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  margin-bottom: 1rem;
+  margin-bottom: 0.85rem;
 }
 
 .section-title {
-  font-size: clamp(2rem, 3.5vw, 2.75rem);
-  margin-bottom: 1rem;
+  font-size: clamp(1.85rem, 5.5vw, 2.75rem);
+  margin-bottom: 0.75rem;
+  line-height: 1.2;
   background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .section-subtitle {
-  font-size: 1.05rem;
+  font-size: clamp(0.9rem, 2.8vw, 1.05rem);
   color: var(--text-muted);
   line-height: 1.6;
 }
@@ -216,6 +274,15 @@ img, svg {
   transition: all var(--transition-normal);
   text-align: center;
   white-space: nowrap;
+  min-height: 44px; /* Accessible 44px touch target */
+  line-height: 1.2;
+}
+
+@media (max-width: 480px) {
+  .btn {
+    padding: 0.7rem 1.15rem;
+    font-size: 0.9rem;
+  }
 }
 
 .btn-primary {
@@ -260,11 +327,13 @@ img, svg {
 .btn-sm {
   padding: 0.5rem 1rem;
   font-size: 0.85rem;
+  min-height: 38px;
 }
 
 .btn-icon {
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
   padding: 0;
   border-radius: var(--radius-md);
   background: rgba(255, 255, 255, 0.04);
@@ -295,6 +364,19 @@ img, svg {
   overflow: hidden;
 }
 
+@media (max-width: 768px) {
+  .glass-card {
+    padding: 1.35rem;
+    border-radius: var(--radius-md);
+  }
+}
+
+@media (max-width: 360px) {
+  .glass-card {
+    padding: 1.15rem;
+  }
+}
+
 .glass-card::before {
   content: '';
   position: absolute;
@@ -312,6 +394,12 @@ img, svg {
   transform: translateY(-3px);
 }
 
+@media (hover: none) {
+  .glass-card:hover, .btn:hover {
+    transform: none !important;
+  }
+}
+
 /* Badges and Tags */
 .tech-tag {
   display: inline-flex;
@@ -321,7 +409,7 @@ img, svg {
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: var(--text-secondary);
   font-weight: 500;
   transition: all var(--transition-fast);
@@ -358,6 +446,7 @@ img, svg {
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -371,4 +460,14 @@ img, svg {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #2b334d;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

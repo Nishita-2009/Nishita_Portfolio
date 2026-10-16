@@ -6,6 +6,7 @@ import {
   Copy, 
   Check, 
   ExternalLink,
+  FileDown,
   Send, 
   ArrowUpRight
 } from 'lucide-react';
@@ -156,6 +157,18 @@ export default function Contact() {
                 >
                   <ExternalLink size={16} />
                   <span>View Resume</span>
+                </a>
+
+                {/* Download Resume button downloads the PDF as Gottipati_Nishita_Sri_Resume.pdf */}
+                <a
+                  href={personalInfo.resumePath}
+                  download="Gottipati_Nishita_Sri_Resume.pdf"
+                  id="contact-download-resume-btn"
+                  className="btn btn-secondary"
+                  title="Download Resume as Gottipati_Nishita_Sri_Resume.pdf"
+                >
+                  <FileDown size={16} />
+                  <span>Download Resume</span>
                 </a>
               </div>
             </div>
