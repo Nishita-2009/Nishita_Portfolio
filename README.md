@@ -106,7 +106,7 @@ The official resume PDF is connected at:
 ```
 public/resume.pdf
 ```
-When users click **Download Resume** in the navigation bar, hero section, or contact area, the browser automatically serves and downloads `public/resume.pdf` as `Gottipati_Nishita_Sri_Resume.pdf`.
+When users click **View Resume** in the navigation bar, hero section, or contact area, the browser automatically opens `/resume.pdf` in a new tab for seamless reading and reviewing.
 
 Whenever you update your resume:
 1. Export your latest resume as a PDF file named `resume.pdf`.

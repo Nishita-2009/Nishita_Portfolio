@@ -1,6 +1,5 @@
 import React from 'react';
 import { 
-  FileDown, 
   ExternalLink,
   FolderGit2, 
   Mail, 
@@ -52,23 +51,11 @@ export default function Hero() {
               target="_blank"
               rel="noopener noreferrer"
               id="hero-view-resume-btn"
-              className="btn btn-secondary"
+              className="btn btn-resume"
               title="Open Resume in a new browser tab"
             >
               <ExternalLink size={18} />
               <span>View Resume</span>
-            </a>
-
-            {/* Download Resume button downloads the PDF as Gottipati_Nishita_Sri_Resume.pdf */}
-            <a
-              href={personalInfo.resumePath}
-              download="Gottipati_Nishita_Sri_Resume.pdf"
-              id="hero-download-resume-btn"
-              className="btn btn-resume"
-              title="Download Resume as Gottipati_Nishita_Sri_Resume.pdf"
-            >
-              <FileDown size={18} />
-              <span>Download Resume</span>
             </a>
 
             <a

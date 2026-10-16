@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, FileDown, ExternalLink } from 'lucide-react';
+import { Menu, X, ExternalLink } from 'lucide-react';
 import { personalInfo, navLinks } from '../data/portfolioData';
 
 export default function Navbar() {
@@ -66,7 +66,7 @@ export default function Navbar() {
 
         {/* Desktop Action Buttons */}
         <div className="nav-actions">
-          {/* Resume button opens /resume.pdf in a new browser tab */}
+          {/* View Resume button opens /resume.pdf in a new browser tab */}
           <a
             href={personalInfo.resumePath}
             target="_blank"
@@ -76,7 +76,7 @@ export default function Navbar() {
             title="Open Gottipati Nishita Sri's Resume in a new tab"
           >
             <ExternalLink size={15} />
-            <span>Resume</span>
+            <span>View Resume</span>
           </a>
           
           {/* Mobile Menu Toggle Button */}
@@ -120,23 +120,11 @@ export default function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               id="mobile-nav-view-resume-btn"
-              className="btn btn-secondary btn-full"
+              className="btn btn-resume btn-full"
               onClick={closeMenu}
             >
               <ExternalLink size={17} />
               <span>View Resume</span>
-            </a>
-
-            {/* Download Resume button downloads the PDF as Gottipati_Nishita_Sri_Resume.pdf */}
-            <a
-              href={personalInfo.resumePath}
-              download="Gottipati_Nishita_Sri_Resume.pdf"
-              id="mobile-nav-resume-btn"
-              className="btn btn-resume btn-full"
-              onClick={closeMenu}
-            >
-              <FileDown size={17} />
-              <span>Download Resume</span>
             </a>
 
             <div className="mobile-socials">

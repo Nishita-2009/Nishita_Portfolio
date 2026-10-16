@@ -5,7 +5,6 @@ import {
   Phone,
   Copy, 
   Check, 
-  FileDown, 
   ExternalLink,
   Send, 
   ArrowUpRight
@@ -152,23 +151,11 @@ export default function Contact() {
                   target="_blank"
                   rel="noopener noreferrer"
                   id="contact-view-resume-btn"
-                  className="btn btn-secondary"
+                  className="btn btn-resume"
                   title="Open Resume in a new browser tab"
                 >
                   <ExternalLink size={16} />
                   <span>View Resume</span>
-                </a>
-
-                {/* Download Resume button downloads the PDF as Gottipati_Nishita_Sri_Resume.pdf */}
-                <a
-                  href={personalInfo.resumePath}
-                  download="Gottipati_Nishita_Sri_Resume.pdf"
-                  id="contact-download-resume-btn"
-                  className="btn btn-resume"
-                  title="Download Resume as Gottipati_Nishita_Sri_Resume.pdf"
-                >
-                  <FileDown size={16} />
-                  <span>Download Resume</span>
                 </a>
               </div>
             </div>
