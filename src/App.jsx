@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
+import Experience from './components/Experience';
 import Education from './components/Education';
 import Certifications from './components/Certifications';
 import Strengths from './components/Strengths';
@@ -31,7 +32,10 @@ export default function App() {
         {/* 4. Featured Projects Section */}
         <Projects />
 
-        {/* 5. Education Timeline */}
+        {/* 5. Experience & Virtual Internships */}
+        <Experience />
+
+        {/* 6. Education Timeline */}
         <Education />
 
         {/* 6. Certifications & Workshops */}

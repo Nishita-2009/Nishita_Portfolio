@@ -983,6 +983,249 @@
 }
 
 /* ==========================================================================
+   5b. EXPERIENCE & VIRTUAL INTERNSHIPS
+   ========================================================================== */
+.experience-container {
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.experience-card {
+  padding: 2rem 2.25rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-card);
+  transition: all var(--transition-normal);
+  position: relative;
+}
+
+.experience-card:hover {
+  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45), 0 0 24px rgba(99, 102, 241, 0.15);
+}
+
+.exp-top-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.25rem;
+}
+
+.exp-org-wrap {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.exp-icon-box {
+  width: 50px;
+  height: 50px;
+  min-width: 50px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.14) 0%, rgba(56, 189, 248, 0.1) 100%);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-blue);
+  flex-shrink: 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.exp-org-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.exp-org-line {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+  flex-wrap: wrap;
+}
+
+.exp-organization {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 1.1rem;
+  letter-spacing: 0.02em;
+}
+
+.exp-issuer {
+  color: var(--accent-blue);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+.exp-role {
+  font-family: var(--font-heading);
+  font-size: clamp(1.2rem, 3.2vw, 1.45rem);
+  color: #ffffff;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 0.35rem;
+}
+
+.exp-track-line {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+}
+
+.exp-track-label {
+  color: var(--text-subtle);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-family: var(--font-mono);
+}
+
+.exp-track-value {
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.exp-meta-pills {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.exp-status-badge {
+  background: rgba(34, 197, 94, 0.1);
+  border-color: rgba(34, 197, 94, 0.3);
+  color: #4ade80;
+  font-size: 0.76rem;
+  padding: 0.25rem 0.75rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: var(--radius-full);
+}
+
+.exp-status-badge::before {
+  background: #4ade80;
+  box-shadow: 0 0 6px #4ade80;
+}
+
+.exp-date-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.exp-divider {
+  height: 1px;
+  background: linear-gradient(90deg, rgba(99, 102, 241, 0.25) 0%, rgba(255, 255, 255, 0.05) 80%, transparent 100%);
+  margin: 1.35rem 0;
+}
+
+.exp-description {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 1.25rem;
+}
+
+.exp-highlights-wrap {
+  margin-bottom: 1.25rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.15rem;
+}
+
+.exp-highlights-heading {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--accent-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: var(--font-mono);
+  margin-bottom: 0.65rem;
+}
+
+.exp-highlights-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.exp-highlight-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+.exp-check-icon {
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.exp-tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.exp-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-subtle);
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.exp-cred-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.84rem;
+  color: var(--text-muted);
+}
+
+.exp-cred-info code {
+  font-family: var(--font-mono);
+  color: var(--accent-blue);
+  background: rgba(56, 189, 248, 0.08);
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  font-size: 0.8rem;
+}
+
+.exp-cert-btn {
+  min-height: 44px;
+  padding: 0.65rem 1.4rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  text-decoration: none;
+}
+
+/* ==========================================================================
    6. EDUCATION & TIMELINE
    ========================================================================== */
 .timeline-container {
@@ -1550,6 +1793,14 @@
 
 /* Tablet & Small Laptops (<=1024px) */
 @media (max-width: 1024px) {
+  .nav-list {
+    gap: 0.85rem;
+  }
+
+  .nav-link {
+    font-size: 0.84rem;
+  }
+
   .hero-section {
     padding-top: calc(var(--header-height) + 2rem);
     padding-bottom: 3.5rem;
@@ -1728,6 +1979,46 @@
 
 /* Intermediate Small Tablet / Large Mobile (<=640px) */
 @media (max-width: 640px) {
+  /* Experience Card Mobile Adjustment */
+  .experience-card {
+    padding: 1.25rem;
+  }
+
+  .exp-top-row {
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .exp-org-wrap {
+    gap: 0.75rem;
+  }
+
+  .exp-icon-box {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+  }
+
+  .exp-meta-pills {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .exp-footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .exp-cert-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
   /* Education Timeline Mobile Adjustment */
   .timeline-line {
     left: 14px;
@@ -1975,4 +2266,17 @@
   .copy-btn {
     margin-left: auto;
   }
+
+  .exp-organization {
+    font-size: 0.98rem;
+  }
+
+  .exp-role {
+    font-size: 1.15rem;
+  }
+
+  .exp-cred-info {
+    font-size: 0.78rem;
+  }
 }
+

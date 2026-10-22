@@ -244,12 +244,36 @@ export const professionalStrengths = [
   }
 ];
 
+export const experiences = [
+  {
+    id: "ibm-virtual-internship",
+    organization: "IBM | 1M1B",
+    role: "AI for Sustainability Virtual Internship",
+    programTrack: "IBM SkillsBuild • Virtual Internship",
+    status: "Completed",
+    completionDate: "October 2026",
+    issuer: "IBM SkillsBuild in collaboration with 1M1B",
+    credentialId: "PLAN-56138075980A",
+    systemOfRecord: "IBM Your Learning",
+    certificateUrl: "https://drive.google.com/file/d/11JV6W1GhbcYBPdFcZGhYlE43Tj1T5mMD/view?usp=drive_link",
+    description: "Successfully completed the virtual internship program offered through IBM SkillsBuild in collaboration with 1M1B, focusing on foundational AI applications for sustainability and verified under IBM's Your Learning system of record upon fulfilling all curriculum requirements.",
+    highlights: [
+      "Completed structured curriculum under the IBM SkillsBuild learning plan",
+      "Explored practical concepts and foundational technology solutions in AI for Sustainability",
+      "Official certificate of completion verified under Credential Plan PLAN-56138075980A"
+    ],
+    tags: ["IBM | 1M1B", "Virtual Internship", "AI for Sustainability", "IBM SkillsBuild"]
+  }
+];
+
 export const navLinks = [
   { name: "Home", href: "#hero" },
   { name: "About", href: "#about" },
   { name: "Skills", href: "#skills" },
   { name: "Projects", href: "#projects" },
+  { name: "Experience", href: "#experience" },
   { name: "Education", href: "#education" },
   { name: "Certifications", href: "#certifications" },
   { name: "Contact", href: "#contact" }
 ];
+
