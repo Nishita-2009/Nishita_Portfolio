@@ -25,21 +25,19 @@ export default function Certifications() {
         <div className="certifications-grid">
           {certifications.map((cert, index) => (
             <div key={index} className="cert-panel">
-              <div className="cert-top">
-                <div className="cert-icon-box">
-                  <Award size={18} />
-                </div>
+              <div className="cert-panel-header">
+                <span className="cert-index">0{index + 1}</span>
                 <span className="cert-tag">{cert.tag}</span>
               </div>
 
               <h3 className="cert-title">{cert.title}</h3>
               
               <div className="cert-issuer">
-                <Check size={13} />
+                <Check size={13} style={{ display: 'inline', marginRight: 4, verticalAlign: 'middle', color: 'var(--accent)' }} />
                 <span>{cert.issuer}</span>
               </div>
 
-              <p className="cert-description">
+              <p className="cert-desc">
                 {cert.description}
               </p>
             </div>

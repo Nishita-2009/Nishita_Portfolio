@@ -5,19 +5,18 @@ import {
   Cpu, 
   Sparkles, 
   Database, 
-  Users, 
-  Wrench
+  Users 
 } from 'lucide-react';
 import { coreSkills, additionalTechnologies } from '../data/portfolioData';
 
 // Map category icons
 const iconMap = {
-  code: <Code2 size={16} className="domain-icon" />,
-  globe: <Globe size={16} className="domain-icon" />,
-  cpu: <Cpu size={16} className="domain-icon" />,
-  sparkles: <Sparkles size={16} className="domain-icon" />,
-  database: <Database size={16} className="domain-icon" />,
-  users: <Users size={16} className="domain-icon" />
+  code: <Code2 size={16} />,
+  globe: <Globe size={16} />,
+  cpu: <Cpu size={16} />,
+  sparkles: <Sparkles size={16} />,
+  database: <Database size={16} />,
+  users: <Users size={16} />
 };
 
 export default function Skills() {
@@ -32,65 +31,52 @@ export default function Skills() {
             <span>02 // Capabilities</span>
           </div>
           <h2 className="section-title">
-            Core Competencies & <span className="text-gradient">Stack</span>
+            Core Competencies & <span className="text-gradient">Technical Domains</span>
           </h2>
           <p className="section-subtitle">
             Cultivated through academic rigor at BITS Pilani and applied software engineering projects.
           </p>
         </div>
 
-        {/* Part 1: Core Skills Architectural Matrix */}
-        <div className="skills-matrix-grid">
-          {coreSkills.map((cat, idx) => (
-            <div key={idx} className="skill-domain-col">
-              <div className="domain-header">
-                {iconMap[cat.icon] || <Code2 size={16} className="domain-icon" />}
-                <h3 className="domain-title">{cat.category}</h3>
-              </div>
-              
-              <ul className="domain-skills-list">
-                {cat.skills.map((skill, sIdx) => (
-                  <li key={sIdx} className="domain-skill-item">
-                    <span className="skill-bullet"></span>
-                    <span className="skill-name">{skill}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-
-        {/* Part 2: Additional Technologies & Practical Implementation */}
-        <div className="additional-tech-wrapper" id="additional-technologies">
-          <div className="additional-tech-plate">
-            <div className="additional-tech-header">
-              <Wrench size={22} className="additional-tech-icon" />
-              <div>
-                <h3 className="additional-tech-title">
-                  Additional Technologies & Practical Implementation
-                </h3>
-                <p className="additional-tech-desc">
-                  Tools, libraries, and cloud infrastructure directly integrated into hands-on practical project builds.
-                </p>
-              </div>
-            </div>
-
-            <div className="additional-tech-grid">
-              {additionalTechnologies.map((item, idx) => (
-                <div key={idx} className="tool-cell">
-                  <span className="skill-bullet"></span>
-                  <div className="tool-details">
-                    <span className="tool-name">{item.name}</span>
-                    <span className="tool-category">{item.category}</span>
+        {/* Part 1: Core Skills Architectural Matrix Plate */}
+        <div className="skills-matrix-wrap">
+          <div className="skills-domain-grid">
+            {coreSkills.map((cat, idx) => (
+              <div key={idx} className="domain-col">
+                <div className="domain-header">
+                  <div className="domain-icon-box">
+                    {iconMap[cat.icon] || <Code2 size={16} />}
                   </div>
+                  <h3 className="domain-title">{cat.category}</h3>
+                </div>
+                
+                <ul className="domain-skills-list">
+                  {cat.skills.map((skill, sIdx) => (
+                    <li key={sIdx} className="domain-skill-item">
+                      <span className="skill-bullet"></span>
+                      <span>{skill}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          {/* Part 2: Additional Technologies & Tools Plate */}
+          <div className="skills-tools-plate" id="additional-technologies">
+            <div className="tools-plate-header">
+              <h3 className="tools-plate-title">
+                Integrated Frameworks, Tools & Cloud Infrastructure
+              </h3>
+            </div>
+
+            <div className="tools-tags-flex">
+              {additionalTechnologies.map((item, idx) => (
+                <div key={idx} className="tool-chip">
+                  <span>{item.name}</span>
+                  <span className="tool-category">{item.category}</span>
                 </div>
               ))}
-            </div>
-
-            <div className="additional-tech-footer">
-              <p className="additional-tech-note">
-                <span className="note-label">Practical Note:</span> These technologies represent tools directly integrated into real projects (like Sujala RO Purifiers and Growz), used without assigning artificial percentage scores or years of experience.
-              </p>
             </div>
           </div>
         </div>

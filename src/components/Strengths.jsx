@@ -31,7 +31,7 @@ export default function Strengths() {
             <span>07 // Mindset & Approach</span>
           </div>
           <h2 className="section-title">
-            Engineering & Professional <span className="text-gradient">Strengths</span>
+            Engineering Disciplines & <span className="text-gradient">Strengths</span>
           </h2>
           <p className="section-subtitle">
             Core analytical, communication, and collaborative disciplines brought to software engineering teams.
@@ -42,13 +42,16 @@ export default function Strengths() {
         <div className="strengths-grid">
           {professionalStrengths.map((item, index) => (
             <div key={index} className="strength-panel">
-              <div className="strength-icon-box">
-                {iconMap[item.icon] || <Brain size={18} />}
+              <div className="strength-header">
+                <span className="strength-index">0{index + 1}</span>
+                <div className="pillar-icon" style={{ color: 'var(--accent)' }}>
+                  {iconMap[item.icon] || <Brain size={18} />}
+                </div>
               </div>
               
               <h3 className="strength-title">{item.title}</h3>
               
-              <p className="strength-description">
+              <p className="strength-desc">
                 {item.description}
               </p>
             </div>

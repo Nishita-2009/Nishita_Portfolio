@@ -22,29 +22,27 @@ export default function Education() {
         </div>
 
         {/* Education Architectural Split Grid */}
-        <div className="education-split-grid">
+        <div className="education-timeline-grid">
           {education.map((item, index) => (
             <div key={index} className="education-panel">
-              <div className="education-panel-header">
-                <span className="education-type-tag">{item.type}</span>
-                <div className="education-date">
-                  <Calendar size={13} />
-                  <span>{item.duration}</span>
+              <div className="edu-header">
+                <span className="edu-type-badge">{item.type}</span>
+                <h3 className="edu-degree">{item.degree}</h3>
+                <div className="edu-institution">{item.institution}</div>
+                <div className="edu-meta-line">
+                  <span>
+                    <Calendar size={13} style={{ display: 'inline', marginRight: 4, verticalAlign: 'middle' }} />
+                    {item.duration}
+                  </span>
+                  <span>•</span>
+                  <span>
+                    <MapPin size={13} style={{ display: 'inline', marginRight: 4, verticalAlign: 'middle' }} />
+                    {item.location}
+                  </span>
                 </div>
               </div>
 
-              <h3 className="education-title">{item.degree}</h3>
-              
-              <div className="education-institution-wrap">
-                <span className="timeline-institution">{item.institution}</span>
-                <span className="dot-sep">•</span>
-                <span className="education-location">
-                  <MapPin size={13} />
-                  {item.location}
-                </span>
-              </div>
-
-              <p className="education-description">
+              <p className="edu-desc">
                 {item.description}
               </p>
             </div>

@@ -1,19 +1,18 @@
 /* ==========================================================================
-   EDITORIAL DESIGN SYSTEM // ARCHITECTURAL RESTRAINT
-   Gottipati Nishita Sri — Portfolio
-   Palette:
-     Main background:      #F7F5F0
-     Primary text:         #191919
-     Secondary text:       #77736B
-     Subtle borders:       #DDD9D0
-     Secondary background: #EFEBE3
-     Accent:               #713B42
-   Geometry: 0–4px border radius, hairline dividers, zero heavy drop shadows.
-   Typography: DM Serif Display (Headings) + Manrope (Body/UI).
+   DISTINCTIVE EDITORIAL & DIGITAL SYSTEM
+   Gottipati Nishita Sri — Computer Science & AI Portfolio
+   Design Tokens:
+     Warm ivory:            #F7F5F0
+     Charcoal:              #191919
+     Deep charcoal section: #20201F
+     Burgundy accent:       #713B42
+     Muted text:            #77736B
+     Fine borders:          #DDD9D0
+     Soft secondary surface:#EFEBE3
    ========================================================================== */
 
 :root {
-  /* Color Palette */
+  /* Core Color Palette Tokens */
   --bg-primary: #F7F5F0;
   --bg-secondary: #EFEBE3;
   --bg-surface: #FFFFFF;
@@ -27,11 +26,22 @@
   --border-medium: #C8C3B8;
   --border-dark: #191919;
 
-  /* Accent: Deep Editorial Wine / Oxblood */
+  /* Accent: Burgundy / Deep Oxblood */
   --accent: #713B42;
   --accent-hover: #5A2E34;
+  --accent-light: #9E525C;
   --accent-subtle: rgba(113, 59, 66, 0.08);
   --accent-border: rgba(113, 59, 66, 0.22);
+
+  /* Deep Charcoal Section Tokens (#20201F) */
+  --bg-dark-section: #20201F;
+  --bg-dark-surface: #272726;
+  --bg-dark-elevated: #2E2E2C;
+  --text-on-dark: #F7F5F0;
+  --text-on-dark-muted: #A8A49C;
+  --border-dark-section: #333230;
+  --border-dark-hover: #484542;
+  --border-dark-accent: #713B42;
 
   /* Typography */
   --font-serif: 'DM Serif Display', Georgia, 'Times New Roman', serif;
@@ -43,14 +53,17 @@
   --radius-sm: 2px;
   --radius-md: 4px;
 
-  /* Subtle Architectural Elevation (No heavy blurs or glows) */
-  --shadow-subtle: 0 1px 2px rgba(25, 25, 25, 0.03);
-  --shadow-card: 0 2px 6px rgba(25, 25, 25, 0.03);
+  /* Subtle Architectural Elevation */
+  --shadow-subtle: 0 1px 3px rgba(25, 25, 25, 0.04);
+  --shadow-card: 0 4px 12px rgba(25, 25, 25, 0.05);
+  --shadow-card-hover: 0 12px 28px -8px rgba(25, 25, 25, 0.12);
+  --shadow-dark-hover: 0 16px 36px -10px rgba(0, 0, 0, 0.65);
 
   /* Purposeful Animation & Easing (180ms – 350ms) */
   --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
   --transition-fast: 0.18s ease;
-  --transition-normal: 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: 0.26s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-hover: 0.32s cubic-bezier(0.16, 1, 0.3, 1);
 
   /* Layout Scale */
   --header-height: 70px;
@@ -149,6 +162,7 @@ img, svg {
   margin-right: auto;
   padding-left: 2.25rem;
   padding-right: 2.25rem;
+  box-sizing: border-box;
 }
 
 @media (max-width: 768px) {
@@ -218,27 +232,24 @@ img, svg {
   font-family: var(--font-serif);
   font-weight: 400;
   color: var(--text-primary);
-  line-height: 1.15;
+  letter-spacing: -0.025em;
+  line-height: 1.12;
   margin-bottom: 1rem;
-  letter-spacing: -0.02em;
+}
+
+.text-gradient {
+  color: var(--text-primary);
+  position: relative;
 }
 
 .section-subtitle {
-  font-size: clamp(1rem, 1.8vw, 1.125rem);
+  font-size: 1.05rem;
   color: var(--text-secondary);
-  line-height: 1.68;
-  font-weight: 400;
-}
-
-/* Editorial Typography Accent */
-.text-gradient {
-  color: var(--accent);
-  font-style: italic;
-  font-family: var(--font-serif);
+  line-height: 1.7;
 }
 
 /* ==========================================================================
-   BUTTON SYSTEM — ARCHITECTURAL, RECTANGULAR, 2PX RADIUS
+   BUTTON SYSTEM — ARCHITECTURAL, RECTANGULAR, 2PX RADIUS & MICROINTERACTIONS
    ========================================================================== */
 .btn {
   display: inline-flex;
@@ -258,9 +269,26 @@ img, svg {
   white-space: nowrap;
   min-height: 44px;
   line-height: 1.2;
+  position: relative;
 }
 
-/* Primary Button: Solid Deep Black, Cream Text */
+/* Arrow Slide Microinteraction */
+.btn-arrow, 
+.btn-external-arrow, 
+.action-arrow {
+  transition: transform var(--transition-normal);
+}
+
+.btn:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+.btn:hover .btn-external-arrow,
+.btn:hover .action-arrow {
+  transform: translate(2.5px, -2.5px);
+}
+
+/* Primary Button: Solid Deep Charcoal, Ivory Text */
 .btn-primary {
   background: var(--text-primary);
   color: var(--bg-primary);
@@ -271,9 +299,11 @@ img, svg {
   background: var(--accent);
   border-color: var(--accent);
   color: #FFFFFF;
+  transform: translateY(-1.5px);
+  box-shadow: 0 4px 12px rgba(113, 59, 66, 0.25);
 }
 
-/* Secondary Button: Clean Hairline Outline */
+/* Secondary Button: Soft Secondary Surface, Hairline Border */
 .btn-secondary {
   background: var(--bg-surface);
   color: var(--text-primary);
@@ -284,6 +314,7 @@ img, svg {
   background: var(--bg-secondary);
   border-color: var(--border-dark);
   color: var(--text-primary);
+  transform: translateY(-1.5px);
 }
 
 /* Dedicated Resume Button */
@@ -297,6 +328,7 @@ img, svg {
   background: var(--text-primary);
   color: var(--bg-primary);
   border-color: var(--text-primary);
+  transform: translateY(-1.5px);
 }
 
 .btn-sm {
@@ -346,7 +378,7 @@ img, svg {
 }
 
 /* ==========================================================================
-   ANIMATION SYSTEM — SUBTLE, PURPOSEFUL, NO BLOBS OR BOUNCES
+   ANIMATION & SCROLL SYSTEM
    ========================================================================== */
 @keyframes editorialFadeUp {
   from {
@@ -360,7 +392,7 @@ img, svg {
 }
 
 .reveal-fade-up {
-  animation: editorialFadeUp 0.4s var(--ease-editorial) both;
+  animation: editorialFadeUp 0.38s var(--ease-editorial) both;
 }
 
 .stagger-1 { animation-delay: 0.06s; }
@@ -394,5 +426,6 @@ img, svg {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+    transform: none !important;
   }
 }

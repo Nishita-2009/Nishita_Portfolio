@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import { GithubIcon } from './Icons';
 import { projects } from '../data/portfolioData';
+import { GrowzPreview, OptHirePreview, SujalaPreview } from './ProjectPreviews';
 
 export default function Projects() {
   const [selectedConfigProject, setSelectedConfigProject] = useState(null);
@@ -20,21 +21,34 @@ export default function Projects() {
     setSelectedConfigProject(null);
   };
 
+  const renderProjectVisual = (projectId) => {
+    switch (projectId) {
+      case 'growz':
+        return <GrowzPreview />;
+      case 'opthire':
+        return <OptHirePreview />;
+      case 'sujala-ro-purifiers':
+        return <SujalaPreview />;
+      default:
+        return null;
+    }
+  };
+
   return (
-    <section id="projects" className="section projects-section" aria-label="Featured Projects">
+    <section id="projects" className="section projects-dark-section" aria-label="Featured Projects Showcase">
       <div className="container">
         
         {/* Section Header */}
-        <div className="section-header">
-          <div className="section-badge">
+        <div className="section-header dark-section-header">
+          <div className="section-badge dark-badge">
             <FolderGit2 size={12} />
-            <span>03 // Selected Works</span>
+            <span>03 // Selected Software Works</span>
           </div>
-          <h2 className="section-title">
-            Curated <span className="text-gradient">Case Studies</span>
+          <h2 className="section-title dark-title">
+            Engineered <span className="dark-title-accent">Systems & Case Studies</span>
           </h2>
-          <p className="section-subtitle">
-            Substantial software engineering projects addressing real-world operational challenges in business intelligence, candidate evaluation, and e-commerce.
+          <p className="section-subtitle dark-subtitle">
+            Substantial software engineering projects addressing real-world operational challenges in business intelligence, candidate evaluation pipelines, and cloud e-commerce.
           </p>
         </div>
 
@@ -44,91 +58,94 @@ export default function Projects() {
             <article 
               key={project.id} 
               id={`project-card-${project.id}`} 
-              className="project-case-card"
+              className={`project-case-card dark-case-card ${index % 2 === 1 ? 'case-reverse' : ''}`}
             >
-              {/* Case Study Header */}
-              <div className="project-case-header">
-                <div className="project-title-group">
-                  <div className="project-badge-line">
-                    <span className="project-badge">{project.badge}</span>
-                  </div>
-
-                  <h3 className="project-name" id={`project-name-${project.id}`}>
-                    {project.name}
-                  </h3>
-                  
-                  <p className="project-tagline">
-                    {project.tagline}
-                  </p>
-                </div>
-
-                <div className="project-index-num" aria-hidden="true">
-                  0{index + 1}
-                </div>
-              </div>
-
               {/* Asymmetric 2-Column Case Study Grid */}
               <div className="project-case-grid">
                 
-                {/* Left Column: Problem, Narrative & Implementation */}
-                <div className="project-case-narrative">
-                  <p className="project-overview-desc">
-                    {project.description}
-                  </p>
-
-                  <div className="case-section-block">
-                    <h4 className="case-block-title">
-                      <span className="case-block-dot"></span>
-                      The Challenge & Problem Addressed
-                    </h4>
-                    <p className="case-block-text">
-                      {project.problemAddressed}
-                    </p>
-                  </div>
-
-                  <div className="case-section-block">
-                    <h4 className="case-block-title">
-                      <span className="case-block-dot"></span>
-                      Engineering & Solution Architecture
-                    </h4>
-                    <p className="case-block-text">
-                      {project.whatWasBuilt}
-                    </p>
+                {/* Left/Showcase Column: Custom Interactive System Preview */}
+                <div className="project-case-visual-col">
+                  <div className="project-visual-wrapper">
+                    {renderProjectVisual(project.id)}
                   </div>
                 </div>
 
-                {/* Right Column: Capabilities, Tech Stack & Action Buttons */}
-                <div className="project-case-tech">
+                {/* Right/Narrative Column: Problem, Architecture, Capabilities, Tech & CTAs */}
+                <div className="project-case-narrative-col">
+                  {/* Case Study Header Line */}
+                  <div className="project-case-header">
+                    <div className="project-title-group">
+                      <div className="project-badge-line">
+                        <span className="project-badge dark-tag">{project.badge}</span>
+                        <span className="project-status-dot"></span>
+                        <span className="project-status-text">{project.statusNote}</span>
+                      </div>
+
+                      <h3 className="project-name dark-project-name" id={`project-name-${project.id}`}>
+                        {project.name}
+                      </h3>
+                      
+                      <p className="project-tagline dark-project-tagline">
+                        {project.tagline}
+                      </p>
+                    </div>
+
+                    <div className="project-index-num dark-index-num" aria-hidden="true">
+                      0{index + 1}
+                    </div>
+                  </div>
+
+                  {/* Narrative Blocks */}
+                  <div className="case-content-blocks">
+                    <div className="case-section-block">
+                      <h4 className="case-block-title dark-block-title">
+                        <span className="case-block-dot"></span>
+                        The Problem Addressed
+                      </h4>
+                      <p className="case-block-text dark-block-text">
+                        {project.problemAddressed}
+                      </p>
+                    </div>
+
+                    <div className="case-section-block">
+                      <h4 className="case-block-title dark-block-title">
+                        <span className="case-block-dot"></span>
+                        Engineering & System Architecture
+                      </h4>
+                      <p className="case-block-text dark-block-text">
+                        {project.whatWasBuilt}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Capabilities Checklist */}
                   <div className="features-block">
-                    <h4 className="case-block-title">
+                    <h4 className="case-block-title dark-block-title">
                       <span className="case-block-dot"></span>
                       Key Technical Capabilities
                     </h4>
-                    <ul className="case-features-list">
-                      {project.keyFeatures.map((feat, fIdx) => (
-                        <li key={fIdx} className="case-feature-item">
-                          <Check size={14} />
+                    <ul className="case-features-list dark-features-list">
+                      {project.keyFeatures.slice(0, 4).map((feat, fIdx) => (
+                        <li key={fIdx} className="case-feature-item dark-feature-item">
+                          <Check size={14} className="feature-check-icon" />
                           <span>{feat}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
+                  {/* Technology Tags */}
                   <div className="tech-stack-block">
-                    <h4 className="case-block-title">
-                      <span className="case-block-dot"></span>
-                      Technologies & Tools
-                    </h4>
-                    <div className="tech-tags-plate">
+                    <div className="tech-tags-plate dark-tags-plate">
                       {project.technologies.map((tech, tIdx) => (
-                        <span key={tIdx} className="tech-tag">
+                        <span key={tIdx} className="tech-tag dark-tech-tag">
                           {tech}
                         </span>
                       ))}
                     </div>
                   </div>
 
-                  {/* Actions Row */}
+                  {/* Interactive Action Buttons */}
                   <div className="case-actions-row">
                     {project.githubUrl ? (
                       <a
@@ -136,23 +153,24 @@ export default function Projects() {
                         target="_blank"
                         rel="noopener noreferrer"
                         id={`project-github-btn-${project.id}`}
-                        className="btn btn-secondary btn-sm"
-                        title={`Open GitHub profile / repository for ${project.name}`}
+                        className="btn btn-primary dark-btn-primary btn-sm"
+                        title={`Open GitHub repository for ${project.name}`}
                       >
                         <GithubIcon size={14} />
-                        <span>GitHub</span>
-                        <ArrowUpRight size={13} className="action-arrow" />
+                        <span>GitHub Repository</span>
+                        <ArrowUpRight size={13} className="btn-arrow" />
                       </a>
                     ) : (
                       <button
                         type="button"
                         id={`project-github-btn-${project.id}`}
-                        className="btn btn-secondary btn-sm disabled-btn"
+                        className="btn btn-secondary dark-btn-secondary btn-sm disabled-btn"
                         onClick={() => handleOpenConfig(project)}
                         title="GitHub repository link configurable"
                       >
                         <GithubIcon size={14} />
-                        <span>GitHub (Configurable)</span>
+                        <span>GitHub Profile</span>
+                        <ArrowUpRight size={13} className="btn-arrow" />
                       </button>
                     )}
 
@@ -162,7 +180,7 @@ export default function Projects() {
                         target="_blank"
                         rel="noopener noreferrer"
                         id={`project-demo-btn-${project.id}`}
-                        className="btn btn-primary btn-sm"
+                        className="btn btn-secondary dark-btn-secondary btn-sm"
                         title={`View live demo for ${project.name}`}
                       >
                         <ExternalLink size={14} />
@@ -172,18 +190,14 @@ export default function Projects() {
                       <button
                         type="button"
                         id={`project-demo-btn-${project.id}`}
-                        className="btn btn-secondary btn-sm demo-status-btn"
+                        className="btn btn-secondary dark-btn-secondary btn-sm demo-status-btn"
                         onClick={() => handleOpenConfig(project)}
-                        title="Click to view deployment status"
+                        title="Click to view deployment architecture notes"
                       >
                         <Info size={13} />
-                        <span>{project.statusNote || 'Deployment Status'}</span>
+                        <span>{project.statusNote || 'Architecture Status'}</span>
                       </button>
                     )}
-
-                    <div className="project-status-note">
-                      Status: {project.statusNote}
-                    </div>
                   </div>
 
                 </div>
@@ -193,14 +207,14 @@ export default function Projects() {
           ))}
         </div>
 
-        {/* Modal for Unverified Links */}
+        {/* Modal for Architecture Status & Links */}
         {selectedConfigProject && (
           <div className="modal-backdrop" onClick={handleCloseConfig} role="dialog" aria-modal="true">
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
               <div className="modal-header">
                 <div className="modal-title-wrap">
                   <Info size={16} />
-                  <h3 className="modal-title">{selectedConfigProject.name} — Link Status</h3>
+                  <h3 className="modal-title">{selectedConfigProject.name} — Architecture & Repository Status</h3>
                 </div>
                 <button 
                   type="button" 
