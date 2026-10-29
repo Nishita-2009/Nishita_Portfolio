@@ -1,17 +1,16 @@
 import React from 'react';
-import { SparkleStarIcon } from './Icons';
 
 export default function HeroVisual() {
   return (
     <div className="hero-editorial-stage" id="hero-technical-artifact">
-      {/* Main Sunset, Live Orbital Geometry & Parallax Composition */}
+      {/* Main Developer Workspace, Live Orbital Geometry & Parallax Composition */}
       <div className="hero-sunset-canvas">
         {/* Multi-Layered Warm Atmospheric Glows (Parallax Depth Layer 1) */}
         <div className="sunset-glow-outer" aria-hidden="true"></div>
         <div className="sunset-glow-inner" aria-hidden="true"></div>
         <div className="sunset-sun-disc" aria-hidden="true"></div>
 
-        {/* Live Orbital SVG Linework, Connected Constellation & Travelling Pulses (Parallax Layer 2) */}
+        {/* Live Orbital SVG Linework, Connected Constellation & Travelling Pulses */}
         <svg
           className="hero-orbit-svg"
           viewBox="0 0 540 460"
@@ -21,24 +20,24 @@ export default function HeroVisual() {
         >
           <defs>
             <linearGradient id="orbitRoseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#71303D" stopOpacity="0.52" />
+              <stop offset="0%" stopColor="#762B3D" stopOpacity="0.55" />
               <stop offset="50%" stopColor="#C87D82" stopOpacity="0.4" />
-              <stop offset="100%" stopColor="#DED5CA" stopOpacity="0.18" />
+              <stop offset="100%" stopColor="#DED1C5" stopOpacity="0.2" />
             </linearGradient>
             <linearGradient id="orbitPulseGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#71303D" stopOpacity="0" />
-              <stop offset="50%" stopColor="#71303D" stopOpacity="0.85" />
+              <stop offset="0%" stopColor="#762B3D" stopOpacity="0" />
+              <stop offset="50%" stopColor="#762B3D" stopOpacity="0.9" />
               <stop offset="100%" stopColor="#C87D82" stopOpacity="0" />
             </linearGradient>
             <radialGradient id="sunBurst" cx="38%" cy="46%" r="48%">
-              <stop offset="0%" stopColor="#FFF6EB" stopOpacity="0.88" />
-              <stop offset="40%" stopColor="#E8A598" stopOpacity="0.46" />
-              <stop offset="75%" stopColor="#71303D" stopOpacity="0.2" />
-              <stop offset="100%" stopColor="#F7F3EC" stopOpacity="0" />
+              <stop offset="0%" stopColor="#FFF8F0" stopOpacity="0.85" />
+              <stop offset="42%" stopColor="#EBD0CA" stopOpacity="0.4" />
+              <stop offset="78%" stopColor="#762B3D" stopOpacity="0.15" />
+              <stop offset="100%" stopColor="#F8F3EC" stopOpacity="0" />
             </radialGradient>
           </defs>
 
-          {/* Subtle Warm Sun Halo */}
+          {/* Subtle Warm Sunrise Halo */}
           <circle cx="240" cy="220" r="192" fill="url(#sunBurst)" />
 
           {/* Outer Rotating Orbit Arc */}
@@ -63,7 +62,7 @@ export default function HeroVisual() {
             className="hero-orbit-ring-slow"
           />
 
-          {/* Secondary Tilted Elliptical Orbit (Counter-Rotating) */}
+          {/* Secondary Tilted Elliptical Orbit */}
           <g className="hero-orbit-ellipse-group">
             <ellipse
               cx="265"
@@ -71,8 +70,8 @@ export default function HeroVisual() {
               rx="225"
               ry="155"
               transform="rotate(-14 265 235)"
-              stroke="#71303D"
-              strokeOpacity="0.26"
+              stroke="#762B3D"
+              strokeOpacity="0.25"
               strokeWidth="1"
               strokeDasharray="3 5"
             />
@@ -84,7 +83,7 @@ export default function HeroVisual() {
             cy="225"
             r="140"
             stroke="#C87D82"
-            strokeOpacity="0.36"
+            strokeOpacity="0.32"
             strokeWidth="0.95"
             className="hero-orbit-ring-reverse"
           />
@@ -92,98 +91,66 @@ export default function HeroVisual() {
           {/* Connected Constellation Vectors */}
           <polyline
             points="70,305 142,108 270,85 398,222 455,95"
-            stroke="#71303D"
-            strokeOpacity="0.16"
+            stroke="#762B3D"
+            strokeOpacity="0.18"
             strokeWidth="0.85"
             strokeDasharray="2 4"
           />
 
-          {/* Connecting Diagonal Technical Hairlines */}
-          <line
-            x1="70"
-            y1="305"
-            x2="205"
-            y2="215"
-            stroke="#71303D"
-            strokeOpacity="0.3"
-            strokeWidth="0.9"
-          />
-          <line
-            x1="355"
-            y1="150"
-            x2="455"
-            y2="95"
-            stroke="#71303D"
-            strokeOpacity="0.28"
-            strokeWidth="0.9"
-          />
-
           {/* Precision Crosshair Markers */}
-          <g stroke="#71303D" strokeOpacity="0.4" strokeWidth="0.9">
+          <g stroke="#762B3D" strokeOpacity="0.4" strokeWidth="0.9">
             <line x1="138" y1="108" x2="146" y2="108" />
             <line x1="142" y1="104" x2="142" y2="112" />
             <line x1="451" y1="95" x2="459" y2="95" />
             <line x1="455" y1="91" x2="455" y2="99" />
           </g>
 
-          {/* Orbiting & Pulsing Constellation Nodes */}
-          <circle cx="82" cy="212" r="4" fill="#191817" />
+          {/* Pulsing Constellation Nodes */}
+          <circle cx="82" cy="212" r="4" fill="#191716" />
           <circle
             cx="82"
             cy="212"
             r="9.5"
-            stroke="#71303D"
+            stroke="#762B3D"
             strokeOpacity="0.36"
             strokeWidth="1"
             className="ambient-node-pulse"
           />
 
           <circle cx="142" cy="108" r="3.2" fill="#C87D82" className="ambient-node-pulse" />
-          <circle cx="270" cy="85" r="2.6" fill="#71303D" fillOpacity="0.7" />
+          <circle cx="270" cy="85" r="2.6" fill="#762B3D" fillOpacity="0.75" />
 
-          <circle cx="398" cy="222" r="4.5" fill="#191817" />
+          <circle cx="398" cy="222" r="4.5" fill="#191716" />
           <circle
             cx="398"
             cy="222"
             r="10.5"
-            stroke="#71303D"
+            stroke="#762B3D"
             strokeOpacity="0.35"
             strokeWidth="1"
             className="ambient-node-pulse"
           />
 
-          <circle cx="445" cy="148" r="3" fill="#71303D" className="ambient-node-pulse" />
-          <circle cx="115" cy="335" r="2.8" fill="#71303D" fillOpacity="0.65" />
+          <circle cx="445" cy="148" r="3" fill="#762B3D" className="ambient-node-pulse" />
+          <circle cx="115" cy="335" r="2.8" fill="#762B3D" fillOpacity="0.65" />
         </svg>
 
-        {/* Subtle Floating Technical Telemetry Labels */}
-        <div className="hero-telemetry-tag telemetry-top-left" aria-hidden="true">
-          <span className="telemetry-dot"></span>
-          <span>CS &amp; AI // BITS PILANI</span>
-        </div>
-
-        <div className="hero-telemetry-tag telemetry-bottom-left" aria-hidden="true">
-          <span>FULL-STACK • GEN-AI</span>
-        </div>
-
-        {/* Stylized Editorial Horizon Artwork (Parallax Layer 3) */}
+        {/* Developer Workspace Horizon Artwork (Arched Window + Laptop + Setup) */}
         <div className="hero-portrait-frame">
           <img
-            src="/images/hero-atmosphere.jpg"
-            alt="Editorial illustration looking toward a warm sunset horizon"
+            src="/images/workspace-hero.jpg"
+            alt="Developer workspace illustration featuring modern laptop with code editor, AI interface cards, desk notes, and sunrise skyline window"
             className="hero-atmosphere-img"
             loading="eager"
           />
         </div>
 
-        {/* Handwritten Calligraphic Note: "Turning Ideas Into Impact" */}
-        <div className="hero-script-callout" aria-hidden="true">
-          <SparkleStarIcon size={11} className="script-sparkle sparkle-top" />
-          <span className="script-line">Turning</span>
-          <span className="script-line">Ideas</span>
-          <span className="script-line">Into</span>
-          <span className="script-line">Impact</span>
-          <SparkleStarIcon size={9} className="script-sparkle sparkle-bottom" />
+        {/* Interactive Floating Hotspot Elements (Subtle Glare & Parallax Responders) */}
+        <div className="hero-floating-hotspot hotspot-ai" title="AI & Intelligent Solutions">
+          <span className="hotspot-pulse"></span>
+        </div>
+        <div className="hero-floating-hotspot hotspot-code" title="Modern Software Engineering">
+          <span className="hotspot-pulse"></span>
         </div>
       </div>
 
@@ -192,11 +159,26 @@ export default function HeroVisual() {
         <div className="rail-index-num">01</div>
 
         <ul className="rail-mantra-list">
-          <li>DEVELOP</li>
-          <li>EXPLORE</li>
-          <li>LEARN</li>
-          <li>BUILD</li>
-          <li>REPEAT</li>
+          <li className="rail-mantra-item is-active">
+            <span className="rail-dot-active" aria-hidden="true"></span>
+            <span>DEVELOP</span>
+          </li>
+          <li className="rail-mantra-item">
+            <span className="rail-dot-ring" aria-hidden="true"></span>
+            <span>EXPLORE</span>
+          </li>
+          <li className="rail-mantra-item">
+            <span className="rail-dot-ring" aria-hidden="true"></span>
+            <span>LEARN</span>
+          </li>
+          <li className="rail-mantra-item">
+            <span className="rail-dot-ring" aria-hidden="true"></span>
+            <span>BUILD</span>
+          </li>
+          <li className="rail-mantra-item">
+            <span className="rail-dot-ring" aria-hidden="true"></span>
+            <span>REPEAT</span>
+          </li>
         </ul>
 
         <div className="rail-vertical-line" aria-hidden="true">

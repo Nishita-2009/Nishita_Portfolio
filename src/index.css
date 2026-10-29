@@ -5,32 +5,33 @@
 
 :root {
   /* Core Surfaces & Text */
-  --bg-ivory: #F7F3EC;
-  --bg-cream: #F1E9DE;
+  --bg-ivory: #F8F3EC;
+  --bg-cream: #F0E7DD;
+  --bg-blush: #EBD0CA;
   --bg-card-light: #FAF7F2;
   --bg-white: #FFFFFF;
 
-  --text-main: #191817;
-  --text-secondary: #77716B;
-  --text-muted: #928B84;
+  --text-main: #191716;
+  --text-secondary: #77716D;
+  --text-muted: #8E8882;
 
-  --border-light: #DED5CA;
-  --border-medium: #CBBFB0;
+  --border-light: #DED1C5;
+  --border-medium: #D0C2B4;
 
   /* Rich Charcoal & Dark Surfaces */
   --bg-charcoal: #171817;
   --bg-dark-secondary: #222321;
   --bg-dark-card: #1E1F1D;
-  --text-on-dark: #F7F3EC;
+  --text-on-dark: #F8F3EC;
   --text-on-dark-secondary: #B0AAA2;
   --border-dark: #2E2F2C;
   --border-dark-hover: #4B4644;
 
   /* Burgundy & Muted Rose Accents */
-  --burgundy: #71303D;
-  --burgundy-hover: #5C2530;
-  --burgundy-soft: rgba(113, 48, 61, 0.09);
-  --burgundy-border: rgba(113, 48, 61, 0.28);
+  --burgundy: #762B3D;
+  --burgundy-hover: #5F2130;
+  --burgundy-soft: rgba(118, 43, 61, 0.08);
+  --burgundy-border: rgba(118, 43, 61, 0.25);
   --muted-rose: #C87D82;
   --muted-rose-soft: rgba(200, 125, 130, 0.14);
 
