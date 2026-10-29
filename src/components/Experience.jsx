@@ -1,146 +1,142 @@
 import React from 'react';
-import { 
-  Briefcase, 
-  Building2, 
-  Check, 
-  Calendar, 
-  ExternalLink, 
-  Award
-} from 'lucide-react';
+import { ArrowUpRight, Code2, Award, Calendar, CheckCircle2 } from 'lucide-react';
 import { experiences } from '../data/portfolioData';
 
 export default function Experience() {
   return (
-    <section id="experience" className="section experience-section" aria-label="Experience & Virtual Internships">
+    <section
+      id="experience"
+      className="section experience-chapter-section"
+      aria-label="Experience and Internships"
+    >
       <div className="container">
-        
-        {/* Section Header */}
-        <div className="section-header">
-          <div className="section-badge">
-            <Briefcase size={12} />
-            <span>04 // Industry Experience</span>
+        {/* Chapter Header */}
+        <div className="chapter-header-split">
+          <div className="chapter-header-left">
+            <div className="editorial-eyebrow-row">
+              <span className="editorial-section-num">05</span>
+              <span className="editorial-eyebrow-tag">
+                <span className="eyebrow-dot"></span>
+                EXPERIENCE &amp; INTERNSHIPS
+              </span>
+            </div>
+
+            <h2 className="chapter-main-heading">
+              Learning Through{' '}
+              <em className="serif-italic-accent">Real Experiences.</em>
+            </h2>
           </div>
-          <h2 className="section-title">
-            Virtual Internship & <span className="text-gradient">Applied Credentials</span>
-          </h2>
-          <p className="section-subtitle">
-            Structured corporate virtual internships, learning programs, and verified technical credentials.
+
+          <p className="chapter-header-lead">
+            Verified virtual internship credentials and intensive hands-on
+            software engineering preparation.
           </p>
         </div>
 
-        {/* Experience Monolith Plate */}
-        <div className="experience-container">
-          {experiences.map((exp) => (
-            <div 
-              key={exp.id} 
-              id={`experience-card-${exp.id}`} 
-              className="experience-monolith-plate"
+        {/* Animated Vertical Timeline Showcase */}
+        <div className="exp-showcase-timeline">
+          <div className="exp-timeline-spine" aria-hidden="true"></div>
+
+          {experiences.map((exp, idx) => (
+            <article
+              key={exp.id}
+              id={`experience-card-${exp.id}`}
+              className={`exp-showcase-card stagger-${idx + 1}`}
             >
-              {/* Top Header Row */}
-              <div className="experience-header-row">
-                <div className="exp-org-wrap">
-                  <div className="exp-icon-box" aria-hidden="true">
-                    <Building2 size={22} />
-                  </div>
-                  <div className="exp-org-info">
-                    <div className="exp-org-line">
-                      <span className="exp-organization">{exp.organization}</span>
-                      <span className="headline-sep">•</span>
-                      <span className="exp-issuer">{exp.issuer}</span>
+              {/* Timeline Node Marker */}
+              <div className="exp-spine-node" aria-hidden="true">
+                <span className="exp-node-core"></span>
+              </div>
+
+              {/* Card Inner Layout */}
+              <div className="exp-card-grid">
+                {/* Left Brand & Meta Column */}
+                <div className="exp-brand-column">
+                  <div className="exp-brand-header">
+                    <div
+                      className={`exp-logo-badge ${
+                        exp.badgeText === 'IBM' ? 'badge-ibm' : 'badge-code'
+                      }`}
+                      aria-hidden="true"
+                    >
+                      {exp.badgeText === 'IBM' ? (
+                        <span className="ibm-text-mark">IBM</span>
+                      ) : (
+                        <Code2 size={20} strokeWidth={2} />
+                      )}
                     </div>
-                    <h3 className="exp-role-title">{exp.role}</h3>
-                    {exp.programTrack && (
-                      <p className="exp-track-line">
-                        Track: <strong>{exp.programTrack}</strong>
-                      </p>
+
+                    <div className="exp-org-titles">
+                      <span
+                        className={`exp-status-pill ${
+                          exp.status === 'Completed'
+                            ? 'status-completed'
+                            : 'status-ongoing'
+                        }`}
+                      >
+                        {exp.status}
+                      </span>
+                      <h3 className="exp-org-heading">{exp.organization}</h3>
+                      <p className="exp-role-sub">{exp.role}</p>
+                    </div>
+                  </div>
+
+                  <div className="exp-date-meta">
+                    <Calendar size={13} />
+                    <span>{exp.completionDate}</span>
+                    {exp.credentialId && (
+                      <>
+                        <span className="meta-dot">•</span>
+                        <span className="exp-plan-code">{exp.credentialId}</span>
+                      </>
                     )}
                   </div>
                 </div>
 
-                <div className="exp-period-badge">
-                  <Calendar size={13} />
-                  <span>{exp.completionDate}</span>
-                </div>
-              </div>
+                {/* Right Content, Highlights & Certificate CTA */}
+                <div className="exp-details-column">
+                  <p className="exp-concise-desc">{exp.description}</p>
 
-              {/* 2-Column Split: Narrative on Left, Verification & Actions on Right */}
-              <div className="experience-body-grid">
-                
-                {/* Left Column: Factual Description & Highlights */}
-                <div className="exp-narrative-col">
-                  <p className="exp-desc">
-                    {exp.description}
-                  </p>
-
-                  {exp.highlights && exp.highlights.length > 0 && (
-                    <div className="exp-learnings-wrap">
-                      <h4 className="exp-subheading">Core Competencies & Key Areas:</h4>
-                      <ul className="exp-learnings-list">
-                        {exp.highlights.map((highlight, hIdx) => (
-                          <li key={hIdx} className="exp-learning-item">
-                            <Check size={14} className="check-icon" />
-                            <span>{highlight}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                  {exp.highlights && (
+                    <ul className="exp-highlights-row">
+                      {exp.highlights.map((item, hIdx) => (
+                        <li key={hIdx} className="exp-highlight-pill">
+                          <CheckCircle2 size={13} className="exp-check-icon" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
                   )}
 
-                  {/* Tags */}
-                  {exp.tags && exp.tags.length > 0 && (
-                    <div className="narrative-tags">
-                      {exp.tags.map((tag, tIdx) => (
-                        <span key={tIdx} className="tech-tag">
+                  <div className="exp-card-footer">
+                    <div className="exp-tags-list">
+                      {exp.tags.map((tag) => (
+                        <span key={tag} className="light-tech-chip">
                           {tag}
                         </span>
                       ))}
                     </div>
-                  )}
-                </div>
 
-                {/* Right Column: Verification Metadata Box & CTA */}
-                <div className="exp-sidebar-col">
-                  <div className="credential-meta-box">
-                    <div className="cred-row">
-                      <span className="cred-label">Credential Status</span>
-                      <span className="cred-val highlight-val">Completed & Verified</span>
-                    </div>
-
-                    <div className="cred-row">
-                      <span className="cred-label">Issuer Organization</span>
-                      <span className="cred-val">{exp.organization}</span>
-                    </div>
-
-                    <div className="cred-row">
-                      <span className="cred-label">Plan ID / Reference</span>
-                      <code className="cred-code">{exp.credentialId}</code>
-                    </div>
-
-                    <div className="cred-row">
-                      <span className="cred-label">Hosting Platform</span>
-                      <span className="cred-val">{exp.issuer}</span>
-                    </div>
-
-                    <a
-                      href={exp.certificateUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      id={`exp-certificate-btn-${exp.id}`}
-                      className="btn btn-primary btn-sm btn-full"
-                      title={`Open verified ${exp.organization} certificate in Google Drive`}
-                    >
-                      <Award size={14} />
-                      <span>View Verified Certificate</span>
-                      <ExternalLink size={14} />
-                    </a>
+                    {exp.certificateUrl && (
+                      <a
+                        href={exp.certificateUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        id={`exp-certificate-btn-${exp.id}`}
+                        className="btn btn-burgundy btn-sm exp-cert-btn"
+                        title="Open verified IBM SkillsBuild Certificate in Google Drive"
+                      >
+                        <Award size={14} />
+                        <span>View Certificate</span>
+                        <ArrowUpRight size={14} className="btn-external-arrow" />
+                      </a>
+                    )}
                   </div>
                 </div>
-
               </div>
-            </div>
+            </article>
           ))}
         </div>
-
       </div>
     </section>
   );

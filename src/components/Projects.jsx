@@ -1,25 +1,97 @@
-import React, { useState } from 'react';
-import { 
-  FolderGit2, 
-  ExternalLink, 
-  Check, 
-  Info,
-  ArrowUpRight
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { createPortal } from 'react-dom';
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Check,
+  Layers,
+  Cpu,
+  Target,
+  Sparkles,
+  X
 } from 'lucide-react';
 import { GithubIcon } from './Icons';
-import { projects } from '../data/portfolioData';
+import { personalInfo, projects } from '../data/portfolioData';
 import { GrowzPreview, OptHirePreview, SujalaPreview } from './ProjectPreviews';
 
 export default function Projects() {
-  const [selectedConfigProject, setSelectedConfigProject] = useState(null);
+  const [selectedProject, setSelectedProject] = useState(null);
+  const openerRef = useRef(null);
+  const dialogRef = useRef(null);
+  const closeBtnRef = useRef(null);
 
-  const handleOpenConfig = (project) => {
-    setSelectedConfigProject(project);
-  };
+  const handleOpenProject = useCallback((project, event) => {
+    if (event && event.currentTarget) {
+      openerRef.current = event.currentTarget;
+    } else {
+      openerRef.current = document.activeElement;
+    }
+    setSelectedProject(project);
+  }, []);
 
-  const handleCloseConfig = () => {
-    setSelectedConfigProject(null);
-  };
+  const handleCloseProject = useCallback(() => {
+    setSelectedProject(null);
+    // Restore focus to the button/card that opened the dialog
+    requestAnimationFrame(() => {
+      if (openerRef.current && typeof openerRef.current.focus === 'function') {
+        openerRef.current.focus();
+      }
+    });
+  }, []);
+
+  // Lock background scroll, handle Escape key, and trap Tab focus inside dialog
+  useEffect(() => {
+    if (!selectedProject) return;
+
+    const originalOverflow = document.body.style.overflow;
+    const originalPaddingRight = document.body.style.paddingRight;
+    const scrollbarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
+
+    document.body.style.overflow = 'hidden';
+    if (scrollbarWidth > 0) {
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
+    }
+
+    // Move initial focus to close button
+    const focusTimer = setTimeout(() => {
+      closeBtnRef.current?.focus();
+    }, 20);
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        handleCloseProject();
+        return;
+      }
+
+      if (e.key === 'Tab' && dialogRef.current) {
+        const focusable = dialogRef.current.querySelectorAll(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusable.length === 0) return;
+        const firstEl = focusable[0];
+        const lastEl = focusable[focusable.length - 1];
+
+        if (e.shiftKey && document.activeElement === firstEl) {
+          e.preventDefault();
+          lastEl.focus();
+        } else if (!e.shiftKey && document.activeElement === lastEl) {
+          e.preventDefault();
+          firstEl.focus();
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      clearTimeout(focusTimer);
+      document.body.style.overflow = originalOverflow;
+      document.body.style.paddingRight = originalPaddingRight;
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [selectedProject, handleCloseProject]);
 
   const renderProjectVisual = (projectId) => {
     switch (projectId) {
@@ -34,246 +106,389 @@ export default function Projects() {
     }
   };
 
-  return (
-    <section id="projects" className="section projects-dark-section" aria-label="Featured Projects Showcase">
-      <div className="container">
-        
-        {/* Section Header */}
-        <div className="section-header dark-section-header">
-          <div className="section-badge dark-badge">
-            <FolderGit2 size={12} />
-            <span>03 // Selected Software Works</span>
-          </div>
-          <h2 className="section-title dark-title">
-            Engineered <span className="dark-title-accent">Systems & Case Studies</span>
-          </h2>
-          <p className="section-subtitle dark-subtitle">
-            Substantial software engineering projects addressing real-world operational challenges in business intelligence, candidate evaluation pipelines, and cloud e-commerce.
-          </p>
-        </div>
-
-        {/* Project Case Studies Stack */}
-        <div className="projects-case-stack">
-          {projects.map((project, index) => (
-            <article 
-              key={project.id} 
-              id={`project-card-${project.id}`} 
-              className={`project-case-card dark-case-card ${index % 2 === 1 ? 'case-reverse' : ''}`}
+  const modalPortal =
+    selectedProject && typeof document !== 'undefined'
+      ? createPortal(
+          <div
+            className="project-modal-portal-overlay"
+            onClick={handleCloseProject}
+            role="presentation"
+          >
+            <div
+              ref={dialogRef}
+              className="project-modal-dialog"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="project-modal-title"
+              aria-describedby="project-modal-overview"
+              onClick={(e) => e.stopPropagation()}
             >
-              {/* Asymmetric 2-Column Case Study Grid */}
-              <div className="project-case-grid">
-                
-                {/* Left/Showcase Column: Custom Interactive System Preview */}
-                <div className="project-case-visual-col">
-                  <div className="project-visual-wrapper">
-                    {renderProjectVisual(project.id)}
+              {/* Pinned Dialog Header */}
+              <div className="project-modal-header">
+                <div className="modal-title-wrap">
+                  <span className="modal-index-pill">
+                    {selectedProject.index}
+                  </span>
+                  <div className="modal-title-text">
+                    <h3 id="project-modal-title" className="modal-title">
+                      {selectedProject.name}
+                    </h3>
+                    <span className="modal-badge-sub">
+                      {selectedProject.badge}
+                    </span>
                   </div>
                 </div>
 
-                {/* Right/Narrative Column: Problem, Architecture, Capabilities, Tech & CTAs */}
-                <div className="project-case-narrative-col">
-                  {/* Case Study Header Line */}
-                  <div className="project-case-header">
-                    <div className="project-title-group">
-                      <div className="project-badge-line">
-                        <span className="project-badge dark-tag">{project.badge}</span>
-                        <span className="project-status-dot"></span>
-                        <span className="project-status-text">{project.statusNote}</span>
-                      </div>
+                <button
+                  ref={closeBtnRef}
+                  type="button"
+                  id="project-modal-close-btn"
+                  className="modal-close-btn"
+                  onClick={handleCloseProject}
+                  aria-label="Close project overview dialog"
+                >
+                  <X size={18} />
+                </button>
+              </div>
 
-                      <h3 className="project-name dark-project-name" id={`project-name-${project.id}`}>
-                        {project.name}
-                      </h3>
-                      
-                      <p className="project-tagline dark-project-tagline">
-                        {project.tagline}
-                      </p>
+              {/* Independently Scrollable Dialog Content Area */}
+              <div className="project-modal-scroll-body">
+                {/* Visual Preview Showcase */}
+                <div className="modal-visual-stage">
+                  {renderProjectVisual(selectedProject.id)}
+                </div>
+
+                {/* Concise Overview Banner */}
+                <div className="modal-overview-strip" id="project-modal-overview">
+                  <Sparkles size={15} className="overview-strip-icon" />
+                  <p>{selectedProject.overview}</p>
+                </div>
+
+                {/* Visual 4-Step Architecture Flow */}
+                {selectedProject.architectureFlow && (
+                  <div className="modal-arch-block">
+                    <div className="modal-block-label">
+                      <Layers size={13} />
+                      <span>System Architecture Flow</span>
                     </div>
-
-                    <div className="project-index-num dark-index-num" aria-hidden="true">
-                      0{index + 1}
-                    </div>
-                  </div>
-
-                  {/* Narrative Blocks */}
-                  <div className="case-content-blocks">
-                    <div className="case-section-block">
-                      <h4 className="case-block-title dark-block-title">
-                        <span className="case-block-dot"></span>
-                        The Problem Addressed
-                      </h4>
-                      <p className="case-block-text dark-block-text">
-                        {project.problemAddressed}
-                      </p>
-                    </div>
-
-                    <div className="case-section-block">
-                      <h4 className="case-block-title dark-block-title">
-                        <span className="case-block-dot"></span>
-                        Engineering & System Architecture
-                      </h4>
-                      <p className="case-block-text dark-block-text">
-                        {project.whatWasBuilt}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Capabilities Checklist */}
-                  <div className="features-block">
-                    <h4 className="case-block-title dark-block-title">
-                      <span className="case-block-dot"></span>
-                      Key Technical Capabilities
-                    </h4>
-                    <ul className="case-features-list dark-features-list">
-                      {project.keyFeatures.slice(0, 4).map((feat, fIdx) => (
-                        <li key={fIdx} className="case-feature-item dark-feature-item">
-                          <Check size={14} className="feature-check-icon" />
-                          <span>{feat}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Technology Tags */}
-                  <div className="tech-stack-block">
-                    <div className="tech-tags-plate dark-tags-plate">
-                      {project.technologies.map((tech, tIdx) => (
-                        <span key={tIdx} className="tech-tag dark-tech-tag">
-                          {tech}
-                        </span>
+                    <div className="modal-arch-pipeline">
+                      {selectedProject.architectureFlow.map((node, idx) => (
+                        <div key={node.step} className="modal-arch-node">
+                          <div className="arch-node-top">
+                            <span className="arch-step-num">{node.step}</span>
+                            {idx < selectedProject.architectureFlow.length - 1 && (
+                              <span className="arch-step-connector" aria-hidden="true">
+                                →
+                              </span>
+                            )}
+                          </div>
+                          <span className="arch-node-title">{node.title}</span>
+                          <span className="arch-node-detail">{node.detail}</span>
+                        </div>
                       ))}
                     </div>
                   </div>
+                )}
 
-                  {/* Interactive Action Buttons */}
-                  <div className="case-actions-row">
-                    {project.githubUrl ? (
-                      <a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        id={`project-github-btn-${project.id}`}
-                        className="btn btn-primary dark-btn-primary btn-sm"
-                        title={`Open GitHub repository for ${project.name}`}
-                      >
-                        <GithubIcon size={14} />
-                        <span>GitHub Repository</span>
-                        <ArrowUpRight size={13} className="btn-arrow" />
-                      </a>
-                    ) : (
-                      <button
-                        type="button"
-                        id={`project-github-btn-${project.id}`}
-                        className="btn btn-secondary dark-btn-secondary btn-sm disabled-btn"
-                        onClick={() => handleOpenConfig(project)}
-                        title="GitHub repository link configurable"
-                      >
-                        <GithubIcon size={14} />
-                        <span>GitHub Profile</span>
-                        <ArrowUpRight size={13} className="btn-arrow" />
-                      </button>
-                    )}
+                {/* 2-Column Problem vs Solution Cards */}
+                <div className="modal-two-col-cards">
+                  <div className="modal-info-card">
+                    <div className="modal-block-label">
+                      <Target size={13} />
+                      <span>Problem Addressed</span>
+                    </div>
+                    <p className="modal-card-copy">
+                      {selectedProject.problemAddressed}
+                    </p>
+                  </div>
 
-                    {project.demoUrl ? (
+                  <div className="modal-info-card">
+                    <div className="modal-block-label">
+                      <Cpu size={13} />
+                      <span>Implementation &amp; Architecture</span>
+                    </div>
+                    <p className="modal-card-copy">
+                      {selectedProject.whatWasBuilt}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Key Features Visual Grid */}
+                <div className="modal-features-block">
+                  <div className="modal-block-label">
+                    <Check size={13} />
+                    <span>Key Technical Features</span>
+                  </div>
+                  <ul className="modal-features-grid">
+                    {selectedProject.keyFeatures.map((feat, idx) => (
+                      <li key={idx} className="modal-feature-chip">
+                        <Check size={14} className="modal-check-icon" />
+                        <span>{feat}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Technology Stack */}
+                <div className="modal-tech-block">
+                  <div className="modal-block-label">
+                    <span>Technology Stack</span>
+                  </div>
+                  <div className="modal-tags-wrap">
+                    {selectedProject.technologies.map((tech) => (
+                      <span key={tech} className="project-chip modal-chip">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Pinned Dialog Footer */}
+              <div className="project-modal-footer">
+                <div className="modal-footer-status">
+                  <span className="status-dot-live"></span>
+                  <span>{selectedProject.statusNote}</span>
+                </div>
+
+                <div className="modal-footer-actions">
+                  {selectedProject.githubUrl && (
+                    <a
+                      href={selectedProject.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-burgundy btn-sm"
+                    >
+                      <GithubIcon size={14} />
+                      <span>GitHub Repository</span>
+                      <ArrowUpRight size={14} className="btn-external-arrow" />
+                    </a>
+                  )}
+                  {selectedProject.demoUrl && (
+                    <a
+                      href={selectedProject.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-outline-dark btn-sm"
+                    >
+                      <span>Live Demo</span>
+                      <ArrowUpRight size={14} className="btn-external-arrow" />
+                    </a>
+                  )}
+                  <button
+                    type="button"
+                    className="btn btn-outline-dark btn-sm"
+                    onClick={handleCloseProject}
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>,
+          document.body
+        )
+      : null;
+
+  return (
+    <section
+      id="projects"
+      className="section projects-dark-section"
+      aria-label="Featured Projects Showcase"
+    >
+      {/* Subtle Animated Burgundy Topographic Linework & Ambient Particles */}
+      <svg
+        className="dark-section-linework projects-linework"
+        viewBox="0 0 1440 600"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+      >
+        <path
+          className="animated-flow-line"
+          d="M-80 40C240 20 460 180 760 220C1060 260 1260 120 1520 180"
+          stroke="#71303D"
+          strokeOpacity="0.3"
+          strokeWidth="1.2"
+        />
+        <path
+          className="animated-flow-line-slow"
+          d="M-80 85C220 65 450 225 750 265C1050 305 1250 165 1520 225"
+          stroke="#C87D82"
+          strokeOpacity="0.16"
+          strokeWidth="1"
+        />
+        <path
+          d="M150 -40C290 120 420 290 540 620"
+          stroke="#71303D"
+          strokeOpacity="0.2"
+          strokeWidth="1"
+        />
+        <circle
+          cx="485"
+          cy="148"
+          r="2.5"
+          fill="#C87D82"
+          fillOpacity="0.5"
+          className="ambient-node-pulse"
+        />
+        <circle
+          cx="1160"
+          cy="195"
+          r="2.5"
+          fill="#C87D82"
+          fillOpacity="0.45"
+          className="ambient-node-pulse"
+        />
+      </svg>
+
+      <div className="container">
+        {/* Split Editorial Header */}
+        <div className="projects-header-split">
+          <div className="projects-header-left">
+            <div className="editorial-eyebrow-row dark-eyebrow-row">
+              <span className="editorial-section-num dark-num">03</span>
+              <span className="editorial-eyebrow-tag dark-eyebrow-tag">
+                <span className="eyebrow-dot rose-dot"></span>
+                PROJECTS
+              </span>
+            </div>
+
+            <h2 className="dark-editorial-title">
+              Projects
+              <br />
+              that <em className="serif-italic-rose">create impact.</em>
+            </h2>
+          </div>
+
+          <div className="projects-header-right">
+            <p className="projects-lead-copy">
+              A collection of projects where I apply my skills in software
+              development, AI and problem-solving to build practical and
+              meaningful solutions.
+            </p>
+
+            <a
+              href={personalInfo.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              id="view-all-projects-link"
+              className="dark-underline-cta"
+            >
+              <span>View All Projects</span>
+              <ArrowRight size={15} className="cta-arrow-icon" />
+            </a>
+          </div>
+        </div>
+
+        {/* 3-Column Balanced Project Showcase Grid */}
+        <div className="projects-showcase-grid">
+          {projects.map((project, idx) => (
+            <article
+              key={project.id}
+              id={`project-card-${project.id}`}
+              className={`project-showcase-card stagger-${idx + 1}`}
+            >
+              {/* Top Visual Frame with Number Badge & Zoom Effect */}
+              <div
+                className="project-preview-frame"
+                onClick={(e) => handleOpenProject(project, e)}
+                role="button"
+                tabIndex={0}
+                aria-label={`Open ${project.name} detailed project overview`}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handleOpenProject(project, e);
+                  }
+                }}
+              >
+                <span className="project-card-index">{project.index}</span>
+                <div className="project-preview-zoom">
+                  {renderProjectVisual(project.id)}
+                </div>
+              </div>
+
+              {/* Card Body */}
+              <div className="project-card-body">
+                <h3
+                  className="project-card-title"
+                  id={`project-name-${project.id}`}
+                >
+                  {project.name}
+                </h3>
+
+                <p className="project-card-desc">{project.tagline}</p>
+
+                {/* Restrained Technology Tags */}
+                <div className="project-card-tags" aria-label="Technologies used">
+                  {project.tags.map((tag) => (
+                    <span key={tag} className="project-chip">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Card Footer Links + Circular Arrow Action */}
+                <div className="project-card-footer">
+                  <div className="project-card-links">
+                    {project.demoUrl && (
                       <a
                         href={project.demoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         id={`project-demo-btn-${project.id}`}
-                        className="btn btn-secondary dark-btn-secondary btn-sm"
-                        title={`View live demo for ${project.name}`}
+                        className="project-text-link"
                       >
-                        <ExternalLink size={14} />
                         <span>Live Demo</span>
+                        <ArrowUpRight size={13} className="link-diag-arrow" />
                       </a>
-                    ) : (
-                      <button
-                        type="button"
-                        id={`project-demo-btn-${project.id}`}
-                        className="btn btn-secondary dark-btn-secondary btn-sm demo-status-btn"
-                        onClick={() => handleOpenConfig(project)}
-                        title="Click to view deployment architecture notes"
-                      >
-                        <Info size={13} />
-                        <span>{project.statusNote || 'Architecture Status'}</span>
-                      </button>
                     )}
+
+                    {project.githubUrl && (
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        id={`project-github-btn-${project.id}`}
+                        className="project-text-link"
+                        title={`Open GitHub for ${project.name}`}
+                      >
+                        <span>GitHub</span>
+                        <ArrowUpRight size={13} className="link-diag-arrow" />
+                      </a>
+                    )}
+
+                    <button
+                      type="button"
+                      id={`project-architecture-btn-${project.id}`}
+                      className="project-text-link project-case-btn"
+                      onClick={(e) => handleOpenProject(project, e)}
+                    >
+                      <span>Project Overview</span>
+                      <ArrowUpRight size={13} className="link-diag-arrow" />
+                    </button>
                   </div>
 
+                  {/* Circular Arrow Button */}
+                  <button
+                    type="button"
+                    className="project-circle-arrow"
+                    onClick={(e) => handleOpenProject(project, e)}
+                    aria-label={`Open ${project.name} overview dialog`}
+                    title={`Explore ${project.name} overview`}
+                  >
+                    <ArrowRight size={15} className="circle-arrow-svg" />
+                  </button>
                 </div>
-
               </div>
             </article>
           ))}
         </div>
-
-        {/* Modal for Architecture Status & Links */}
-        {selectedConfigProject && (
-          <div className="modal-backdrop" onClick={handleCloseConfig} role="dialog" aria-modal="true">
-            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-              <div className="modal-header">
-                <div className="modal-title-wrap">
-                  <Info size={16} />
-                  <h3 className="modal-title">{selectedConfigProject.name} — Architecture & Repository Status</h3>
-                </div>
-                <button 
-                  type="button" 
-                  className="modal-close-btn" 
-                  onClick={handleCloseConfig}
-                  aria-label="Close dialog"
-                >
-                  ✕
-                </button>
-              </div>
-
-              <div className="modal-body">
-                <p className="modal-desc">
-                  To ensure authentic representation on software engineering applications, private repositories and offline prototypes are configured without dummy links.
-                </p>
-
-                <div className="modal-info-box">
-                  <div className="info-row">
-                    <span className="info-key">Project:</span>
-                    <span className="info-val">{selectedConfigProject.name}</span>
-                  </div>
-                  <div className="info-row">
-                    <span className="info-key">Status:</span>
-                    <span className="info-val">{selectedConfigProject.statusNote}</span>
-                  </div>
-                  <div className="info-row">
-                    <span className="info-key">Config:</span>
-                    <code className="info-code">src/data/portfolioData.js</code>
-                  </div>
-                </div>
-
-                <p className="modal-subtext">
-                  You can update <code className="inline-code">githubUrl</code> or <code className="inline-code">demoUrl</code> anytime in <code className="inline-code">src/data/portfolioData.js</code>.
-                </p>
-              </div>
-
-              <div className="modal-footer">
-                <a
-                  href={selectedConfigProject.githubUrl || "https://github.com/Nishita-2009"}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-primary btn-sm"
-                >
-                  <GithubIcon size={14} />
-                  <span>Visit GitHub Profile</span>
-                </a>
-                <button
-                  type="button"
-                  className="btn btn-secondary btn-sm"
-                  onClick={handleCloseConfig}
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-
       </div>
+
+      {/* Render Portal Dialog at document.body level */}
+      {modalPortal}
     </section>
   );
 }

@@ -1,106 +1,121 @@
 import React from 'react';
-import { 
-  GraduationCap, 
-  Sparkles, 
-  Target, 
-  Layers 
-} from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
+import { HexCubeIcon, SparkleStarIcon } from './Icons';
 import { aboutData } from '../data/portfolioData';
 
 export default function About() {
   return (
-    <section id="about" className="section about-section" aria-label="About Gottipati Nishita Sri">
+    <section
+      id="about"
+      className="section about-section"
+      aria-label="About Gottipati Nishita Sri"
+    >
+      {/* Subtle Bottom-Left Decorative Burgundy Wave SVG */}
+      <svg
+        className="about-decor-wave"
+        viewBox="0 0 260 220"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+      >
+        <path
+          d="M-30 90C30 110 85 150 135 230M-30 110C25 130 75 168 120 235M-30 130C20 148 65 182 105 240"
+          stroke="#71303D"
+          strokeOpacity="0.18"
+          strokeWidth="1.2"
+        />
+      </svg>
+
       <div className="container">
-        
-        {/* Section Header */}
-        <div className="section-header">
-          <div className="section-badge">
-            <Sparkles size={12} />
-            <span>01 // Background & Philosophy</span>
-          </div>
-          <h2 className="section-title">
-            Academic Foundation & <span className="text-gradient">Engineering Focus</span>
-          </h2>
-          <p className="section-subtitle">
-            An authentic overview of my undergraduate education, technical focus, and approach to software development.
-          </p>
-        </div>
-
-        {/* Editorial 2-Column Grid */}
-        <div className="about-editorial-grid">
-          
-          {/* Left Column: Thesis Quote & Focus Tags */}
-          <div className="about-lead-col">
-            <blockquote className="about-pull-quote">
-              “Turning core computer science principles into working software, from MSME intelligence platforms to specialized AI agent workflows.”
-            </blockquote>
-
-            <div className="narrative-tags">
-              <span className="tech-tag">BITS Pilani (Digital)</span>
-              <span className="tech-tag">NIAT Fellow</span>
-              <span className="tech-tag">DSA & Problem Solving</span>
-              <span className="tech-tag">Full-Stack Web</span>
-              <span className="tech-tag">Generative AI & LLMs</span>
-              <span className="tech-tag">RAG Fundamentals</span>
+        <div className="about-split-layout">
+          {/* Left Column: Concise Editorial Intro & CTA */}
+          <div className="about-text-col">
+            <div className="editorial-eyebrow-row">
+              <span className="editorial-section-num">02</span>
+              <span className="editorial-eyebrow-tag">
+                <span className="eyebrow-dash" aria-hidden="true"></span>
+                ABOUT ME
+              </span>
             </div>
-          </div>
 
-          {/* Right Column: Full Narrative & 2x2 Quad Pillars */}
-          <div className="about-narrative-col">
-            <div className="narrative-paragraphs">
-              {aboutData.paragraphs.map((para, idx) => (
-                <p key={idx} className="narrative-p">
-                  {para}
-                </p>
+            <h2 className="about-heading">
+              More Than
+              <br />
+              Just <em className="serif-italic-accent">Code</em>
+            </h2>
+
+            <p className="about-lead-copy">
+              I’m a Computer Science undergraduate at{' '}
+              <strong>BITS Pilani</strong> with a foundation in programming,
+              problem-solving and software development. I enjoy building
+              practical applications, exploring Generative AI and developing
+              technology-driven solutions to real-world problems.
+            </p>
+
+            {/* Compact Visual Fact Pills (No Wall of Text) */}
+            <div className="about-quick-pills">
+              {aboutData.quickFacts.map((fact) => (
+                <div key={fact.label} className="about-fact-pill">
+                  <span className="fact-pill-label">{fact.label}:</span>
+                  <span className="fact-pill-val">{fact.value}</span>
+                </div>
               ))}
             </div>
 
-            {/* 4 Core Pillars in a 2x2 Architectural Quad-Grid (Hairline cross, no boxes) */}
-            <div className="about-pillars-grid">
-              <div className="pillar-cell">
-                <div className="pillar-cell-header">
-                  <GraduationCap size={18} className="pillar-icon" />
-                  <h4 className="pillar-cell-title">BITS Pilani (Digital)</h4>
-                </div>
-                <p className="pillar-cell-desc">
-                  Pursuing a BSc in Computer Science, building robust foundations in algorithms, system architecture, database theory, and core computer science mathematics.
-                </p>
-              </div>
-
-              <div className="pillar-cell">
-                <div className="pillar-cell-header">
-                  <Layers size={18} className="pillar-icon" />
-                  <h4 className="pillar-cell-title">Industry Training at NIAT</h4>
-                </div>
-                <p className="pillar-cell-desc">
-                  Undergoing hands-on engineering training with NxtWave of Innovation in Advanced Technologies (NIAT), mastering full-stack web engineering and practical software development.
-                </p>
-              </div>
-
-              <div className="pillar-cell">
-                <div className="pillar-cell-header">
-                  <Sparkles size={18} className="pillar-icon" />
-                  <h4 className="pillar-cell-title">Generative AI & Practical RAG</h4>
-                </div>
-                <p className="pillar-cell-desc">
-                  Exploring LLM integration, agentic workflows, prompt engineering, and retrieval-augmented generation to create functional, intelligent solutions for real-world scenarios.
-                </p>
-              </div>
-
-              <div className="pillar-cell">
-                <div className="pillar-cell-header">
-                  <Target size={18} className="pillar-icon" />
-                  <h4 className="pillar-cell-title">Growth Through Practical Building</h4>
-                </div>
-                <p className="pillar-cell-desc">
-                  Believer in experiential learning: turning conceptual knowledge into working software, from MSME analytics platforms to specialized AI recruitment tools.
-                </p>
-              </div>
+            <div className="about-cta-wrap">
+              <a
+                href="#experience"
+                id="about-get-to-know-btn"
+                className="btn btn-capsule-outline"
+              >
+                <span>Get to Know Me</span>
+                <ArrowUpRight size={15} className="btn-external-arrow" />
+              </a>
             </div>
           </div>
 
-        </div>
+          {/* Right Column: Sunlit Workspace Visual + Handwritten Notes + Floating Interests Card */}
+          <div className="about-visual-col">
+            <div className="about-workspace-stage">
+              {/* Handwritten Callout on the Left of the Desk */}
+              <div className="about-script-notes" aria-hidden="true">
+                <SparkleStarIcon size={11} className="about-sparkle-1" />
+                <span>Curious</span>
+                <span>Learner</span>
+                <span>Problem Solver</span>
+                <span>Builder</span>
+                <SparkleStarIcon size={9} className="about-sparkle-2" />
+              </div>
 
+              {/* Sunlit Workspace Image */}
+              <div className="about-image-frame">
+                <img
+                  src="/images/about-workspace.jpg"
+                  alt="Warm sunlit developer workspace with laptop, books, and botanical accents"
+                  className="about-workspace-img"
+                  loading="lazy"
+                />
+              </div>
+
+              {/* Refined Interests Card */}
+              <div
+                className="about-interests-card"
+                aria-label="Core Focus Areas and Interests"
+              >
+                <ul className="about-interests-list">
+                  {aboutData.interests.map((interest) => (
+                    <li key={interest} className="about-interest-item">
+                      <span className="interest-icon-wrap" aria-hidden="true">
+                        <HexCubeIcon size={18} />
+                      </span>
+                      <span className="interest-label">{interest}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

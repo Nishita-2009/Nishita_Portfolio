@@ -1,197 +1,150 @@
 import React from 'react';
-import { 
-  ShieldCheck,
-  Code2
-} from 'lucide-react';
+import { SparkleStarIcon } from './Icons';
 
 export default function HeroVisual() {
   return (
-    <div className="hero-technical-composition" id="hero-technical-artifact">
-      {/* 1. Header Spec Bar */}
-      <div className="tech-artifact-header">
-        <div className="tech-artifact-id">
-          <span className="tech-status-pip" aria-hidden="true"></span>
-          <span className="tech-id-text">SYSTEM TOPOLOGY // CANDIDATE SPEC</span>
-        </div>
-        <div className="tech-artifact-badge">
-          <ShieldCheck size={12} />
-          <span>VERIFIED 2026</span>
-        </div>
-      </div>
+    <div className="hero-editorial-stage" id="hero-technical-artifact">
+      {/* Main Sunset & Orbit Composition */}
+      <div className="hero-sunset-canvas">
+        {/* Warm Atmospheric Glow Layers */}
+        <div className="sunset-glow-outer" aria-hidden="true"></div>
+        <div className="sunset-glow-inner" aria-hidden="true"></div>
+        <div className="sunset-sun-disc" aria-hidden="true"></div>
 
-      {/* 2. Interactive SVG System Network Canvas */}
-      <div className="tech-network-canvas" aria-label="Interactive AI and Systems Architecture Diagram">
-        <svg 
-          className="tech-svg-diagram" 
-          viewBox="0 0 460 260" 
-          fill="none" 
+        {/* Delicate Orbital SVG Linework & Nodes */}
+        <svg
+          className="hero-orbit-svg"
+          viewBox="0 0 540 460"
+          fill="none"
           xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
         >
-          {/* Subtle Background Grid */}
           <defs>
-            <pattern id="techGrid" width="20" height="20" patternUnits="userSpaceOnUse">
-              <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#DDD9D0" strokeWidth="0.6" strokeOpacity="0.6" />
-            </pattern>
-            <linearGradient id="oxbloodGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#713B42" />
-              <stop offset="100%" stopColor="#9E525C" />
+            <linearGradient id="orbitRoseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#71303D" stopOpacity="0.45" />
+              <stop offset="50%" stopColor="#C87D82" stopOpacity="0.35" />
+              <stop offset="100%" stopColor="#DED5CA" stopOpacity="0.15" />
             </linearGradient>
-            <linearGradient id="charcoalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#191919" />
-              <stop offset="100%" stopColor="#2D2B28" />
-            </linearGradient>
+            <radialGradient id="sunBurst" cx="38%" cy="46%" r="48%">
+              <stop offset="0%" stopColor="#FFF6EB" stopOpacity="0.85" />
+              <stop offset="40%" stopColor="#E8A598" stopOpacity="0.45" />
+              <stop offset="75%" stopColor="#71303D" stopOpacity="0.18" />
+              <stop offset="100%" stopColor="#F7F3EC" stopOpacity="0" />
+            </radialGradient>
           </defs>
 
-          <rect width="460" height="260" fill="url(#techGrid)" opacity="0.4" />
+          {/* Subtle Warm Sun Halo */}
+          <circle cx="240" cy="220" r="190" fill="url(#sunBurst)" />
 
-          {/* Connection Traces */}
-          <g className="tech-traces" stroke="#C8C3B8" strokeWidth="1.2" strokeDasharray="3 3">
-            {/* Center to Top-Left (DSA Engine) */}
-            <path d="M 230 130 L 90 65" />
-            {/* Center to Top-Right (AI Agents & LLMs) */}
-            <path d="M 230 130 L 370 65" />
-            {/* Center to Bottom-Left (Full-Stack Systems) */}
-            <path d="M 230 130 L 90 200" />
-            {/* Center to Bottom-Right (Data & RAG Pipeline) */}
-            <path d="M 230 130 L 370 200" />
-            {/* Perimeter Cross-connections */}
-            <path d="M 90 65 L 370 65" strokeWidth="0.8" strokeOpacity="0.4" />
-            <path d="M 90 200 L 370 200" strokeWidth="0.8" strokeOpacity="0.4" />
-          </g>
-
-          {/* Animated Data Packets traveling along traces */}
-          <circle className="pulse-packet packet-1" r="3" fill="#713B42">
-            <animateMotion 
-              path="M 230 130 L 90 65 L 230 130" 
-              dur="6s" 
-              repeatCount="indefinite" 
-            />
-          </circle>
-          <circle className="pulse-packet packet-2" r="3" fill="#713B42">
-            <animateMotion 
-              path="M 230 130 L 370 65 L 230 130" 
-              dur="5s" 
-              begin="1.5s" 
-              repeatCount="indefinite" 
-            />
-          </circle>
-          <circle className="pulse-packet packet-3" r="3" fill="#191919">
-            <animateMotion 
-              path="M 230 130 L 370 200 L 230 130" 
-              dur="7s" 
-              begin="0.8s" 
-              repeatCount="indefinite" 
-            />
-          </circle>
-          <circle className="pulse-packet packet-4" r="3" fill="#191919">
-            <animateMotion 
-              path="M 230 130 L 90 200 L 230 130" 
-              dur="5.5s" 
-              begin="2.2s" 
-              repeatCount="indefinite" 
-            />
-          </circle>
-
-          {/* Concentric Telemetry Orbit Rings at Center */}
-          <circle 
-            cx="230" 
-            cy="130" 
-            r="44" 
-            stroke="#DDD9D0" 
-            strokeWidth="1" 
-            strokeDasharray="4 4" 
-            className="orbit-ring-slow" 
-          />
-          <circle 
-            cx="230" 
-            cy="130" 
-            r="64" 
-            stroke="#DDD9D0" 
-            strokeWidth="0.8" 
-            strokeOpacity="0.7" 
-            strokeDasharray="2 6" 
-            className="orbit-ring-fast" 
+          {/* Outer Orbit Arc */}
+          <circle
+            cx="275"
+            cy="235"
+            r="195"
+            stroke="url(#orbitRoseGrad)"
+            strokeWidth="1.1"
+            className="hero-orbit-ring-slow"
           />
 
-          {/* Center Hub Node: Core Agent & Algorithmic Runtime */}
-          <g className="tech-node node-center" transform="translate(230, 130)">
-            <circle r="22" fill="url(#charcoalGrad)" stroke="#713B42" strokeWidth="1.5" />
-            <circle r="16" fill="none" stroke="#F7F5F0" strokeWidth="0.7" strokeOpacity="0.5" />
-            <circle r="4" fill="#713B42" className="center-pulse-dot" />
-          </g>
+          {/* Secondary Tilted Elliptical Orbit */}
+          <ellipse
+            cx="265"
+            cy="235"
+            rx="225"
+            ry="155"
+            transform="rotate(-14 265 235)"
+            stroke="#71303D"
+            strokeOpacity="0.22"
+            strokeWidth="1"
+            strokeDasharray="3 5"
+          />
 
-          {/* Node 1: Algorithmic Foundations (DSA / C++) */}
-          <g className="tech-node node-nw" transform="translate(90, 65)">
-            <rect x="-42" y="-18" width="84" height="36" rx="2" fill="#FFFFFF" stroke="#DDD9D0" strokeWidth="1" />
-            <text x="0" y="-3" textAnchor="middle" fill="#713B42" fontSize="8" fontWeight="700" letterSpacing="0.06em">01. ALGORITHMS</text>
-            <text x="0" y="9" textAnchor="middle" fill="#191919" fontSize="9.5" fontWeight="600">DSA • C++</text>
-          </g>
+          {/* Inner Delicate Ring */}
+          <circle
+            cx="270"
+            cy="225"
+            r="138"
+            stroke="#C87D82"
+            strokeOpacity="0.32"
+            strokeWidth="0.9"
+          />
 
-          {/* Node 2: Applied AI & LLMs */}
-          <g className="tech-node node-ne" transform="translate(370, 65)">
-            <rect x="-44" y="-18" width="88" height="36" rx="2" fill="#FFFFFF" stroke="#DDD9D0" strokeWidth="1" />
-            <text x="0" y="-3" textAnchor="middle" fill="#713B42" fontSize="8" fontWeight="700" letterSpacing="0.06em">02. APPLIED AI</text>
-            <text x="0" y="9" textAnchor="middle" fill="#191919" fontSize="9.5" fontWeight="600">LLMs • Agents</text>
-          </g>
+          {/* Connecting Diagonal Technical Hairline */}
+          <line
+            x1="70"
+            y1="305"
+            x2="205"
+            y2="215"
+            stroke="#71303D"
+            strokeOpacity="0.28"
+            strokeWidth="0.9"
+          />
+          <line
+            x1="355"
+            y1="150"
+            x2="455"
+            y2="95"
+            stroke="#71303D"
+            strokeOpacity="0.25"
+            strokeWidth="0.9"
+          />
 
-          {/* Node 3: Full-Stack Systems & Architecture */}
-          <g className="tech-node node-sw" transform="translate(90, 200)">
-            <rect x="-46" y="-18" width="92" height="36" rx="2" fill="#FFFFFF" stroke="#DDD9D0" strokeWidth="1" />
-            <text x="0" y="-3" textAnchor="middle" fill="#713B42" fontSize="8" fontWeight="700" letterSpacing="0.06em">03. ARCHITECTURE</text>
-            <text x="0" y="9" textAnchor="middle" fill="#191919" fontSize="9.5" fontWeight="600">Full-Stack Web</text>
-          </g>
+          {/* Orbiting Nodes */}
+          <circle cx="82" cy="212" r="4" fill="#191817" />
+          <circle cx="82" cy="212" r="9" stroke="#71303D" strokeOpacity="0.3" strokeWidth="1" />
 
-          {/* Node 4: Data Engineering & RAG */}
-          <g className="tech-node node-se" transform="translate(370, 200)">
-            <rect x="-42" y="-18" width="84" height="36" rx="2" fill="#FFFFFF" stroke="#DDD9D0" strokeWidth="1" />
-            <text x="0" y="-3" textAnchor="middle" fill="#713B42" fontSize="8" fontWeight="700" letterSpacing="0.06em">04. DATA PIPELINE</text>
-            <text x="0" y="9" textAnchor="middle" fill="#191919" fontSize="9.5" fontWeight="600">RAG • MongoDB</text>
-          </g>
+          <circle cx="142" cy="108" r="3" fill="#C87D82" />
+          <circle cx="398" cy="222" r="4.5" fill="#191817" />
+          <circle cx="398" cy="222" r="10" stroke="#71303D" strokeOpacity="0.3" strokeWidth="1" />
 
-          {/* Center Title Tag */}
-          <rect x="180" y="162" width="100" height="18" rx="2" fill="#EFEBE3" stroke="#DDD9D0" strokeWidth="0.8" />
-          <text x="230" y="174" textAnchor="middle" fill="#191919" fontSize="8.5" fontWeight="600" letterSpacing="0.04em">CORE ENGINE</text>
+          <circle cx="445" cy="148" r="3" fill="#71303D" />
+          <circle cx="115" cy="335" r="2.5" fill="#71303D" fillOpacity="0.6" />
         </svg>
-      </div>
 
-      {/* 3. Integrated Engineering Specification HUD (Responsive & Compact) */}
-      <div className="tech-specs-plate">
-        <div className="spec-metric-row">
-          <div className="spec-metric">
-            <span className="spec-label">INSTITUTION</span>
-            <span className="spec-value">BITS Pilani (Digital)</span>
-          </div>
-          <div className="spec-divider"></div>
-          <div className="spec-metric">
-            <span className="spec-label">PROGRAM</span>
-            <span className="spec-value">BSc Computer Science</span>
-          </div>
+        {/* Stylized Editorial Portrait/Horizon Artwork */}
+        <div className="hero-portrait-frame">
+          <img
+            src="/images/hero-atmosphere.jpg"
+            alt="Editorial illustration looking toward a warm sunset horizon"
+            className="hero-atmosphere-img"
+            loading="eager"
+          />
         </div>
 
-        <div className="spec-metric-row secondary-spec-row">
-          <div className="spec-metric">
-            <span className="spec-label">FELLOWSHIP</span>
-            <span className="spec-value">NIAT Engineering Fellow</span>
-          </div>
-          <div className="spec-divider"></div>
-          <div className="spec-metric">
-            <span className="spec-label">SEEKING</span>
-            <span className="spec-value spec-highlight">SWE Internships (2026)</span>
-          </div>
-        </div>
-
-        {/* Live System Capabilities Tagline */}
-        <div className="tech-hud-footer">
-          <div className="hud-code-tag">
-            <Code2 size={13} className="hud-icon" />
-            <span>Stack: Python • C++ • JavaScript • GenAI • RAG</span>
-          </div>
-          <div className="hud-status-badge">
-            <span className="hud-live-pip"></span>
-            <span>AVAILABLE</span>
-          </div>
+        {/* Handwritten Calligraphic Note: "Turning Ideas Into Impact" */}
+        <div className="hero-script-callout" aria-hidden="true">
+          <SparkleStarIcon size={11} className="script-sparkle sparkle-top" />
+          <span className="script-line">Turning</span>
+          <span className="script-line">Ideas</span>
+          <span className="script-line">Into</span>
+          <span className="script-line">Impact</span>
+          <SparkleStarIcon size={9} className="script-sparkle sparkle-bottom" />
         </div>
       </div>
+
+      {/* Right-Side Editorial Technical Rail (01 // DEVELOP EXPLORE LEARN BUILD REPEAT) */}
+      <aside className="hero-editorial-rail" aria-label="Engineering Philosophy">
+        <div className="rail-index-num">01</div>
+
+        <ul className="rail-mantra-list">
+          <li>DEVELOP</li>
+          <li>EXPLORE</li>
+          <li>LEARN</li>
+          <li>BUILD</li>
+          <li>REPEAT</li>
+        </ul>
+
+        <div className="rail-vertical-line" aria-hidden="true">
+          <span className="rail-line-node"></span>
+        </div>
+
+        <div className="rail-domain-caption">
+          <span>SOFTWARE</span>
+          <span>AI</span>
+          <span>REAL-WORLD</span>
+          <span>SOLUTIONS</span>
+        </div>
+      </aside>
     </div>
   );
 }

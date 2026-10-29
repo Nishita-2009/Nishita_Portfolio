@@ -1,257 +1,268 @@
 import React, { useState } from 'react';
-import { 
-  Mail, 
-  MapPin, 
-  Phone, 
-  Copy, 
-  Check, 
-  ExternalLink, 
-  FileDown, 
-  Send, 
-  ArrowUpRight 
+import {
+  Mail,
+  Send,
+  Copy,
+  Check,
+  ExternalLink,
+  FileDown,
+  Phone,
+  MapPin,
+  ArrowUpRight
 } from 'lucide-react';
+import { GithubIcon, LinkedinIcon } from './Icons';
 import { personalInfo } from '../data/portfolioData';
 
 export default function Contact() {
   const [copiedEmail, setCopiedEmail] = useState(false);
-  const [copiedPhone, setCopiedPhone] = useState(false);
 
-  const handleCopyEmail = () => {
+  const handleCopyEmail = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     navigator.clipboard.writeText(personalInfo.email);
     setCopiedEmail(true);
-    setTimeout(() => setCopiedEmail(false), 2500);
-  };
-
-  const handleCopyPhone = () => {
-    navigator.clipboard.writeText(personalInfo.displayPhone);
-    setCopiedPhone(true);
-    setTimeout(() => setCopiedPhone(false), 2500);
+    setTimeout(() => setCopiedEmail(false), 2200);
   };
 
   return (
-    <section id="contact" className="section contact-section" aria-label="Contact and Connect">
-      <div className="container">
-        
-        {/* Section Header */}
-        <div className="section-header">
-          <div className="section-badge">
-            <Mail size={12} />
-            <span>08 // Inquiries</span>
-          </div>
-          <h2 className="section-title">
-            Initiate a <span className="text-gradient">Conversation</span>
-          </h2>
-          <p className="section-subtitle">
-            Open to software development internships, engineering collaborations, and learning opportunities.
-          </p>
+    <section
+      id="contact"
+      className="section contact-cream-section"
+      aria-label="Contact and Connect"
+    >
+      {/* Subtle Animated Burgundy Orbit Arcs & Warm Rose Glow */}
+      <div className="contact-rose-glow" aria-hidden="true"></div>
+      <svg
+        className="contact-orbit-svg"
+        viewBox="0 0 600 280"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+      >
+        <path
+          className="animated-flow-line"
+          d="M110 280C170 115 335 20 530 45"
+          stroke="#71303D"
+          strokeOpacity="0.22"
+          strokeWidth="1.1"
+        />
+        <path
+          className="animated-flow-line-slow"
+          d="M230 280C285 145 415 75 585 95"
+          stroke="#C87D82"
+          strokeOpacity="0.24"
+          strokeWidth="1"
+        />
+        <circle
+          cx="293"
+          cy="68"
+          r="3"
+          fill="#71303D"
+          fillOpacity="0.5"
+          className="ambient-node-pulse"
+        />
+        <circle
+          cx="440"
+          cy="38"
+          r="2.5"
+          fill="#C87D82"
+          fillOpacity="0.6"
+          className="ambient-node-pulse"
+        />
+      </svg>
+
+      <div className="container contact-container">
+        <div className="editorial-eyebrow-row">
+          <span className="editorial-section-num">08</span>
+          <span className="editorial-eyebrow-tag">
+            <span className="eyebrow-dot"></span>
+            CONTACT
+          </span>
         </div>
 
-        {/* Contact Plate */}
-        <div className="contact-plate">
-          <div className="contact-grid">
-            
-            {/* Left: Message & Contact Items */}
-            <div className="contact-info">
-              <h3 className="contact-heading">
-                Ready to contribute to practical software solutions
-              </h3>
-              
-              <p className="contact-message" id="contact-message-text">
-                {personalInfo.contactMessage}
-              </p>
+        {/* Tier 1: Balanced Editorial Closing Statement & Primary Action */}
+        <div className="contact-top-banner">
+          <div className="contact-headline-block">
+            <h2 className="contact-closing-title">
+              Let’s Build Something
+              <br />
+              <em className="serif-italic-accent">Meaningful</em> Together.
+            </h2>
+          </div>
 
-              <div className="contact-details-list">
-                {/* Email Item */}
-                <div className="contact-item">
-                  <div className="contact-icon-box">
-                    <Mail size={16} />
-                  </div>
-                  <div className="contact-item-content">
-                    <span className="contact-label">Email</span>
-                    <a 
-                      href={`mailto:${personalInfo.email}`}
-                      id="contact-email-link"
-                      className="contact-value-link"
-                      title="Send email via default client"
-                    >
-                      {personalInfo.email}
-                    </a>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={handleCopyEmail}
-                    id="copy-email-btn"
-                    className="copy-btn"
-                    title="Copy email address"
-                    aria-label="Copy email address to clipboard"
-                  >
-                    {copiedEmail ? <Check size={14} className="text-green" /> : <Copy size={14} />}
-                  </button>
-                </div>
-
-                {/* Phone Item from verified resume */}
-                {personalInfo.displayPhone && (
-                  <div className="contact-item">
-                    <div className="contact-icon-box">
-                      <Phone size={16} />
-                    </div>
-                    <div className="contact-item-content">
-                      <span className="contact-label">Phone</span>
-                      <a 
-                        href={`tel:${personalInfo.phone}`}
-                        id="contact-phone-link"
-                        className="contact-value-link"
-                        title="Call directly"
-                      >
-                        {personalInfo.displayPhone}
-                      </a>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={handleCopyPhone}
-                      id="copy-phone-btn"
-                      className="copy-btn"
-                      title="Copy phone number"
-                      aria-label="Copy phone number to clipboard"
-                    >
-                      {copiedPhone ? <Check size={14} className="text-green" /> : <Copy size={14} />}
-                    </button>
-                  </div>
-                )}
-
-                {/* Location Item */}
-                <div className="contact-item">
-                  <div className="contact-icon-box">
-                    <MapPin size={16} />
-                  </div>
-                  <div className="contact-item-content">
-                    <span className="contact-label">Location</span>
-                    <span className="contact-value" id="contact-location-display">
-                      {personalInfo.location}
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Direct Mail & Resume Action Buttons */}
-              <div className="contact-actions">
-                <a
-                  href={`mailto:${personalInfo.email}`}
-                  id="contact-compose-email-btn"
-                  className="btn btn-primary"
-                >
-                  <Send size={14} />
-                  <span>Compose Email</span>
-                </a>
-
-                {/* View Resume button opens in a new tab */}
-                <a
-                  href={personalInfo.resumePath}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  id="contact-view-resume-btn"
-                  className="btn btn-resume"
-                  title="Open Resume in a new browser tab"
-                >
-                  <ExternalLink size={14} />
-                  <span>View Resume</span>
-                </a>
-
-                {/* Download Resume button downloads the PDF as Gottipati_Nishita_Sri_Resume.pdf */}
-                <a
-                  href={personalInfo.resumePath}
-                  download="Gottipati_Nishita_Sri_Resume.pdf"
-                  id="contact-download-resume-btn"
-                  className="btn btn-secondary"
-                  title="Download Resume as Gottipati_Nishita_Sri_Resume.pdf"
-                >
-                  <FileDown size={14} />
-                  <span>Download Resume</span>
-                </a>
-              </div>
+          <div className="contact-invite-block">
+            <p className="contact-invite-text" id="contact-message-text">
+              {personalInfo.contactMessage}
+            </p>
+            <div className="contact-location-meta">
+              <span className="location-pill-item">
+                <MapPin size={13} />
+                <span>{personalInfo.location}</span>
+              </span>
+              <span className="meta-dot">•</span>
+              <a
+                href={`tel:${personalInfo.phone}`}
+                id="contact-phone-link"
+                className="location-pill-item contact-phone-inline"
+                title={`Call ${personalInfo.phone}`}
+              >
+                <Phone size={13} />
+                <span>{personalInfo.displayPhone}</span>
+              </a>
             </div>
+          </div>
 
-            {/* Right: Verified Profiles Panel */}
-            <div className="contact-social-panel">
-              <h4 className="social-panel-title">Verified Profiles & Repositories</h4>
-              <p className="social-panel-desc">
-                Connect or review my project repositories and professional background:
-              </p>
-
-              <div className="social-links-list">
-                {/* GitHub */}
-                <a
-                  href={personalInfo.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  id="contact-github-link"
-                  className="social-profile-cell"
-                  aria-label="GitHub Profile (opens in new tab)"
-                >
-                  <div className="social-icon-box">
-                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-                      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-                    </svg>
-                  </div>
-                  <div className="social-info">
-                    <span className="social-platform">GitHub</span>
-                    <span className="social-handle">@Nishita-2009</span>
-                  </div>
-                  <ArrowUpRight size={15} className="social-arrow" />
-                </a>
-
-                {/* LinkedIn */}
-                <a
-                  href={personalInfo.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  id="contact-linkedin-link"
-                  className="social-profile-cell"
-                  aria-label="LinkedIn Profile (opens in new tab)"
-                >
-                  <div className="social-icon-box">
-                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-                      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                    </svg>
-                  </div>
-                  <div className="social-info">
-                    <span className="social-platform">LinkedIn</span>
-                    <span className="social-handle">nishita-sri-gottipati</span>
-                  </div>
-                  <ArrowUpRight size={15} className="social-arrow" />
-                </a>
-
-                {/* Portfolio Repository Link */}
-                <a
-                  href={personalInfo.portfolioRepo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  id="contact-portfolio-repo-link"
-                  className="social-profile-cell"
-                  aria-label="Portfolio Source Repository on GitHub"
-                >
-                  <div className="social-icon-box">
-                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-                      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-                    </svg>
-                  </div>
-                  <div className="social-info">
-                    <span className="social-platform">Portfolio Repository</span>
-                    <span className="social-handle">Nishita-2009/Nishita_Portfolio</span>
-                  </div>
-                  <ArrowUpRight size={15} className="social-arrow" />
-                </a>
-              </div>
-
-              <div className="contact-status-box">
-                <span className="pulsing-dot-green"></span>
-                <span>Active applicant for Software Development Internships</span>
-              </div>
-            </div>
-
+          <div className="contact-send-cta-wrap">
+            <a
+              href={`mailto:${personalInfo.email}`}
+              id="contact-compose-email-btn"
+              className="contact-circle-send"
+              aria-label="Compose an email to Gottipati Nishita Sri"
+              title="Send Email"
+            >
+              <Send size={20} className="send-plane-icon" />
+            </a>
           </div>
         </div>
 
+        {/* Tier 2: Spacious, Independent 3-Column Contact Action Grid */}
+        <div
+          className="contact-cards-grid"
+          aria-label="Direct Contact and Social Profiles"
+        >
+          {/* 1. Email Card */}
+          <div className="contact-action-card">
+            <a
+              href={`mailto:${personalInfo.email}`}
+              id="contact-email-link"
+              className="contact-card-primary-zone"
+              title={`Send email to ${personalInfo.email}`}
+            >
+              <div className="contact-card-icon" aria-hidden="true">
+                <Mail size={19} strokeWidth={1.7} />
+              </div>
+              <div className="contact-card-text">
+                <span className="contact-card-title">Email</span>
+                <span className="contact-card-url">{personalInfo.email}</span>
+              </div>
+            </a>
+
+            <div className="contact-card-controls">
+              <button
+                type="button"
+                onClick={handleCopyEmail}
+                id="copy-email-btn"
+                className="contact-icon-action"
+                title={copiedEmail ? 'Email copied!' : 'Copy email address'}
+                aria-label={
+                  copiedEmail
+                    ? 'Email address copied to clipboard'
+                    : 'Copy email address to clipboard'
+                }
+              >
+                {copiedEmail ? <Check size={14} /> : <Copy size={14} />}
+              </button>
+              <a
+                href={`mailto:${personalInfo.email}`}
+                className="contact-icon-action"
+                aria-label="Open email client"
+                title="Compose email"
+              >
+                <ArrowUpRight size={15} className="contact-action-arrow" />
+              </a>
+            </div>
+          </div>
+
+          {/* 2. LinkedIn Card */}
+          <a
+            href={personalInfo.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            id="contact-linkedin-link"
+            className="contact-action-card contact-card-link"
+            aria-label="LinkedIn Profile (opens in new tab)"
+          >
+            <div className="contact-card-primary-zone">
+              <div className="contact-card-icon" aria-hidden="true">
+                <LinkedinIcon size={18} />
+              </div>
+              <div className="contact-card-text">
+                <span className="contact-card-title">LinkedIn</span>
+                <span className="contact-card-url">
+                  {personalInfo.linkedinDisplay}
+                </span>
+              </div>
+            </div>
+
+            <div className="contact-card-controls" aria-hidden="true">
+              <span className="contact-icon-action">
+                <ArrowUpRight size={15} className="contact-action-arrow" />
+              </span>
+            </div>
+          </a>
+
+          {/* 3. GitHub Card */}
+          <a
+            href={personalInfo.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            id="contact-github-link"
+            className="contact-action-card contact-card-link"
+            aria-label="GitHub Profile (opens in new tab)"
+          >
+            <div className="contact-card-primary-zone">
+              <div className="contact-card-icon" aria-hidden="true">
+                <GithubIcon size={18} />
+              </div>
+              <div className="contact-card-text">
+                <span className="contact-card-title">GitHub</span>
+                <span className="contact-card-url">
+                  {personalInfo.githubDisplay}
+                </span>
+              </div>
+            </div>
+
+            <div className="contact-card-controls" aria-hidden="true">
+              <span className="contact-icon-action">
+                <ArrowUpRight size={15} className="contact-action-arrow" />
+              </span>
+            </div>
+          </a>
+        </div>
+
+        {/* Tier 3: Subtle Resume Action Bar */}
+        <div className="contact-resume-strip">
+          <div className="resume-strip-left">
+            <span className="resume-strip-dot" aria-hidden="true"></span>
+            <span>
+              Review or download my complete academic &amp; project curriculum
+              vitae:
+            </span>
+          </div>
+
+          <div className="resume-strip-actions">
+            <a
+              href={personalInfo.resumePath}
+              target="_blank"
+              rel="noopener noreferrer"
+              id="contact-view-resume-btn"
+              className="btn btn-outline-light btn-sm"
+            >
+              <ExternalLink size={14} />
+              <span>View Resume</span>
+            </a>
+
+            <a
+              href={personalInfo.resumePath}
+              download="Gottipati_Nishita_Sri_Resume.pdf"
+              id="contact-download-resume-btn"
+              className="btn btn-burgundy btn-sm"
+            >
+              <FileDown size={14} />
+              <span>Download Resume</span>
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   );

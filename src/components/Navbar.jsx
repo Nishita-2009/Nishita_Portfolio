@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ExternalLink, FileDown } from 'lucide-react';
+import { Menu, X, ExternalLink, FileDown, ArrowUpRight } from 'lucide-react';
 import { personalInfo, navLinks } from '../data/portfolioData';
 
 export default function Navbar() {
@@ -7,32 +7,40 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
 
-  // Handle active navigation item based on scroll position
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 18);
 
-      const sections = navLinks.map(link => link.href.substring(1));
-      const scrollPos = window.scrollY + 120;
+      const sectionIds = navLinks.map((link) => link.href.substring(1));
+      const triggerLine = 160;
+      let currentActive = 'hero';
 
-      for (const section of sections) {
-        const el = document.getElementById(section);
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
         if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPos >= top && scrollPos < top + height) {
-            setActiveSection(section);
-            break;
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= triggerLine && rect.bottom > triggerLine) {
+            currentActive = id;
           }
         }
       }
+
+      // If scrolled near bottom of page, activate contact
+      if (
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 60
+      ) {
+        currentActive = 'contact';
+      }
+
+      setActiveSection(currentActive);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Lock body scroll and listen for Escape key when mobile menu is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -49,53 +57,64 @@ export default function Navbar() {
     }
   }, [isOpen]);
 
-  const toggleMenu = () => setIsOpen(!isOpen);
+  const toggleMenu = () => setIsOpen((prev) => !prev);
   const closeMenu = () => setIsOpen(false);
 
   return (
     <header className={`navbar-wrapper ${isScrolled ? 'scrolled' : ''}`}>
       <div className="container nav-container">
         {/* Brand Logo */}
-        <a href="#hero" className="brand-logo" id="nav-brand-link" aria-label="Gottipati Nishita Sri Portfolio" onClick={closeMenu}>
+        <a
+          href="#hero"
+          className="brand-logo"
+          id="nav-brand-link"
+          aria-label="Gottipati Nishita Sri Portfolio Home"
+          onClick={closeMenu}
+        >
           <div className="brand-monogram">NS</div>
           <div className="brand-text">
             <span className="brand-name">{personalInfo.shortName}</span>
-            <span className="brand-title">BITS Pilani • CS & AI</span>
+            <span className="brand-title">{personalInfo.brandSub}</span>
           </div>
         </a>
 
         {/* Desktop Navigation */}
         <nav className="desktop-nav" aria-label="Main Navigation">
           <ul className="nav-list">
-            {navLinks.map((link) => (
-              <li key={link.name} className="nav-item">
-                <a
-                  href={link.href}
-                  id={`nav-link-${link.name.toLowerCase()}`}
-                  className={`nav-link ${activeSection === link.href.substring(1) ? 'active' : ''}`}
-                >
-                  {link.name}
-                </a>
-              </li>
-            ))}
+            {navLinks.map((link) => {
+              const sectionId = link.href.substring(1);
+              const isActive = activeSection === sectionId;
+              return (
+                <li key={link.name} className="nav-item">
+                  <a
+                    href={link.href}
+                    id={`nav-link-${link.name.toLowerCase()}`}
+                    className={`nav-link ${isActive ? 'active' : ''}`}
+                    aria-current={isActive ? 'page' : undefined}
+                  >
+                    {link.name}
+                  </a>
+                </li>
+              );
+            })}
           </ul>
         </nav>
 
-        {/* Desktop Action Buttons */}
+        {/* Prominent Resume Action + Mobile Menu Toggle */}
         <div className="nav-actions">
           <a
             href={personalInfo.resumePath}
             target="_blank"
             rel="noopener noreferrer"
             id="nav-resume-btn"
-            className="btn btn-resume btn-sm"
+            className="btn btn-burgundy btn-nav-resume"
             title="Open Gottipati Nishita Sri's Resume in a new tab"
           >
             <ExternalLink size={14} />
             <span>Resume</span>
+            <ArrowUpRight size={14} className="btn-external-arrow" />
           </a>
-          
-          {/* Mobile Menu Toggle Button */}
+
           <button
             type="button"
             className="mobile-menu-btn"
@@ -111,47 +130,62 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Drawer Navigation */}
-      <div className={`mobile-drawer ${isOpen ? 'open' : ''}`} id="mobile-nav-drawer" aria-hidden={!isOpen}>
-        <div className="mobile-drawer-inner">
+      <div
+        className={`mobile-drawer ${isOpen ? 'open' : ''}`}
+        id="mobile-nav-drawer"
+        aria-hidden={!isOpen}
+        onClick={closeMenu}
+      >
+        <div
+          className="mobile-drawer-inner"
+          onClick={(e) => e.stopPropagation()}
+        >
           <nav aria-label="Mobile Navigation">
             <ul className="mobile-nav-list">
-              {navLinks.map((link) => (
-                <li key={link.name} className="mobile-nav-item">
-                  <a
-                    href={link.href}
-                    id={`mobile-nav-link-${link.name.toLowerCase()}`}
-                    className={`mobile-nav-link ${activeSection === link.href.substring(1) ? 'active' : ''}`}
-                    onClick={closeMenu}
-                  >
-                    <span>{link.name}</span>
-                  </a>
-                </li>
-              ))}
+              {navLinks.map((link) => {
+                const sectionId = link.href.substring(1);
+                return (
+                  <li key={link.name} className="mobile-nav-item">
+                    <a
+                      href={link.href}
+                      id={`mobile-nav-link-${link.name.toLowerCase()}`}
+                      className={`mobile-nav-link ${
+                        activeSection === sectionId ? 'active' : ''
+                      }`}
+                      onClick={closeMenu}
+                    >
+                      <span>{link.name}</span>
+                      <ArrowUpRight size={15} className="mobile-nav-arrow" />
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
           </nav>
-          
+
           <div className="mobile-drawer-footer">
             <a
               href={personalInfo.resumePath}
               target="_blank"
               rel="noopener noreferrer"
               id="mobile-nav-view-resume-btn"
-              className="btn btn-secondary btn-full"
+              className="btn btn-burgundy btn-full"
               onClick={closeMenu}
             >
               <ExternalLink size={15} />
               <span>View Resume</span>
+              <ArrowUpRight size={14} />
             </a>
 
             <a
               href={personalInfo.resumePath}
               download="Gottipati_Nishita_Sri_Resume.pdf"
               id="mobile-nav-download-resume-btn"
-              className="btn btn-resume btn-full"
+              className="btn btn-outline-light btn-full"
               onClick={closeMenu}
             >
               <FileDown size={15} />
-              <span>Download Resume</span>
+              <span>Download Resume PDF</span>
             </a>
 
             <div className="mobile-socials">
@@ -161,7 +195,6 @@ export default function Navbar() {
                 rel="noopener noreferrer"
                 className="mobile-social-link"
                 id="mobile-nav-github"
-                aria-label="GitHub Profile"
               >
                 GitHub
               </a>
@@ -172,9 +205,16 @@ export default function Navbar() {
                 rel="noopener noreferrer"
                 className="mobile-social-link"
                 id="mobile-nav-linkedin"
-                aria-label="LinkedIn Profile"
               >
                 LinkedIn
+              </a>
+              <span className="dot-sep">•</span>
+              <a
+                href={`mailto:${personalInfo.email}`}
+                className="mobile-social-link"
+                id="mobile-nav-email"
+              >
+                Email
               </a>
             </div>
           </div>

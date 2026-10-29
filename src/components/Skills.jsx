@@ -1,86 +1,167 @@
-import React from 'react';
-import { 
-  Code2, 
-  Globe, 
-  Cpu, 
-  Sparkles, 
-  Database, 
-  Users 
+import React, { useState } from 'react';
+import {
+  Code2,
+  Globe,
+  Sparkles,
+  Database,
+  Cpu,
+  Users,
+  ArrowUpRight
 } from 'lucide-react';
 import { coreSkills, additionalTechnologies } from '../data/portfolioData';
 
-// Map category icons
-const iconMap = {
-  code: <Code2 size={16} />,
-  globe: <Globe size={16} />,
-  cpu: <Cpu size={16} />,
-  sparkles: <Sparkles size={16} />,
-  database: <Database size={16} />,
-  users: <Users size={16} />
+const skillIcons = {
+  code: <Code2 size={20} strokeWidth={1.65} />,
+  globe: <Globe size={20} strokeWidth={1.65} />,
+  sparkles: <Sparkles size={20} strokeWidth={1.65} />,
+  database: <Database size={20} strokeWidth={1.65} />,
+  cpu: <Cpu size={20} strokeWidth={1.65} />,
+  users: <Users size={20} strokeWidth={1.65} />
 };
 
 export default function Skills() {
+  const [showEcosystem, setShowEcosystem] = useState(false);
+
   return (
-    <section id="skills" className="section skills-section" aria-label="Technical Skills and Technologies">
+    <section
+      id="skills"
+      className="section skills-dark-section"
+      aria-label="Technical Skills and Capabilities"
+    >
+      {/* Flowing Burgundy Silk-Wave Linework (Matching Reference) */}
+      <svg
+        className="dark-section-linework skills-linework"
+        viewBox="0 0 1440 520"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+      >
+        <defs>
+          <linearGradient id="silkWaveGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#C87D82" stopOpacity="0.42" />
+            <stop offset="50%" stopColor="#71303D" stopOpacity="0.28" />
+            <stop offset="100%" stopColor="#171817" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+        {/* Bottom-left flowing silk waves */}
+        <path
+          className="animated-flow-line"
+          d="M-60 320C140 290 290 420 520 430C750 440 880 510 1050 530"
+          stroke="url(#silkWaveGrad)"
+          strokeWidth="1.5"
+        />
+        <path
+          className="animated-flow-line-slow"
+          d="M-60 350C150 320 310 445 540 455C770 465 900 525 1080 545"
+          stroke="url(#silkWaveGrad)"
+          strokeWidth="1.1"
+        />
+        <path
+          d="M-60 380C160 355 330 470 560 480"
+          stroke="#71303D"
+          strokeOpacity="0.24"
+          strokeWidth="0.9"
+        />
+        {/* Top-right subtle wave */}
+        <path
+          d="M1140 -20C1250 120 1340 240 1480 340"
+          stroke="url(#silkWaveGrad)"
+          strokeWidth="1.3"
+        />
+        <circle
+          cx="320"
+          cy="88"
+          r="2"
+          fill="#C87D82"
+          fillOpacity="0.55"
+          className="ambient-node-pulse"
+        />
+        <circle
+          cx="515"
+          cy="430"
+          r="2.5"
+          fill="#C87D82"
+          fillOpacity="0.6"
+          className="ambient-node-pulse"
+        />
+      </svg>
+
       <div className="container">
-        
-        {/* Section Header */}
-        <div className="section-header">
-          <div className="section-badge">
-            <Cpu size={12} />
-            <span>02 // Capabilities</span>
-          </div>
-          <h2 className="section-title">
-            Core Competencies & <span className="text-gradient">Technical Domains</span>
-          </h2>
-          <p className="section-subtitle">
-            Cultivated through academic rigor at BITS Pilani and applied software engineering projects.
-          </p>
-        </div>
-
-        {/* Part 1: Core Skills Architectural Matrix Plate */}
-        <div className="skills-matrix-wrap">
-          <div className="skills-domain-grid">
-            {coreSkills.map((cat, idx) => (
-              <div key={idx} className="domain-col">
-                <div className="domain-header">
-                  <div className="domain-icon-box">
-                    {iconMap[cat.icon] || <Code2 size={16} />}
-                  </div>
-                  <h3 className="domain-title">{cat.category}</h3>
-                </div>
-                
-                <ul className="domain-skills-list">
-                  {cat.skills.map((skill, sIdx) => (
-                    <li key={sIdx} className="domain-skill-item">
-                      <span className="skill-bullet"></span>
-                      <span>{skill}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-
-          {/* Part 2: Additional Technologies & Tools Plate */}
-          <div className="skills-tools-plate" id="additional-technologies">
-            <div className="tools-plate-header">
-              <h3 className="tools-plate-title">
-                Integrated Frameworks, Tools & Cloud Infrastructure
-              </h3>
+        <div className="skills-split-layout">
+          {/* Left Column: Editorial Heading & Summary */}
+          <div className="skills-header-col">
+            <div className="editorial-eyebrow-row dark-eyebrow-row">
+              <span className="editorial-section-num dark-num">04</span>
+              <span className="editorial-eyebrow-tag dark-eyebrow-tag">
+                <span className="eyebrow-dot rose-dot"></span>
+                SKILLS
+              </span>
             </div>
 
-            <div className="tools-tags-flex">
-              {additionalTechnologies.map((item, idx) => (
-                <div key={idx} className="tool-chip">
-                  <span>{item.name}</span>
-                  <span className="tool-category">{item.category}</span>
+            <h2 className="dark-editorial-title skills-main-title">
+              Skills
+              <br />I Work With
+            </h2>
+
+            <p className="skills-lead-copy">
+              A combination of technical and professional skills that help me
+              build, learn and collaborate effectively.
+            </p>
+
+            <button
+              type="button"
+              id="toggle-all-skills-btn"
+              className="btn btn-outline-dark-pill"
+              onClick={() => setShowEcosystem((prev) => !prev)}
+              aria-expanded={showEcosystem}
+            >
+              <span>
+                {showEcosystem ? 'Hide Cloud & Tools' : 'View All Skills'}
+              </span>
+              <ArrowUpRight size={14} className="btn-external-arrow" />
+            </button>
+          </div>
+
+          {/* Right Column: 6-Card Structured Skills Grid */}
+          <div className="skills-cards-col">
+            <div className="skills-six-grid">
+              {coreSkills.map((item, idx) => (
+                <div
+                  key={item.category}
+                  className={`skill-domain-card stagger-${(idx % 3) + 1}`}
+                >
+                  <div className="skill-card-icon" aria-hidden="true">
+                    {skillIcons[item.icon] || <Code2 size={20} />}
+                  </div>
+                  <div className="skill-card-content">
+                    <h3 className="skill-card-heading">{item.category}</h3>
+                    <p className="skill-card-summary">{item.summary}</p>
+                  </div>
                 </div>
               ))}
             </div>
+
+            {/* Expandable Cloud & Tooling Strip */}
+            <div
+              className={`skills-ecosystem-bar ${
+                showEcosystem ? 'ecosystem-expanded' : ''
+              }`}
+              id="additional-technologies"
+            >
+              <span className="ecosystem-bar-label">
+                CLOUD &amp; DEV ECOSYSTEM:
+              </span>
+              <div className="ecosystem-chips-wrap">
+                {additionalTechnologies.map((tool) => (
+                  <span key={tool.name} className="ecosystem-chip">
+                    {tool.name}
+                    <small className="ecosystem-chip-cat">{tool.category}</small>
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
-
       </div>
     </section>
   );
