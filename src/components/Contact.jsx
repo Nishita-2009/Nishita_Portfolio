@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './Icons';
 import { personalInfo } from '../data/portfolioData';
+import AmbientField from './AmbientField';
 
 export default function Contact() {
   const [copiedEmail, setCopiedEmail] = useState(false);
@@ -31,6 +32,12 @@ export default function Contact() {
       aria-label="Contact and Connect"
     >
       {/* Subtle Animated Burgundy Orbit Arcs & Warm Rose Glow */}
+      <AmbientField tone="light" variant="contact" nodes={false} />
+      <div className="contact-rings" aria-hidden="true">
+        <span className="contact-ring ring-1"></span>
+        <span className="contact-ring ring-2"></span>
+        <span className="contact-ring ring-3"></span>
+      </div>
       <div className="contact-rose-glow" aria-hidden="true"></div>
       <svg
         className="contact-orbit-svg"
@@ -83,10 +90,13 @@ export default function Contact() {
         {/* Tier 1: Balanced Editorial Closing Statement & Primary Action */}
         <div className="contact-top-banner">
           <div className="contact-headline-block">
-            <h2 className="contact-closing-title">
-              Let’s Build Something
+            <h2 className="contact-closing-title" data-draw>
+              <span className="cw" style={{ '--w': 0 }}>Let’s</span>{' '}
+              <span className="cw" style={{ '--w': 1 }}>Build</span>{' '}
+              <span className="cw" style={{ '--w': 2 }}>Something</span>
               <br />
-              <em className="serif-italic-accent">Meaningful</em> Together.
+              <em className="serif-italic-accent cw" style={{ '--w': 3 }}>Meaningful</em>{' '}
+              <span className="cw" style={{ '--w': 4 }}>Together.</span>
             </h2>
           </div>
 

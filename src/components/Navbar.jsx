@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X, ExternalLink, FileDown, ArrowUpRight } from 'lucide-react';
 import { personalInfo, navLinks } from '../data/portfolioData';
 
@@ -6,10 +6,21 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
+  const progressBarRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 18);
+      const scrollY = window.scrollY;
+      setIsScrolled(scrollY > 18);
+
+      // Update top scroll progress bar directly via DOM ref (zero React re-renders)
+      if (progressBarRef.current) {
+        const docHeight =
+          document.documentElement.scrollHeight - window.innerHeight;
+        const progress =
+          docHeight > 0 ? Math.min(100, Math.max(0, (scrollY / docHeight) * 100)) : 0;
+        progressBarRef.current.style.transform = `scaleX(${(progress / 100).toFixed(4)})`;
+      }
 
       const sectionIds = navLinks.map((link) => link.href.substring(1));
       const triggerLine = 160;
@@ -25,9 +36,8 @@ export default function Navbar() {
         }
       }
 
-      // If scrolled near bottom of page, activate contact
       if (
-        window.innerHeight + window.scrollY >=
+        window.innerHeight + scrollY >=
         document.documentElement.scrollHeight - 60
       ) {
         currentActive = 'contact';
@@ -127,6 +137,11 @@ export default function Navbar() {
             {isOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
+      </div>
+
+      {/* Subtle Scroll Progress Hairline */}
+      <div className="nav-scroll-progress-track" aria-hidden="true">
+        <div ref={progressBarRef} className="nav-scroll-progress-bar"></div>
       </div>
 
       {/* Mobile Drawer Navigation */}

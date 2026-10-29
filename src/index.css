@@ -278,7 +278,7 @@ svg {
 }
 
 /* ==========================================================================
-   BUTTON SYSTEM (Refined Proportions, Smooth Fill & Arrow Microinteractions)
+   BUTTON SYSTEM (Refined Proportions, Smooth Fill, Lift & Arrow Microinteractions)
    ========================================================================== */
 .btn {
   display: inline-flex;
@@ -293,9 +293,11 @@ svg {
   border-radius: var(--radius-sm);
   border: 1px solid transparent;
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
   transition: background-color var(--transition-base),
     border-color var(--transition-base), color var(--transition-base),
-    transform var(--transition-base);
+    transform var(--transition-base), box-shadow var(--transition-base);
   white-space: nowrap;
   min-height: 44px;
   line-height: 1.2;
@@ -306,7 +308,11 @@ svg {
 }
 
 .btn:hover .btn-external-arrow {
-  transform: translate(2.5px, -2.5px);
+  transform: translate(3px, -3px);
+}
+
+.btn:active {
+  transform: translateY(0);
 }
 
 /* Solid Burgundy Button */
@@ -314,12 +320,15 @@ svg {
   background-color: var(--burgundy);
   color: #FFFFFF;
   border-color: var(--burgundy);
+  box-shadow: 0 6px 18px -6px rgba(113, 48, 61, 0.42);
 }
 
 .btn-burgundy:hover {
   background-color: var(--burgundy-hover);
   border-color: var(--burgundy-hover);
   color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -8px rgba(113, 48, 61, 0.58);
 }
 
 /* Warm Light Outlined Button */
@@ -333,6 +342,8 @@ svg {
   background-color: #FFFFFF;
   border-color: var(--burgundy);
   color: var(--burgundy);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
 }
 
 /* Subtle Icon/Download Action */
@@ -347,6 +358,7 @@ svg {
   background-color: var(--burgundy-soft);
   border-color: var(--burgundy-border);
   color: var(--burgundy);
+  transform: translateY(-2px);
 }
 
 .download-label-text {
@@ -357,7 +369,7 @@ svg {
 
 /* Capsule Outline Button (Used in About Section matching reference) */
 .btn-capsule-outline {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.55);
   color: var(--text-main);
   border: 1px solid #C4B4A5;
   border-radius: var(--radius-capsule);
@@ -368,13 +380,15 @@ svg {
   background-color: var(--burgundy);
   border-color: var(--burgundy);
   color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px -8px rgba(113, 48, 61, 0.45);
 }
 
 /* Dark Outlined Button (Used in Skills Section) */
 .btn-outline-dark-pill {
-  background-color: rgba(113, 48, 61, 0.12);
+  background-color: rgba(113, 48, 61, 0.14);
   color: var(--text-on-dark);
-  border: 1px solid rgba(200, 125, 130, 0.42);
+  border: 1px solid rgba(200, 125, 130, 0.44);
   border-radius: var(--radius-sm);
   padding: 0.68rem 1.3rem;
 }
@@ -383,6 +397,7 @@ svg {
   background-color: var(--burgundy);
   border-color: var(--muted-rose);
   color: #FFFFFF;
+  transform: translateY(-2px);
 }
 
 .btn-outline-dark {
@@ -393,7 +408,9 @@ svg {
 
 .btn-outline-dark:hover {
   border-color: var(--muted-rose);
+  background-color: rgba(113, 48, 61, 0.22);
   color: #FFFFFF;
+  transform: translateY(-2px);
 }
 
 .btn-sm {
@@ -434,6 +451,41 @@ svg {
   transition-delay: 220ms;
 }
 
+/* Hero Choreographed Entrance Sequence */
+@keyframes heroChoreoRise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-choreo-item {
+  animation: heroChoreoRise 620ms var(--ease-cinematic) both;
+}
+
+.choreo-1 {
+  animation-delay: 40ms;
+}
+.choreo-2 {
+  animation-delay: 100ms;
+}
+.choreo-3 {
+  animation-delay: 160ms;
+}
+.choreo-4 {
+  animation-delay: 220ms;
+}
+.choreo-5 {
+  animation-delay: 280ms;
+}
+.choreo-6 {
+  animation-delay: 340ms;
+}
+
 /* Ambient Decorative SVG Animations */
 @keyframes slowOrbitSpin {
   from {
@@ -441,6 +493,15 @@ svg {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes slowOrbitSpinReverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
   }
 }
 
@@ -454,6 +515,15 @@ svg {
   }
 }
 
+@keyframes signalDashTravel {
+  from {
+    stroke-dashoffset: 540;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
 @keyframes softNodePulse {
   0%,
   100% {
@@ -461,14 +531,30 @@ svg {
     transform: scale(1);
   }
   50% {
-    opacity: 0.85;
-    transform: scale(1.25);
+    opacity: 0.9;
+    transform: scale(1.28);
+  }
+}
+
+@keyframes tagRevealIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
 .hero-orbit-ring-slow {
   transform-origin: 275px 235px;
-  animation: slowOrbitSpin 54s linear infinite;
+  animation: slowOrbitSpin 52s linear infinite;
+}
+
+.hero-orbit-ring-reverse {
+  transform-origin: 270px 225px;
+  animation: slowOrbitSpinReverse 68s linear infinite;
 }
 
 .animated-flow-line {
@@ -479,16 +565,26 @@ svg {
   animation: subtleLineFlow 13s ease-in-out infinite reverse;
 }
 
+.animated-signal-path {
+  animation: signalDashTravel 11s linear infinite;
+}
+
 .ambient-node-pulse {
   transform-box: fill-box;
   transform-origin: center;
   animation: softNodePulse 4.5s ease-in-out infinite;
 }
 
+.tag-stagger-chip {
+  animation: tagRevealIn 320ms var(--ease-cinematic) both;
+}
+
 /* Pause decorative animations when parent section is off-screen */
 section:not(.section-active) .hero-orbit-ring-slow,
+section:not(.section-active) .hero-orbit-ring-reverse,
 section:not(.section-active) .animated-flow-line,
 section:not(.section-active) .animated-flow-line-slow,
+section:not(.section-active) .animated-signal-path,
 section:not(.section-active) .ambient-node-pulse {
   animation-play-state: paused;
 }
@@ -504,7 +600,9 @@ section:not(.section-active) .ambient-node-pulse {
     scroll-behavior: auto !important;
   }
 
-  .scroll-reveal {
+  .scroll-reveal,
+  .hero-choreo-item,
+  .tag-stagger-chip {
     opacity: 1 !important;
     transform: none !important;
   }
