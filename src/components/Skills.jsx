@@ -12,12 +12,12 @@ import { coreSkills, additionalTechnologies } from '../data/portfolioData';
 
 // Map category icons
 const iconMap = {
-  code: <Code2 size={20} className="skill-cat-icon text-indigo" />,
-  globe: <Globe size={20} className="skill-cat-icon text-blue" />,
-  cpu: <Cpu size={20} className="skill-cat-icon text-violet" />,
-  sparkles: <Sparkles size={20} className="skill-cat-icon text-cyan" />,
-  database: <Database size={20} className="skill-cat-icon text-indigo" />,
-  users: <Users size={20} className="skill-cat-icon text-violet" />
+  code: <Code2 size={18} className="skill-cat-icon" />,
+  globe: <Globe size={18} className="skill-cat-icon" />,
+  cpu: <Cpu size={18} className="skill-cat-icon" />,
+  sparkles: <Sparkles size={18} className="skill-cat-icon" />,
+  database: <Database size={18} className="skill-cat-icon" />,
+  users: <Users size={18} className="skill-cat-icon" />
 };
 
 export default function Skills() {
@@ -28,14 +28,14 @@ export default function Skills() {
         {/* Section Header */}
         <div className="section-header">
           <div className="section-badge">
-            <Cpu size={14} />
-            <span>Technical Capabilities</span>
+            <Cpu size={13} />
+            <span>02 // Capabilities</span>
           </div>
           <h2 className="section-title">
-            Technical <span className="text-gradient">Skills</span>
+            Technical <span className="text-gradient">Skills & Stack</span>
           </h2>
           <p className="section-subtitle">
-            Core competencies from my academic foundation and hands-on software development projects.
+            Core competencies cultivated through academic rigor at BITS Pilani and hands-on software development projects.
           </p>
         </div>
 
@@ -52,10 +52,10 @@ export default function Skills() {
 
           <div className="core-skills-grid">
             {coreSkills.map((cat, idx) => (
-              <div key={idx} className="skill-card glass-card">
+              <div key={idx} className="skill-card">
                 <div className="skill-card-header">
                   <div className="skill-icon-wrap">
-                    {iconMap[cat.icon] || <Code2 size={20} />}
+                    {iconMap[cat.icon] || <Code2 size={18} />}
                   </div>
                   <h4 className="skill-card-title">{cat.category}</h4>
                 </div>
@@ -75,12 +75,12 @@ export default function Skills() {
           </div>
         </div>
 
-        {/* Part 2: Additional Technologies & Practical Experience (Separated as requested) */}
+        {/* Part 2: Additional Technologies & Practical Experience */}
         <div className="additional-tech-wrapper" id="additional-technologies">
-          <div className="additional-tech-card glass-card">
+          <div className="additional-tech-card">
             <div className="additional-tech-header">
               <div className="additional-tech-icon-box">
-                <Wrench size={22} className="text-violet" />
+                <Wrench size={20} />
               </div>
               <div>
                 <h3 className="additional-tech-title">

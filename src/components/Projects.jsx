@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { 
   FolderGit2, 
   ExternalLink, 
-  CheckCircle2, 
+  Check, 
   Info,
   ArrowUpRight
 } from 'lucide-react';
@@ -27,14 +27,14 @@ export default function Projects() {
         {/* Section Header */}
         <div className="section-header">
           <div className="section-badge">
-            <FolderGit2 size={14} />
-            <span>Featured Software Work</span>
+            <FolderGit2 size={13} />
+            <span>03 // Case Studies</span>
           </div>
           <h2 className="section-title">
-            Practical <span className="text-gradient">Projects</span>
+            Curated <span className="text-gradient">Software Projects</span>
           </h2>
           <p className="section-subtitle">
-            Engineered applications addressing real-world needs in business intelligence, recruitment automation, and e-commerce.
+            Engineered applications addressing authentic real-world needs in business intelligence, recruitment automation, and e-commerce.
           </p>
         </div>
 
@@ -44,7 +44,7 @@ export default function Projects() {
             <article 
               key={project.id} 
               id={`project-card-${project.id}`} 
-              className="project-card glass-card"
+              className="project-card"
             >
               <div className="project-header">
                 <div className="project-meta-top">
@@ -71,7 +71,7 @@ export default function Projects() {
                 <div className="project-section-block">
                   <h4 className="block-title">
                     <span className="block-icon-dot"></span>
-                    Problem Addressed:
+                    The Challenge & Problem Addressed
                   </h4>
                   <p className="block-text">
                     {project.problemAddressed}
@@ -82,7 +82,7 @@ export default function Projects() {
                 <div className="project-section-block">
                   <h4 className="block-title">
                     <span className="block-icon-dot"></span>
-                    What I Built & Implemented:
+                    Engineering & Implementation
                   </h4>
                   <p className="block-text">
                     {project.whatWasBuilt}
@@ -93,12 +93,12 @@ export default function Projects() {
                 <div className="project-section-block">
                   <h4 className="block-title">
                     <span className="block-icon-dot"></span>
-                    Key Features:
+                    Key Capabilities & Architecture
                   </h4>
                   <ul className="project-features-list">
                     {project.keyFeatures.map((feat, fIdx) => (
                       <li key={fIdx} className="feature-item">
-                        <CheckCircle2 size={15} className="feature-check text-violet" />
+                        <Check size={14} className="feature-check" />
                         <span>{feat}</span>
                       </li>
                     ))}
@@ -109,7 +109,7 @@ export default function Projects() {
                 <div className="project-tech-stack">
                   <h4 className="block-title">
                     <span className="block-icon-dot"></span>
-                    Technologies Used:
+                    Technologies & Tools Used
                   </h4>
                   <div className="tech-tags-wrap">
                     {project.technologies.map((tech, tIdx) => (
@@ -134,9 +134,9 @@ export default function Projects() {
                       className="btn btn-secondary btn-sm"
                       title={`Open GitHub profile / repository for ${project.name}`}
                     >
-                      <GithubIcon size={16} />
+                      <GithubIcon size={15} />
                       <span>GitHub</span>
-                      <ArrowUpRight size={14} className="action-arrow" />
+                      <ArrowUpRight size={13} className="action-arrow" />
                     </a>
                   ) : (
                     <button
@@ -146,7 +146,7 @@ export default function Projects() {
                       onClick={() => handleOpenConfig(project)}
                       title="GitHub repository link configurable"
                     >
-                      <GithubIcon size={16} />
+                      <GithubIcon size={15} />
                       <span>GitHub (Configurable)</span>
                     </button>
                   )}
@@ -161,7 +161,7 @@ export default function Projects() {
                       className="btn btn-primary btn-sm"
                       title={`View live demo for ${project.name}`}
                     >
-                      <ExternalLink size={16} />
+                      <ExternalLink size={15} />
                       <span>Live Demo</span>
                     </a>
                   ) : (
@@ -172,7 +172,7 @@ export default function Projects() {
                       onClick={() => handleOpenConfig(project)}
                       title="Click to view deployment status"
                     >
-                      <Info size={15} />
+                      <Info size={14} />
                       <span>{project.statusNote || 'Demo Details'}</span>
                     </button>
                   )}
@@ -190,10 +190,10 @@ export default function Projects() {
         {/* Config / Link Guidance Modal */}
         {selectedConfigProject && (
           <div className="modal-backdrop" onClick={handleCloseConfig} role="dialog" aria-modal="true">
-            <div className="modal-content glass-card" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
               <div className="modal-header">
                 <div className="modal-title-wrap">
-                  <Info size={20} className="text-violet" />
+                  <Info size={18} />
                   <h3 className="modal-title">{selectedConfigProject.name} — Link Status</h3>
                 </div>
                 <button 
@@ -238,7 +238,7 @@ export default function Projects() {
                   rel="noopener noreferrer"
                   className="btn btn-primary btn-sm"
                 >
-                  <GithubIcon size={16} />
+                  <GithubIcon size={15} />
                   <span>Visit GitHub Profile</span>
                 </a>
                 <button

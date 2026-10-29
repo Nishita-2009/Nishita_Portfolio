@@ -10,34 +10,26 @@ export default function Education() {
         {/* Section Header */}
         <div className="section-header">
           <div className="section-badge">
-            <GraduationCap size={14} />
-            <span>Academic Background</span>
+            <GraduationCap size={13} />
+            <span>05 // Education</span>
           </div>
           <h2 className="section-title">
-            Education & <span className="text-gradient">Training</span>
+            Academic & Professional <span className="text-gradient">Training</span>
           </h2>
           <p className="section-subtitle">
-            Formal university education and intensive industry engineering preparation in Hyderabad.
+            Formal university undergraduate curriculum and intensive industry engineering preparation in Hyderabad.
           </p>
         </div>
 
         {/* Timeline Layout */}
         <div className="timeline-container">
-          <div className="timeline-line"></div>
-
           {education.map((item, index) => (
             <div key={index} className="timeline-item">
-              <div className="timeline-marker">
-                <div className="timeline-dot">
-                  <GraduationCap size={16} className="text-violet" />
-                </div>
-              </div>
-
-              <div className="timeline-card glass-card">
+              <div className="timeline-card">
                 <div className="timeline-header">
                   <div className="timeline-type-badge">{item.type}</div>
                   <div className="timeline-date">
-                    <Calendar size={14} />
+                    <Calendar size={13} />
                     <span>{item.duration}</span>
                   </div>
                 </div>

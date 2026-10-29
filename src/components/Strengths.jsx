@@ -11,12 +11,12 @@ import {
 import { professionalStrengths } from '../data/portfolioData';
 
 const iconMap = {
-  brain: <Brain size={24} className="text-violet" />,
-  puzzle: <Puzzle size={24} className="text-indigo" />,
-  message: <MessageSquare size={24} className="text-blue" />,
-  users: <Users size={24} className="text-violet" />,
-  refresh: <RefreshCw size={24} className="text-indigo" />,
-  book: <BookOpen size={24} className="text-blue" />
+  brain: <Brain size={20} />,
+  puzzle: <Puzzle size={20} />,
+  message: <MessageSquare size={20} />,
+  users: <Users size={20} />,
+  refresh: <RefreshCw size={20} />,
+  book: <BookOpen size={20} />
 };
 
 export default function Strengths() {
@@ -27,23 +27,23 @@ export default function Strengths() {
         {/* Section Header */}
         <div className="section-header">
           <div className="section-badge">
-            <ShieldCheck size={14} />
-            <span>Work Ethic & Mindset</span>
+            <ShieldCheck size={13} />
+            <span>07 // Mindset & Approach</span>
           </div>
           <h2 className="section-title">
-            Professional <span className="text-gradient">Strengths</span>
+            Engineering & Professional <span className="text-gradient">Strengths</span>
           </h2>
           <p className="section-subtitle">
-            Core interpersonal and cognitive attributes brought to software teams and collaborative engineering environments.
+            Core analytical and collaborative attributes brought to software engineering teams.
           </p>
         </div>
 
         {/* Strengths Grid */}
         <div className="strengths-grid">
           {professionalStrengths.map((item, index) => (
-            <div key={index} className="strength-card glass-card">
+            <div key={index} className="strength-card">
               <div className="strength-icon-box">
-                {iconMap[item.icon] || <Brain size={24} />}
+                {iconMap[item.icon] || <Brain size={20} />}
               </div>
               
               <h3 className="strength-title">{item.title}</h3>

@@ -48,8 +48,9 @@ export default function Footer() {
               className="footer-social-btn"
               id="footer-github-link"
               aria-label="GitHub Profile"
+              title="GitHub Profile"
             >
-              <GithubIcon size={18} />
+              <GithubIcon size={16} />
             </a>
 
             <a
@@ -59,8 +60,9 @@ export default function Footer() {
               className="footer-social-btn"
               id="footer-linkedin-link"
               aria-label="LinkedIn Profile"
+              title="LinkedIn Profile"
             >
-              <LinkedinIcon size={18} />
+              <LinkedinIcon size={16} />
             </a>
 
             <a
@@ -68,8 +70,9 @@ export default function Footer() {
               className="footer-social-btn"
               id="footer-email-link"
               aria-label="Send Email"
+              title="Send Email"
             >
-              <Mail size={18} />
+              <Mail size={16} />
             </a>
 
             <button
@@ -80,7 +83,7 @@ export default function Footer() {
               aria-label="Scroll back to top"
               title="Back to top"
             >
-              <ArrowUp size={18} />
+              <ArrowUp size={16} />
             </button>
           </div>
         </div>

@@ -15,14 +15,14 @@ export default function About() {
         {/* Section Header */}
         <div className="section-header">
           <div className="section-badge">
-            <Sparkles size={14} />
-            <span>Background & Journey</span>
+            <Sparkles size={13} />
+            <span>01 // Background & Trajectory</span>
           </div>
           <h2 className="section-title">
-            About <span className="text-gradient">Me</span>
+            Academic Foundation & <span className="text-gradient">Engineering Focus</span>
           </h2>
           <p className="section-subtitle">
-            An authentic, student-focused overview of my academic background, technical focus, and passion for software engineering.
+            An authentic overview of my undergraduate education, technical focus, and approach to software development.
           </p>
         </div>
 
@@ -55,9 +55,9 @@ export default function About() {
 
           {/* Core Pillars / Value Proposition */}
           <div className="about-pillars">
-            <div className="pillar-card glass-card">
+            <div className="pillar-card">
               <div className="pillar-icon-box">
-                <GraduationCap size={22} className="pillar-icon" />
+                <GraduationCap size={20} className="pillar-icon" />
               </div>
               <div className="pillar-content">
                 <h4 className="pillar-title">BITS Pilani (Digital)</h4>
@@ -67,9 +67,9 @@ export default function About() {
               </div>
             </div>
 
-            <div className="pillar-card glass-card">
+            <div className="pillar-card">
               <div className="pillar-icon-box">
-                <Layers size={22} className="pillar-icon" />
+                <Layers size={20} className="pillar-icon" />
               </div>
               <div className="pillar-content">
                 <h4 className="pillar-title">Industry Training at NIAT</h4>
@@ -79,9 +79,9 @@ export default function About() {
               </div>
             </div>
 
-            <div className="pillar-card glass-card">
+            <div className="pillar-card">
               <div className="pillar-icon-box">
-                <Sparkles size={22} className="pillar-icon" />
+                <Sparkles size={20} className="pillar-icon" />
               </div>
               <div className="pillar-content">
                 <h4 className="pillar-title">Generative AI & Practical RAG</h4>
@@ -91,9 +91,9 @@ export default function About() {
               </div>
             </div>
 
-            <div className="pillar-card glass-card">
+            <div className="pillar-card">
               <div className="pillar-icon-box">
-                <Target size={22} className="pillar-icon" />
+                <Target size={20} className="pillar-icon" />
               </div>
               <div className="pillar-content">
                 <h4 className="pillar-title">Growth Through Practical Building</h4>

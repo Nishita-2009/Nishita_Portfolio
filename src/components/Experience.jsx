@@ -2,7 +2,7 @@ import React from 'react';
 import { 
   Briefcase, 
   Building2, 
-  CheckCircle2, 
+  Check, 
   Calendar, 
   ExternalLink, 
   ShieldCheck 
@@ -17,14 +17,14 @@ export default function Experience() {
         {/* Section Header */}
         <div className="section-header">
           <div className="section-badge">
-            <Briefcase size={14} />
-            <span>Work & Experience</span>
+            <Briefcase size={13} />
+            <span>04 // Industry Experience</span>
           </div>
           <h2 className="section-title">
-            Experience & <span className="text-gradient">Virtual Internships</span>
+            Virtual Internship & <span className="text-gradient">Applied Learning</span>
           </h2>
           <p className="section-subtitle">
-            Practical industry learning programs, corporate virtual internships, and verified credentials.
+            Structured industry learning programs, corporate virtual internships, and verified credentials.
           </p>
         </div>
 
@@ -34,13 +34,13 @@ export default function Experience() {
             <div 
               key={exp.id} 
               id={`experience-card-${exp.id}`} 
-              className="experience-card glass-card"
+              className="experience-card"
             >
               {/* Card Header */}
               <div className="exp-top-row">
                 <div className="exp-org-wrap">
                   <div className="exp-icon-box" aria-hidden="true">
-                    <Building2 size={24} className="text-indigo" />
+                    <Building2 size={22} />
                   </div>
                   <div className="exp-org-info">
                     <div className="exp-org-line">
@@ -60,7 +60,7 @@ export default function Experience() {
 
                 <div className="exp-meta-pills">
                   <div className="status-badge exp-status-badge" title="Internship Completed">
-                    <CheckCircle2 size={13} />
+                    <Check size={13} />
                     <span>Status: {exp.status}</span>
                   </div>
                   <div className="exp-date-pill">
@@ -85,7 +85,7 @@ export default function Experience() {
                   <ul className="exp-highlights-list">
                     {exp.highlights.map((highlight, hIdx) => (
                       <li key={hIdx} className="exp-highlight-item">
-                        <CheckCircle2 size={15} className="exp-check-icon text-violet" />
+                        <Check size={14} className="exp-check-icon" />
                         <span>{highlight}</span>
                       </li>
                     ))}
@@ -107,7 +107,7 @@ export default function Experience() {
               {/* Footer with Verification ID & View Certificate Action */}
               <div className="exp-footer">
                 <div className="exp-cred-info">
-                  <ShieldCheck size={16} className="text-blue" />
+                  <ShieldCheck size={16} />
                   <span>Credential Plan ID: <code>{exp.credentialId}</code></span>
                 </div>
 
@@ -116,11 +116,11 @@ export default function Experience() {
                   target="_blank"
                   rel="noopener noreferrer"
                   id={`exp-certificate-btn-${exp.id}`}
-                  className="btn btn-primary exp-cert-btn"
+                  className="btn btn-primary exp-cert-btn btn-sm"
                   title={`Open verified ${exp.organization} certificate in a new browser tab`}
                 >
-                  <span>View Certificate</span>
-                  <ExternalLink size={15} />
+                  <span>View Verified Certificate</span>
+                  <ExternalLink size={14} />
                 </a>
               </div>
             </div>

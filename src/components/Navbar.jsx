@@ -60,7 +60,7 @@ export default function Navbar() {
           <div className="brand-monogram">NS</div>
           <div className="brand-text">
             <span className="brand-name">{personalInfo.shortName}</span>
-            <span className="brand-title">Portfolio</span>
+            <span className="brand-title">BITS Pilani • CS & AI</span>
           </div>
         </a>
 
@@ -91,7 +91,7 @@ export default function Navbar() {
             className="btn btn-resume btn-sm"
             title="Open Gottipati Nishita Sri's Resume in a new tab"
           >
-            <ExternalLink size={15} />
+            <ExternalLink size={14} />
             <span>Resume</span>
           </a>
           
@@ -105,7 +105,7 @@ export default function Navbar() {
             aria-controls="mobile-nav-drawer"
             aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
           >
-            {isOpen ? <X size={22} /> : <Menu size={22} />}
+            {isOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
       </div>
@@ -139,7 +139,7 @@ export default function Navbar() {
               className="btn btn-secondary btn-full"
               onClick={closeMenu}
             >
-              <ExternalLink size={16} />
+              <ExternalLink size={15} />
               <span>View Resume</span>
             </a>
 
@@ -150,7 +150,7 @@ export default function Navbar() {
               className="btn btn-resume btn-full"
               onClick={closeMenu}
             >
-              <FileDown size={16} />
+              <FileDown size={15} />
               <span>Download Resume</span>
             </a>
 
