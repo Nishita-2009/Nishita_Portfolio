@@ -1,4 +1,6 @@
 import React from 'react';
+import { ArrowUpRight } from 'lucide-react';
+import { SparkleStarIcon } from './Icons';
 
 export default function HeroVisual() {
   return (
@@ -26,13 +28,13 @@ export default function HeroVisual() {
             </linearGradient>
             <linearGradient id="orbitPulseGrad" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="#762B3D" stopOpacity="0" />
-              <stop offset="50%" stopColor="#762B3D" stopOpacity="0.9" />
+              <stop offset="50%" stopColor="#762B3D" stopOpacity="0.95" />
               <stop offset="100%" stopColor="#C87D82" stopOpacity="0" />
             </linearGradient>
             <radialGradient id="sunBurst" cx="38%" cy="46%" r="48%">
-              <stop offset="0%" stopColor="#FFF8F0" stopOpacity="0.85" />
-              <stop offset="42%" stopColor="#EBD0CA" stopOpacity="0.4" />
-              <stop offset="78%" stopColor="#762B3D" stopOpacity="0.15" />
+              <stop offset="0%" stopColor="#FFF8F0" stopOpacity="0.88" />
+              <stop offset="42%" stopColor="#EBD0CA" stopOpacity="0.45" />
+              <stop offset="78%" stopColor="#762B3D" stopOpacity="0.18" />
               <stop offset="100%" stopColor="#F8F3EC" stopOpacity="0" />
             </radialGradient>
           </defs>
@@ -71,7 +73,7 @@ export default function HeroVisual() {
               ry="155"
               transform="rotate(-14 265 235)"
               stroke="#762B3D"
-              strokeOpacity="0.25"
+              strokeOpacity="0.28"
               strokeWidth="1"
               strokeDasharray="3 5"
             />
@@ -83,7 +85,7 @@ export default function HeroVisual() {
             cy="225"
             r="140"
             stroke="#C87D82"
-            strokeOpacity="0.32"
+            strokeOpacity="0.35"
             strokeWidth="0.95"
             className="hero-orbit-ring-reverse"
           />
@@ -98,7 +100,7 @@ export default function HeroVisual() {
           />
 
           {/* Precision Crosshair Markers */}
-          <g stroke="#762B3D" strokeOpacity="0.4" strokeWidth="0.9">
+          <g stroke="#762B3D" strokeOpacity="0.45" strokeWidth="0.9">
             <line x1="138" y1="108" x2="146" y2="108" />
             <line x1="142" y1="104" x2="142" y2="112" />
             <line x1="451" y1="95" x2="459" y2="95" />
@@ -135,22 +137,68 @@ export default function HeroVisual() {
           <circle cx="115" cy="335" r="2.8" fill="#762B3D" fillOpacity="0.65" />
         </svg>
 
-        {/* Developer Workspace Horizon Artwork (Arched Window + Laptop + Setup) */}
+        {/* Razor-Sharp Developer Workspace Horizon Artwork (Arched Window + Laptop) */}
         <div className="hero-portrait-frame">
           <img
             src="/images/workspace-hero.jpg"
-            alt="Developer workspace illustration featuring modern laptop with code editor, AI interface cards, desk notes, and sunrise skyline window"
+            alt="Ultra-high definition developer workspace illustration featuring modern laptop with dark code editor, AI interface cards, desk notes, and sunrise skyline arched window"
             className="hero-atmosphere-img"
             loading="eager"
           />
         </div>
 
-        {/* Interactive Floating Hotspot Elements (Subtle Glare & Parallax Responders) */}
-        <div className="hero-floating-hotspot hotspot-ai" title="AI & Intelligent Solutions">
-          <span className="hotspot-pulse"></span>
+        {/* Crisp Vector Floating Frosted Glass Cards */}
+        <div className="hero-float-card card-ai" aria-hidden="true">
+          <div className="card-top">
+            <span className="card-badge">AI</span>
+            <ArrowUpRight size={11} className="card-arrow" />
+          </div>
+          <div className="card-body">
+            <span>Ideas</span>
+            <span>to</span>
+            <span>impact</span>
+          </div>
         </div>
-        <div className="hero-floating-hotspot hotspot-code" title="Modern Software Engineering">
-          <span className="hotspot-pulse"></span>
+
+        <div className="hero-float-card card-code" aria-hidden="true">
+          <div className="card-top">
+            <span className="card-badge">&lt;/&gt;</span>
+            <ArrowUpRight size={11} className="card-arrow" />
+          </div>
+          <div className="card-body">
+            <span>Build</span>
+            <span>Experiment</span>
+            <span>Solve</span>
+            <span>Create</span>
+          </div>
+        </div>
+
+        <div className="hero-float-card card-metrics" aria-hidden="true">
+          <div className="metrics-header">
+            <span className="metrics-dot"></span>
+            <span className="metrics-label">DATA &amp; AI</span>
+          </div>
+          <div className="metrics-bars">
+            <span style={{ height: '42%' }}></span>
+            <span style={{ height: '72%' }}></span>
+            <span style={{ height: '96%' }}></span>
+            <span style={{ height: '58%' }}></span>
+            <span style={{ height: '82%' }}></span>
+          </div>
+          <div className="metrics-footer">
+            <span className="metrics-val">+42%</span>
+            <span className="metrics-chip">LLMs</span>
+          </div>
+        </div>
+
+        {/* Calligraphic Script Callout: "Turning Ideas Into Impact" */}
+        <div className="hero-script-callout" aria-hidden="true">
+          <SparkleStarIcon size={12} className="script-sparkle sparkle-top" />
+          <span className="script-line">Turning</span>
+          <span className="script-line">Ideas</span>
+          <span className="script-line">Into</span>
+          <span className="script-line">Impact</span>
+          <SparkleStarIcon size={10} className="script-sparkle sparkle-bottom" />
         </div>
       </div>
 
