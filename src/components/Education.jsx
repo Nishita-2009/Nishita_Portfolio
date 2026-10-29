@@ -10,8 +10,8 @@ export default function Education() {
         {/* Section Header */}
         <div className="section-header">
           <div className="section-badge">
-            <GraduationCap size={13} />
-            <span>05 // Education</span>
+            <GraduationCap size={12} />
+            <span>05 // Education & Training</span>
           </div>
           <h2 className="section-title">
             Academic & Professional <span className="text-gradient">Training</span>
@@ -21,34 +21,32 @@ export default function Education() {
           </p>
         </div>
 
-        {/* Timeline Layout */}
-        <div className="timeline-container">
+        {/* Education Architectural Split Grid */}
+        <div className="education-split-grid">
           {education.map((item, index) => (
-            <div key={index} className="timeline-item">
-              <div className="timeline-card">
-                <div className="timeline-header">
-                  <div className="timeline-type-badge">{item.type}</div>
-                  <div className="timeline-date">
-                    <Calendar size={13} />
-                    <span>{item.duration}</span>
-                  </div>
+            <div key={index} className="education-panel">
+              <div className="education-panel-header">
+                <span className="education-type-tag">{item.type}</span>
+                <div className="education-date">
+                  <Calendar size={13} />
+                  <span>{item.duration}</span>
                 </div>
-
-                <h3 className="timeline-title">{item.degree}</h3>
-                
-                <div className="timeline-institution-wrap">
-                  <span className="timeline-institution">{item.institution}</span>
-                  <span className="dot-sep">•</span>
-                  <span className="timeline-location">
-                    <MapPin size={13} />
-                    {item.location}
-                  </span>
-                </div>
-
-                <p className="timeline-description">
-                  {item.description}
-                </p>
               </div>
+
+              <h3 className="education-title">{item.degree}</h3>
+              
+              <div className="education-institution-wrap">
+                <span className="timeline-institution">{item.institution}</span>
+                <span className="dot-sep">•</span>
+                <span className="education-location">
+                  <MapPin size={13} />
+                  {item.location}
+                </span>
+              </div>
+
+              <p className="education-description">
+                {item.description}
+              </p>
             </div>
           ))}
         </div>

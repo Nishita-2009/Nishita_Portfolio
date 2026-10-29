@@ -12,12 +12,12 @@ import { coreSkills, additionalTechnologies } from '../data/portfolioData';
 
 // Map category icons
 const iconMap = {
-  code: <Code2 size={18} className="skill-cat-icon" />,
-  globe: <Globe size={18} className="skill-cat-icon" />,
-  cpu: <Cpu size={18} className="skill-cat-icon" />,
-  sparkles: <Sparkles size={18} className="skill-cat-icon" />,
-  database: <Database size={18} className="skill-cat-icon" />,
-  users: <Users size={18} className="skill-cat-icon" />
+  code: <Code2 size={16} className="domain-icon" />,
+  globe: <Globe size={16} className="domain-icon" />,
+  cpu: <Cpu size={16} className="domain-icon" />,
+  sparkles: <Sparkles size={16} className="domain-icon" />,
+  database: <Database size={16} className="domain-icon" />,
+  users: <Users size={16} className="domain-icon" />
 };
 
 export default function Skills() {
@@ -28,74 +28,57 @@ export default function Skills() {
         {/* Section Header */}
         <div className="section-header">
           <div className="section-badge">
-            <Cpu size={13} />
+            <Cpu size={12} />
             <span>02 // Capabilities</span>
           </div>
           <h2 className="section-title">
-            Technical <span className="text-gradient">Skills & Stack</span>
+            Core Competencies & <span className="text-gradient">Stack</span>
           </h2>
           <p className="section-subtitle">
-            Core competencies cultivated through academic rigor at BITS Pilani and hands-on software development projects.
+            Cultivated through academic rigor at BITS Pilani and applied software engineering projects.
           </p>
         </div>
 
-        {/* Part 1: Core Skills from Resume */}
-        <div className="core-skills-wrapper">
-          <div className="skills-subheading-group">
-            <h3 className="skills-group-title">
-              Core Skills from Resume
-            </h3>
-            <p className="skills-group-desc">
-              Fundamental programming languages, web technologies, and computational concepts practiced in coursework and software builds.
-            </p>
-          </div>
-
-          <div className="core-skills-grid">
-            {coreSkills.map((cat, idx) => (
-              <div key={idx} className="skill-card">
-                <div className="skill-card-header">
-                  <div className="skill-icon-wrap">
-                    {iconMap[cat.icon] || <Code2 size={18} />}
-                  </div>
-                  <h4 className="skill-card-title">{cat.category}</h4>
-                </div>
-                
-                <div className="skill-card-body">
-                  <ul className="skill-tags-list">
-                    {cat.skills.map((skill, sIdx) => (
-                      <li key={sIdx} className="skill-tag-item">
-                        <span className="skill-bullet"></span>
-                        <span className="skill-name">{skill}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+        {/* Part 1: Core Skills Architectural Matrix */}
+        <div className="skills-matrix-grid">
+          {coreSkills.map((cat, idx) => (
+            <div key={idx} className="skill-domain-col">
+              <div className="domain-header">
+                {iconMap[cat.icon] || <Code2 size={16} className="domain-icon" />}
+                <h3 className="domain-title">{cat.category}</h3>
               </div>
-            ))}
-          </div>
+              
+              <ul className="domain-skills-list">
+                {cat.skills.map((skill, sIdx) => (
+                  <li key={sIdx} className="domain-skill-item">
+                    <span className="skill-bullet"></span>
+                    <span className="skill-name">{skill}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
 
-        {/* Part 2: Additional Technologies & Practical Experience */}
+        {/* Part 2: Additional Technologies & Practical Implementation */}
         <div className="additional-tech-wrapper" id="additional-technologies">
-          <div className="additional-tech-card">
+          <div className="additional-tech-plate">
             <div className="additional-tech-header">
-              <div className="additional-tech-icon-box">
-                <Wrench size={20} />
-              </div>
+              <Wrench size={22} className="additional-tech-icon" />
               <div>
                 <h3 className="additional-tech-title">
-                  Additional Technologies & Practical Experience
+                  Additional Technologies & Practical Implementation
                 </h3>
                 <p className="additional-tech-desc">
-                  Tools, libraries, and cloud services utilized in hands-on practical project implementations (such as e-commerce platforms and AI applications).
+                  Tools, libraries, and cloud infrastructure directly integrated into hands-on practical project builds.
                 </p>
               </div>
             </div>
 
             <div className="additional-tech-grid">
               {additionalTechnologies.map((item, idx) => (
-                <div key={idx} className="tool-card">
-                  <div className="tool-bullet"></div>
+                <div key={idx} className="tool-cell">
+                  <span className="skill-bullet"></span>
                   <div className="tool-details">
                     <span className="tool-name">{item.name}</span>
                     <span className="tool-category">{item.category}</span>

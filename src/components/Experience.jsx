@@ -17,30 +17,30 @@ export default function Experience() {
         {/* Section Header */}
         <div className="section-header">
           <div className="section-badge">
-            <Briefcase size={13} />
+            <Briefcase size={12} />
             <span>04 // Industry Experience</span>
           </div>
           <h2 className="section-title">
             Virtual Internship & <span className="text-gradient">Applied Learning</span>
           </h2>
           <p className="section-subtitle">
-            Structured industry learning programs, corporate virtual internships, and verified credentials.
+            Structured corporate virtual internships, learning programs, and verified technical credentials.
           </p>
         </div>
 
-        {/* Experience Cards Container */}
+        {/* Experience Plate Container */}
         <div className="experience-container">
           {experiences.map((exp) => (
             <div 
               key={exp.id} 
               id={`experience-card-${exp.id}`} 
-              className="experience-card"
+              className="experience-plate"
             >
               {/* Card Header */}
               <div className="exp-top-row">
                 <div className="exp-org-wrap">
                   <div className="exp-icon-box" aria-hidden="true">
-                    <Building2 size={22} />
+                    <Building2 size={20} />
                   </div>
                   <div className="exp-org-info">
                     <div className="exp-org-line">
@@ -59,12 +59,12 @@ export default function Experience() {
                 </div>
 
                 <div className="exp-meta-pills">
-                  <div className="status-badge exp-status-badge" title="Internship Completed">
-                    <Check size={13} />
+                  <div className="exp-status-badge" title="Internship Completed">
+                    <Check size={12} />
                     <span>Status: {exp.status}</span>
                   </div>
                   <div className="exp-date-pill">
-                    <Calendar size={13} />
+                    <Calendar size={12} />
                     <span>{exp.completionDate}</span>
                   </div>
                 </div>
@@ -107,7 +107,7 @@ export default function Experience() {
               {/* Footer with Verification ID & View Certificate Action */}
               <div className="exp-footer">
                 <div className="exp-cred-info">
-                  <ShieldCheck size={16} />
+                  <ShieldCheck size={15} />
                   <span>Credential Plan ID: <code>{exp.credentialId}</code></span>
                 </div>
 

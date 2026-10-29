@@ -10,21 +10,21 @@ export default function Certifications() {
         {/* Section Header */}
         <div className="section-header">
           <div className="section-badge">
-            <Award size={13} />
+            <Award size={12} />
             <span>06 // Credentials</span>
           </div>
           <h2 className="section-title">
             Certifications & <span className="text-gradient">Workshops</span>
           </h2>
           <p className="section-subtitle">
-            Verified workshops and technology credentials completed alongside academic computer science studies.
+            Industry workshops and specialized credentials completed alongside computer science undergraduate studies.
           </p>
         </div>
 
         {/* Certifications Grid */}
         <div className="certifications-grid">
           {certifications.map((cert, index) => (
-            <div key={index} className="cert-card">
+            <div key={index} className="cert-panel">
               <div className="cert-top">
                 <div className="cert-icon-box">
                   <Award size={18} />

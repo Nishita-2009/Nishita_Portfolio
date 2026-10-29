@@ -15,8 +15,8 @@ export default function About() {
         {/* Section Header */}
         <div className="section-header">
           <div className="section-badge">
-            <Sparkles size={13} />
-            <span>01 // Background & Trajectory</span>
+            <Sparkles size={12} />
+            <span>01 // Background & Philosophy</span>
           </div>
           <h2 className="section-title">
             Academic Foundation & <span className="text-gradient">Engineering Focus</span>
@@ -26,22 +26,14 @@ export default function About() {
           </p>
         </div>
 
-        {/* Main Content Grid */}
-        <div className="about-grid">
+        {/* Editorial 2-Column Grid */}
+        <div className="about-editorial-grid">
           
-          {/* Detailed Narrative */}
-          <div className="about-narrative glass-card">
-            <h3 className="narrative-heading">
-              Computer Science Undergraduate & Aspiring Software Engineer
-            </h3>
-
-            <div className="narrative-body">
-              {aboutData.paragraphs.map((para, idx) => (
-                <p key={idx} className="narrative-paragraph">
-                  {para}
-                </p>
-              ))}
-            </div>
+          {/* Left Column: Thesis Quote & Focus Tags */}
+          <div className="about-lead-col">
+            <blockquote className="about-pull-quote">
+              “Turning core computer science principles into working software, from MSME intelligence platforms to specialized AI agent workflows.”
+            </blockquote>
 
             <div className="narrative-tags">
               <span className="tech-tag">BITS Pilani (Digital)</span>
@@ -53,51 +45,54 @@ export default function About() {
             </div>
           </div>
 
-          {/* Core Pillars / Value Proposition */}
-          <div className="about-pillars">
-            <div className="pillar-card">
-              <div className="pillar-icon-box">
-                <GraduationCap size={20} className="pillar-icon" />
-              </div>
-              <div className="pillar-content">
-                <h4 className="pillar-title">BITS Pilani (Digital)</h4>
-                <p className="pillar-desc">
+          {/* Right Column: Full Narrative & 2x2 Quad Pillars */}
+          <div className="about-narrative-col">
+            <div className="narrative-paragraphs">
+              {aboutData.paragraphs.map((para, idx) => (
+                <p key={idx} className="narrative-p">
+                  {para}
+                </p>
+              ))}
+            </div>
+
+            {/* 4 Core Pillars in a 2x2 Architectural Quad-Grid (Hairline cross, no boxes) */}
+            <div className="about-pillars-grid">
+              <div className="pillar-cell">
+                <div className="pillar-cell-header">
+                  <GraduationCap size={18} className="pillar-icon" />
+                  <h4 className="pillar-cell-title">BITS Pilani (Digital)</h4>
+                </div>
+                <p className="pillar-cell-desc">
                   Pursuing a BSc in Computer Science, building robust foundations in algorithms, system architecture, database theory, and core computer science mathematics.
                 </p>
               </div>
-            </div>
 
-            <div className="pillar-card">
-              <div className="pillar-icon-box">
-                <Layers size={20} className="pillar-icon" />
-              </div>
-              <div className="pillar-content">
-                <h4 className="pillar-title">Industry Training at NIAT</h4>
-                <p className="pillar-desc">
+              <div className="pillar-cell">
+                <div className="pillar-cell-header">
+                  <Layers size={18} className="pillar-icon" />
+                  <h4 className="pillar-cell-title">Industry Training at NIAT</h4>
+                </div>
+                <p className="pillar-cell-desc">
                   Undergoing hands-on engineering training with NxtWave of Innovation in Advanced Technologies (NIAT), mastering full-stack web engineering and practical software development.
                 </p>
               </div>
-            </div>
 
-            <div className="pillar-card">
-              <div className="pillar-icon-box">
-                <Sparkles size={20} className="pillar-icon" />
-              </div>
-              <div className="pillar-content">
-                <h4 className="pillar-title">Generative AI & Practical RAG</h4>
-                <p className="pillar-desc">
+              <div className="pillar-cell">
+                <div className="pillar-cell-header">
+                  <Sparkles size={18} className="pillar-icon" />
+                  <h4 className="pillar-cell-title">Generative AI & Practical RAG</h4>
+                </div>
+                <p className="pillar-cell-desc">
                   Exploring LLM integration, agentic workflows, prompt engineering, and retrieval-augmented generation to create functional, intelligent solutions for real-world scenarios.
                 </p>
               </div>
-            </div>
 
-            <div className="pillar-card">
-              <div className="pillar-icon-box">
-                <Target size={20} className="pillar-icon" />
-              </div>
-              <div className="pillar-content">
-                <h4 className="pillar-title">Growth Through Practical Building</h4>
-                <p className="pillar-desc">
+              <div className="pillar-cell">
+                <div className="pillar-cell-header">
+                  <Target size={18} className="pillar-icon" />
+                  <h4 className="pillar-cell-title">Growth Through Practical Building</h4>
+                </div>
+                <p className="pillar-cell-desc">
                   Believer in experiential learning: turning conceptual knowledge into working software, from MSME analytics platforms to specialized AI recruitment tools.
                 </p>
               </div>
