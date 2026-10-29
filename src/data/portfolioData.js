@@ -259,14 +259,14 @@ export const experiences = [
     completionDate: "October 2026",
     issuer: "IBM SkillsBuild in collaboration with 1M1B",
     credentialId: "PLAN-56138075980A",
-    systemOfRecord: "IBM Your Learning",
+    systemOfRecord: "IBM SkillsBuild",
     certificateUrl:
       "https://drive.google.com/file/d/11JV6W1GhbcYBPdFcZGhYlE43Tj1T5mMD/view?usp=drive_link",
     description:
-      "Completed the IBM 1M1B AI for Sustainability Virtual Internship through IBM SkillsBuild, gaining hands-on exposure to real-world AI applications and sustainable technology solutions.",
+      "Completed the IBM 1M1B AI for Sustainability Virtual Internship through IBM SkillsBuild, gaining hands-on exposure to foundational AI applications and sustainable technology solutions.",
     highlights: [
-      "Structured curriculum under IBM SkillsBuild (Plan ID: PLAN-56138075980A)",
-      "Applied AI concepts for environmental & sustainability problem-solving"
+      "Followed the structured IBM SkillsBuild internship curriculum.",
+      "Explored AI applications for environmental and sustainability problem-solving."
     ],
     tags: ["IBM | 1M1B", "Virtual Internship", "AI for Sustainability", "IBM SkillsBuild"]
   },
@@ -275,7 +275,7 @@ export const experiences = [
     organization: "Industry Ready Training",
     badgeText: "</>",
     role: "NIAT (NxtWave)",
-    programTrack: "NxtWave of Innovation in Advanced Technologies",
+    programTrack: "Practical Engineering Training",
     status: "Ongoing",
     completionDate: "08/2025 – Present",
     issuer: "NIAT (NxtWave) • Hyderabad",
@@ -283,12 +283,12 @@ export const experiences = [
     systemOfRecord: null,
     certificateUrl: null,
     description:
-      "Focused hands-on engineering training in modern full-stack web development, algorithmic problem-solving, and practical AI application building.",
+      "Practical software development training focused on hands-on problem-solving, full-stack technologies, and building real-world applications.",
     highlights: [
-      "Project-driven software engineering across web, databases, and GenAI",
-      "Continuous practice in Data Structures & Algorithms (Python & C++)"
+      "Hands-on coding in modern full-stack web and database technologies.",
+      "Continuous algorithmic problem-solving and technical practice."
     ],
-    tags: ["Full-Stack Web", "DSA", "Generative AI", "Problem Solving"]
+    tags: ["Full-Stack", "Problem Solving", "Web Technologies"]
   }
 ];
 
@@ -328,9 +328,11 @@ export const certifications = [
     id: "cert-ibm-1m1b",
     title: "IBM | 1M1B",
     subtitle: "AI for Sustainability Virtual Internship",
-    issuer: "IBM SkillsBuild & 1M1B",
+    issuer: "IBM SkillsBuild",
+    completionDate: "October 2026",
+    planId: "PLAN-56138075980A",
     description:
-      "Verified virtual internship credential in foundational AI applications and sustainable technology.",
+      "Virtual internship focused on foundational AI applications, sustainability challenges, and responsible technology solutions through IBM SkillsBuild.",
     tag: "Verified Credential",
     certificateUrl:
       "https://drive.google.com/file/d/11JV6W1GhbcYBPdFcZGhYlE43Tj1T5mMD/view?usp=drive_link",
@@ -340,22 +342,26 @@ export const certifications = [
     id: "cert-ai-agent",
     title: "AI Agent Workshop",
     subtitle: "Multi-Agent Systems & Autonomous LLM Workflows",
-    issuer: "Practical Hands-on Workshop",
+    issuer: "NxtWave • Hands-on Workshop",
+    completionDate: "2026",
     description:
-      "Designing and orchestrating multi-agent workflows, task delegation, and LLM tool integration.",
+      "Hands-on workshop introducing AI agents and multi-agent workflow concepts.",
     tag: "Agentic AI",
-    certificateUrl: null,
+    certificateUrl:
+      "https://s3-ap-south-1.amazonaws.com/poster-generation-backend-nxtwave-media-static/ccbp_beta/AI-AGENTS-NIAT/PPKYA5RUKY.png",
     icon: "bot"
   },
   {
     id: "cert-gesture",
     title: "Gesture Workshop",
     subtitle: "Computer Vision & Human-Computer Interaction",
-    issuer: "Technology & Interaction Workshop",
+    issuer: "NIAT Chevella • Interactive Workshop",
+    completionDate: "2026",
     description:
-      "Exploring computer vision fundamentals, sensor inputs, and gesture-driven interactive interfaces.",
+      "Workshop exploring gesture-based interaction and computer vision concepts.",
     tag: "Computer Vision",
-    certificateUrl: null,
+    certificateUrl:
+      "https://s3-ap-south-1.amazonaws.com/poster-generation-backend-nxtwave-media-static/ccbp_beta/NIAT_Chevella_guesture_workshop/0IK601HO8L.png",
     icon: "cpu"
   },
   {
@@ -363,10 +369,12 @@ export const certifications = [
     title: "SOAR – AI To Aspire",
     subtitle: "By Microsoft and NSDC",
     issuer: "Microsoft & NSDC",
+    completionDate: "2026",
     description:
-      "Industry-aligned foundational program covering AI concepts, ethics, and emerging digital technologies.",
+      "AI-focused learning initiative associated with Microsoft and NSDC.",
     tag: "AI & Innovation",
-    certificateUrl: null,
+    certificateUrl:
+      "https://drive.google.com/file/d/1HAMcIxMnBOIaDCXdab6dUrx_-FN7Eo4M/view?usp=sharing",
     icon: "star"
   }
 ];

@@ -38,7 +38,7 @@ export default function Certifications() {
             </h2>
           </div>
           <p className="chapter-header-lead cert-lead">
-            One verified internship credential and three hands-on workshops.
+            Verified virtual internship credential and practical technical workshops.
           </p>
         </div>
 
@@ -74,6 +74,13 @@ export default function Certifications() {
               <div className="cert-card-body">
                 <h3 className="cert-card-title cert-title-featured">{featured.title}</h3>
                 <p className="cert-card-subtitle">{featured.subtitle}</p>
+
+                <div className="cert-meta-row">
+                  <span className="cert-meta-item">Completed: {featured.completionDate}</span>
+                  <span className="meta-dot">•</span>
+                  <span className="cert-meta-item">Plan ID: {featured.planId}</span>
+                </div>
+
                 <p className="cert-card-desc">{featured.description}</p>
               </div>
 
@@ -97,7 +104,7 @@ export default function Certifications() {
             </div>
           </article>
 
-          {/* Workshops */}
+          {/* Practical Workshops */}
           {others.map((cert, idx) => {
             const Icon = certIconMap[cert.icon] || Award;
             return (
@@ -118,6 +125,7 @@ export default function Certifications() {
                   <div className="cert-card-body">
                     <h3 className="cert-card-title">{cert.title}</h3>
                     <p className="cert-card-subtitle">{cert.subtitle}</p>
+                    <p className="cert-card-desc">{cert.description}</p>
                   </div>
                   <div className="cert-card-footer">
                     <span className="cert-issuer-label">{cert.issuer}</span>
@@ -128,7 +136,9 @@ export default function Certifications() {
                         rel="noopener noreferrer"
                         id={`cert-verify-link-${cert.id}`}
                         className="cert-verify-action"
+                        title={`View Certificate for ${cert.title}`}
                       >
+                        <Award size={13} className="btn-icon" />
                         <span>View Certificate</span>
                         <ArrowUpRight size={13} className="link-diag-arrow" />
                       </a>
