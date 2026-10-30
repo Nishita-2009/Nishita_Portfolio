@@ -28,7 +28,7 @@ export default function Skills() {
     >
       <AmbientField tone="dark" variant="dark" lights={false} />
 
-      <div className="container">
+      <div className="skills-wide-container">
         {/* Editorial Eyebrow */}
         <div className="chapter-header-split">
           <div className="chapter-header-left">

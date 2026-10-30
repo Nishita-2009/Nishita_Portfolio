@@ -1,9 +1,11 @@
 import React from 'react';
-import { GraduationCap, Code2, Calendar, MapPin, CheckCircle } from 'lucide-react';
+import { GraduationCap, Code2, Calendar, MapPin, CheckCircle, Award } from 'lucide-react';
 import { education } from '../data/portfolioData';
 import AmbientField from './AmbientField';
 
 export default function Education() {
+  const [bits, niat] = education;
+
   return (
     <section
       id="education"
@@ -12,7 +14,7 @@ export default function Education() {
     >
       <AmbientField tone="light" variant="light" lights={false} />
 
-      <div className="container">
+      <div className="education-wide-container">
         {/* Editorial Eyebrow */}
         <div className="chapter-header-split">
           <div className="chapter-header-left">
@@ -20,72 +22,71 @@ export default function Education() {
               <span className="editorial-section-num">04</span>
               <span className="editorial-eyebrow-tag">
                 <span className="eyebrow-dot"></span>
-                EDUCATION // ACADEMIC EXPEDITION &amp; FOUNDATIONS
+                EDUCATION // ACADEMIC EXPEDITION &amp; RIGOR
               </span>
             </div>
             <h2 className="chapter-main-heading">
-              Academic Foundations
+              Computer Science Rigor
               <br />
-              <em className="serif-italic-accent">&amp; Technical Training.</em>
+              <em className="serif-italic-accent">&amp; Industrial Immersion.</em>
             </h2>
           </div>
           <p className="chapter-header-lead">
-            Dual-pillar education uniting university computer science rigor from BITS Pilani
-            with hands-on software development training from NIAT.
+            An asymmetric academic journey uniting foundational university computer science
+            from BITS Pilani with production-grade engineering at NIAT.
           </p>
         </div>
 
-        {/* Monumental Dual-Pillar Exhibition Stage */}
-        <div className="education-monumental-grid">
-          {education.map((item, idx) => (
+        {/* Asymmetrical Academic Journey Grid (60% / 40%) */}
+        <div className="education-journey-asymmetric">
+          {/* Primary Dominant Milestone: BITS Pilani (60%) */}
+          {bits && (
             <article
-              key={item.id}
-              id={`education-card-${item.id}`}
-              className={`edu-monumental-card edu-pillar-${idx + 1}`}
+              id={`education-card-${bits.id}`}
+              className="edu-pillar-card edu-pillar-primary"
               data-glow
               data-tilt
             >
+              <div className="edu-corner-badge">PRIMARY UNIVERSITY DEGREE</div>
+
               <div className="pillar-header">
-                <div className="pillar-index-badge">
-                  <span>0{idx + 1}</span>
+                <div className="pillar-icon-box" aria-hidden="true">
+                  <GraduationCap size={32} strokeWidth={1.6} />
                 </div>
-                <div className="pillar-type-tag">
-                  <span>{item.type}</span>
+                <div className="pillar-header-meta">
+                  <span className="pillar-type-label">{bits.type}</span>
+                  <span className="pillar-status-live">
+                    <span className="live-dot"></span> {bits.status}
+                  </span>
                 </div>
-                <span className="pillar-status-chip">{item.status}</span>
               </div>
 
-              <div className="pillar-body">
-                <div className="pillar-icon-box" aria-hidden="true">
-                  {item.icon === 'graduation' ? (
-                    <GraduationCap size={28} strokeWidth={1.6} />
-                  ) : (
-                    <Code2 size={28} strokeWidth={1.6} />
-                  )}
-                </div>
+              <div className="pillar-content">
+                <h3 className="pillar-degree-title">{bits.degree}</h3>
+                <h4 className="pillar-institution-name">{bits.institution}</h4>
 
-                <h3 className="pillar-degree-title">{item.degree}</h3>
-                <h4 className="pillar-institution-name">{item.institution}</h4>
-
-                <div className="pillar-meta-row">
-                  <span className="pillar-meta-item">
-                    <Calendar size={13} />
-                    <span>{item.duration}</span>
+                <div className="pillar-meta-bar">
+                  <span className="meta-pill">
+                    <Calendar size={13} /> {bits.duration}
                   </span>
-                  <span className="pillar-meta-sep">•</span>
-                  <span className="pillar-meta-item">
-                    <MapPin size={13} />
-                    <span>{item.location}</span>
+                  <span className="meta-pill">
+                    <MapPin size={13} /> {bits.location}
+                  </span>
+                  <span className="meta-pill pill-highlight">
+                    <Award size={13} /> Formal CS Curriculum
                   </span>
                 </div>
 
-                <div className="pillar-divider"></div>
+                <p className="pillar-narrative">
+                  Pursuing rigorous undergraduate coursework in foundational computer science, discrete mathematics,
+                  data structures, computational thinking, and software engineering principles at Birla Institute of Technology and Science, Pilani.
+                </p>
 
                 <div className="pillar-pillars-section">
-                  <span className="pillar-section-heading">CURRICULAR PILLARS &amp; FOCUS</span>
+                  <span className="pillar-section-heading">CURRICULAR FOUNDATIONS</span>
                   <div className="pillar-tags-wrap">
-                    {item.pillars &&
-                      item.pillars.map((pillar) => (
+                    {bits.pillars &&
+                      bits.pillars.map((pillar) => (
                         <span key={pillar} className="pillar-tag-pill">
                           <CheckCircle size={12} className="tag-check-icon" />
                           <span>{pillar}</span>
@@ -96,13 +97,70 @@ export default function Education() {
               </div>
 
               <div className="pillar-footer">
-                <span className="pillar-verification-tag">
-                  {item.icon === 'graduation' ? 'DEGREE CANDIDATE' : 'INDUSTRY IMMERSION'}
-                </span>
+                <span className="pillar-coord">BITS PILANI // DEGREE TRACK</span>
                 <span className="pillar-year-badge">2025 – PRESENT</span>
               </div>
             </article>
-          ))}
+          )}
+
+          {/* Secondary Industry Milestone: NIAT (NxtWave) (40%) */}
+          {niat && (
+            <article
+              id={`education-card-${niat.id}`}
+              className="edu-pillar-card edu-pillar-secondary"
+              data-glow
+              data-tilt
+            >
+              <div className="edu-corner-badge badge-industry">PRACTICAL TRAINING</div>
+
+              <div className="pillar-header">
+                <div className="pillar-icon-box icon-code" aria-hidden="true">
+                  <Code2 size={26} strokeWidth={1.7} />
+                </div>
+                <div className="pillar-header-meta">
+                  <span className="pillar-type-label">{niat.type}</span>
+                  <span className="pillar-status-chip">{niat.status}</span>
+                </div>
+              </div>
+
+              <div className="pillar-content">
+                <h3 className="pillar-degree-title title-secondary">{niat.degree}</h3>
+                <h4 className="pillar-institution-name">{niat.institution}</h4>
+
+                <div className="pillar-meta-bar">
+                  <span className="meta-pill">
+                    <Calendar size={13} /> {niat.duration}
+                  </span>
+                  <span className="meta-pill">
+                    <MapPin size={13} /> {niat.location}
+                  </span>
+                </div>
+
+                <p className="pillar-narrative">
+                  Hands-on software development program emphasizing scalable full-stack engineering,
+                  API integration, modern developer workflows, code reviews, and industry readiness.
+                </p>
+
+                <div className="pillar-pillars-section">
+                  <span className="pillar-section-heading">ENGINEERING FOCUS</span>
+                  <div className="pillar-tags-wrap">
+                    {niat.pillars &&
+                      niat.pillars.map((pillar) => (
+                        <span key={pillar} className="pillar-tag-pill">
+                          <CheckCircle size={12} className="tag-check-icon" />
+                          <span>{pillar}</span>
+                        </span>
+                      ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="pillar-footer">
+                <span className="pillar-coord">NIAT // INDUSTRY TRAINING</span>
+                <span className="pillar-year-badge">ACTIVE</span>
+              </div>
+            </article>
+          )}
         </div>
       </div>
     </section>

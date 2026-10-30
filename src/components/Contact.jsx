@@ -31,7 +31,7 @@ export default function Contact() {
     >
       <AmbientField tone="light" variant="contact" nodes={false} />
 
-      <div className="container contact-scene-container">
+      <div className="contact-wide-container contact-scene-container">
         {/* Editorial Eyebrow */}
         <div className="editorial-eyebrow-row">
           <span className="editorial-section-num">06</span>

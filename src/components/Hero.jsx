@@ -108,7 +108,7 @@ export default function Hero() {
         <AmbientField tone="light" variant="hero" lights={false} />
       </div>
 
-      <div className="container hero-cinematic-container">
+      <div className="hero-wide-container hero-cinematic-container">
         {/* Top Floating Telemetry & Availability Ribbon */}
         <div className={`hero-top-telemetry hs ${on(1)}`}>
           <div className="hero-availability-tag">

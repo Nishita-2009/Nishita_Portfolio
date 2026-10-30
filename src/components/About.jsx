@@ -9,7 +9,7 @@ export default function About() {
       className="section about-scene-section"
       aria-label="About Gottipati Nishita Sri"
     >
-      <div className="container">
+      <div className="about-wide-container">
         {/* Editorial Eyebrow */}
         <div className="editorial-eyebrow-row">
           <span className="editorial-section-num">01</span>

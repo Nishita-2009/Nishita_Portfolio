@@ -74,13 +74,11 @@ export default function Projects() {
       let dx = e.deltaX;
       let dy = e.deltaY;
 
-      // Normalize lines to pixels if needed
       if (e.deltaMode === 1) {
         dx *= 16;
         dy *= 16;
       }
 
-      // Shift + mouse wheel turns vertical wheel into horizontal
       if (e.shiftKey && dx === 0 && dy !== 0) {
         dx = dy;
         dy = 0;
@@ -89,14 +87,12 @@ export default function Projects() {
       const absX = Math.abs(dx);
       const absY = Math.abs(dy);
 
-      // If vertical scroll intent dominates or movement is tiny, let it pass through immediately!
+      // Let vertical scroll pass through instantly
       if (absX < 12 || absX <= absY * 1.25) {
         deltaXAcc = 0;
         return;
       }
 
-      // User is deliberately swiping horizontally with 2 fingers
-      // Prevent browser back/forward history navigation gesture on horizontal swipe
       if (e.cancelable) {
         e.preventDefault();
       }
@@ -125,7 +121,6 @@ export default function Projects() {
       }
     };
 
-    /* Native touch swipe (mobile) */
     let tx = 0;
     let ty = 0;
     let tracking = false;
@@ -141,7 +136,7 @@ export default function Projects() {
       const t = e.changedTouches[0];
       const dx = t.clientX - tx;
       const dy = t.clientY - ty;
-      if (Math.abs(dx) > 38 && Math.abs(dx) > Math.abs(dy) * 1.4) {
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.2) {
         goTo(indexRef.current + (dx < 0 ? 1 : -1));
       }
     };
@@ -151,79 +146,45 @@ export default function Projects() {
     el.addEventListener('touchend', onTouchEnd, { passive: true });
 
     return () => {
-      clearTimeout(lockTimer);
-      clearTimeout(quietTimer);
       el.removeEventListener('wheel', onWheel);
       el.removeEventListener('touchstart', onTouchStart);
       el.removeEventListener('touchend', onTouchEnd);
+      clearTimeout(lockTimer);
+      clearTimeout(quietTimer);
     };
   }, [goTo]);
 
-  /* ------------------------------ Modal ------------------------------ */
-  const handleOpenProject = useCallback((project, event) => {
-    openerRef.current =
-      event && event.currentTarget ? event.currentTarget : document.activeElement;
+  const handleOpenProject = useCallback((project, e) => {
+    openerRef.current = e?.currentTarget || null;
     setSelectedProject(project);
   }, []);
 
   const handleCloseProject = useCallback(() => {
     setSelectedProject(null);
-    requestAnimationFrame(() => {
-      if (openerRef.current && typeof openerRef.current.focus === 'function') {
-        openerRef.current.focus();
-      }
-    });
+    if (openerRef.current && typeof openerRef.current.focus === 'function') {
+      openerRef.current.focus();
+    }
   }, []);
 
   useEffect(() => {
     if (!selectedProject) return undefined;
-
     const originalOverflow = document.body.style.overflow;
-    const originalPaddingRight = document.body.style.paddingRight;
-    const scrollbarWidth =
-      window.innerWidth - document.documentElement.clientWidth;
-
     document.body.style.overflow = 'hidden';
-    if (scrollbarWidth > 0) {
-      document.body.style.paddingRight = `${scrollbarWidth}px`;
-    }
 
-    const focusTimer = setTimeout(() => closeBtnRef.current?.focus(), 20);
-
-    const onKey = (e) => {
-      if (e.key === 'Escape') {
-        e.preventDefault();
-        handleCloseProject();
-        return;
-      }
-      if (e.key === 'Tab' && dialogRef.current) {
-        const focusable = dialogRef.current.querySelectorAll(
-          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
-        );
-        if (focusable.length === 0) return;
-        const firstEl = focusable[0];
-        const lastEl = focusable[focusable.length - 1];
-        if (e.shiftKey && document.activeElement === firstEl) {
-          e.preventDefault();
-          lastEl.focus();
-        } else if (!e.shiftKey && document.activeElement === lastEl) {
-          e.preventDefault();
-          firstEl.focus();
-        }
-      }
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') handleCloseProject();
     };
+    window.addEventListener('keydown', onKeyDown);
+    if (closeBtnRef.current) closeBtnRef.current.focus();
 
-    window.addEventListener('keydown', onKey);
     return () => {
-      clearTimeout(focusTimer);
       document.body.style.overflow = originalOverflow;
-      document.body.style.paddingRight = originalPaddingRight;
-      window.removeEventListener('keydown', onKey);
+      window.removeEventListener('keydown', onKeyDown);
     };
   }, [selectedProject, handleCloseProject]);
 
-  const renderProjectVisual = (projectId) => {
-    switch (projectId) {
+  const renderProjectVisual = (id) => {
+    switch (id) {
       case 'growz':
         return <GrowzPreview />;
       case 'opthire':
@@ -402,9 +363,9 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="section projects-dark-section"
+      className="section projects-dark-section projects-theatre-section"
       data-active-project={activeProject.id}
-      aria-label="Featured Projects Showcase"
+      aria-label="Featured Projects Product Theatre"
     >
       <div
         className={`projects-ambient-spotlight spotlight-${activeProject.id}`}
@@ -412,42 +373,45 @@ export default function Projects() {
       ></div>
       <AmbientField tone="dark" variant="dark" lights={false} />
 
-      <div className="container">
-        <div className="projects-header-split">
-          <div className="projects-header-left">
+      {/* Wide Theatre Container (breaking out of 1168px) */}
+      <div className="projects-theatre-container">
+        {/* Theatre Panoramic Header */}
+        <div className="projects-theatre-header">
+          <div className="theatre-header-left">
             <div className="editorial-eyebrow-row dark-eyebrow-row">
               <span className="editorial-section-num dark-num">02</span>
               <span className="editorial-eyebrow-tag dark-eyebrow-tag">
                 <span className="eyebrow-dot rose-dot"></span>
-                PROJECTS
+                PROJECTS // PRODUCT THEATRE
               </span>
             </div>
-            <h2 className="dark-editorial-title">
-              Projects
+            <h2 className="dark-editorial-title theatre-headline">
+              Engineering Practical Systems,
               <br />
-              that <em className="serif-italic-rose">create impact.</em>
+              <em className="serif-italic-rose">Not Just Interfaces.</em>
             </h2>
           </div>
 
-          <div className="projects-header-right">
-            <p className="projects-lead-copy">
-              Swipe sideways with two fingers, use the arrows, or pick a project
-              below.
+          <div className="theatre-header-right">
+            <p className="theatre-instruction-copy">
+              Two-finger trackpad horizontal swipe, arrow keys, or tabs to inspect each build.
             </p>
             <a
               href={personalInfo.github}
               target="_blank"
               rel="noopener noreferrer"
               id="view-all-projects-link"
-              className="dark-underline-cta"
+              className="theatre-github-cta"
             >
-              <span>View All Projects</span>
-              <ArrowRight size={15} className="cta-arrow-icon" />
+              <span>GitHub Showcase</span>
+              <ArrowRight size={15} />
             </a>
           </div>
         </div>
 
+        {/* Interactive Theatre Stage */}
         <div ref={stageRef} className="projects-interactive-stage" onKeyDown={handleKeyDown}>
+          {/* Navigation Control Bar */}
           <div className="projects-story-toolbar">
             <div
               className="projects-selector-tabs"
@@ -517,14 +481,14 @@ export default function Projects() {
             </div>
           </div>
 
-          {/* Real horizontal track: trackpad, touch, keyboard and buttons all drive it */}
+          {/* Product Theatre Slides Track */}
           <div
             ref={viewportRef}
             className="projects-viewport"
             tabIndex={0}
             role="group"
             aria-roledescription="carousel"
-            aria-label="Featured projects. Swipe horizontally with two fingers or use the left and right arrow keys."
+            aria-label="Featured projects. Swipe horizontally with two fingers or use arrow keys."
           >
             <div className="projects-track" style={{ '--idx': activeIndex }}>
               {projects.map((project, i) => {
@@ -543,44 +507,49 @@ export default function Projects() {
                     aria-hidden={!isActive}
                     inert={!isActive}
                   >
-                    <div className="project-spotlight-grid">
-                      <div className="project-info-panel">
-                        <div className="info-panel-top-meta">
-                          <span className="info-panel-index">{project.index}</span>
-                          <span className="info-panel-badge">{project.badge}</span>
+                    {/* Visual-Dominant Product Theatre Grid: 32% narrative rail / 68% visual canvas */}
+                    <div className="theatre-stage-grid">
+                      {/* Left: Compact Narrative Control Rail (32%) */}
+                      <div className="theatre-narrative-rail">
+                        <div className="theatre-meta-header">
+                          <span className="theatre-project-index">{project.index}</span>
+                          <span className="theatre-project-badge">{project.badge}</span>
                         </div>
 
-                        <h3 className="info-panel-title">{project.name}</h3>
-                        <p className="info-panel-tagline">{project.tagline || project.overview}</p>
+                        <h3 className="theatre-project-title">{project.name}</h3>
+                        <p className="theatre-project-tagline">{project.tagline || project.overview}</p>
 
                         {project.architectureFlow && (
-                          <div className="info-panel-arch-strip" aria-label="System Architecture Pipeline">
-                            {project.architectureFlow.map((node) => (
-                              <div key={node.step} className="info-arch-step">
-                                <span className="info-arch-num">{node.step}</span>
-                                <span className="info-arch-name">{node.title}</span>
-                              </div>
-                            ))}
+                          <div className="theatre-arch-flow" aria-label="Architecture Flow">
+                            <span className="theatre-flow-heading">PIPELINE FLOW</span>
+                            <div className="theatre-flow-nodes">
+                              {project.architectureFlow.map((node) => (
+                                <div key={node.step} className="theatre-flow-step">
+                                  <span className="flow-step-num">{node.step}</span>
+                                  <span className="flow-step-title">{node.title}</span>
+                                </div>
+                              ))}
+                            </div>
                           </div>
                         )}
 
-                        <div className="info-panel-tech-tags" aria-label="Project Technologies">
+                        <div className="theatre-tech-tags">
                           {project.technologies.map((tech) => (
-                            <span key={tech} className="project-chip">
+                            <span key={tech} className="theatre-tech-chip">
                               {tech}
                             </span>
                           ))}
                         </div>
 
-                        <div className="info-panel-actions">
+                        <div className="theatre-actions-row">
                           <button
                             type="button"
                             id={`project-spotlight-overview-btn-${project.id}`}
-                            className="btn btn-burgundy"
+                            className="btn btn-burgundy btn-sm"
                             onClick={(e) => handleOpenProject(project, e)}
                           >
-                            <span>Explore Complete Details</span>
-                            <ArrowUpRight size={15} className="btn-external-arrow" />
+                            <span>Deep Dive</span>
+                            <ArrowUpRight size={14} className="btn-external-arrow" />
                           </button>
 
                           {project.githubUrl && (
@@ -589,11 +558,10 @@ export default function Projects() {
                               target="_blank"
                               rel="noopener noreferrer"
                               id={`project-spotlight-github-${project.id}`}
-                              className="btn btn-outline-dark"
+                              className="btn btn-outline-dark btn-sm"
                             >
-                              <GithubIcon size={15} />
-                              <span>GitHub Repo</span>
-                              <ArrowUpRight size={14} className="btn-external-arrow" />
+                              <GithubIcon size={14} />
+                              <span>GitHub</span>
                             </a>
                           )}
 
@@ -602,18 +570,19 @@ export default function Projects() {
                               href={project.demoUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="btn btn-outline-dark"
+                              className="btn btn-outline-dark btn-sm"
                             >
-                              <span>Live Demo</span>
-                              <ArrowUpRight size={14} className="btn-external-arrow" />
+                              <span>Demo</span>
+                              <ArrowUpRight size={13} />
                             </a>
                           )}
                         </div>
                       </div>
 
-                      <div className="project-active-visual-stage">
+                      {/* Right: Expansive Visual Cockpit (68% width!) */}
+                      <div className="theatre-visual-canvas">
                         <div
-                          className="active-visual-frame"
+                          className="theatre-visual-frame active-visual-frame"
                           onClick={(e) => handleOpenProject(project, e)}
                           role="button"
                           tabIndex={isActive ? 0 : -1}
@@ -625,22 +594,12 @@ export default function Projects() {
                             }
                           }}
                         >
-                          <div className="active-stage-topbar">
-                            <span className="stage-index-badge">
-                              PROJECT {project.index} // INTERACTIVE PREVIEW
-                            </span>
-                            <span className="stage-open-hint">Inspect architecture ↗</span>
-                          </div>
-                          <div className="active-stage-canvas">
+                          <div className="theatre-preview-wrapper">
                             {renderProjectVisual(project.id)}
                           </div>
-                          <div className="active-stage-capabilities">
-                            {project.keyFeatures.slice(0, 2).map((feat, k) => (
-                              <div key={k} className="stage-capability-item">
-                                <Check size={13} className="stage-cap-check" />
-                                <span>{feat}</span>
-                              </div>
-                            ))}
+                          <div className="theatre-hover-lens">
+                            <span>CLICK TO EXPAND SYSTEM ARCHITECTURE</span>
+                            <ArrowUpRight size={14} />
                           </div>
                         </div>
                       </div>
@@ -650,11 +609,6 @@ export default function Projects() {
               })}
             </div>
           </div>
-
-          <p className="projects-gesture-hint" aria-hidden="true">
-            <span className="hint-dot"></span>
-            Two-finger swipe &nbsp;·&nbsp; ← → keys &nbsp;·&nbsp; tap arrows
-          </p>
         </div>
       </div>
 

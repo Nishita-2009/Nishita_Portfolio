@@ -22,7 +22,7 @@ export default function Certifications() {
     >
       <AmbientField tone="dark" variant="dark" />
 
-      <div className="container">
+      <div className="cert-wide-container">
         {/* Editorial Eyebrow */}
         <div className="chapter-header-split cert-header">
           <div className="chapter-header-left">
