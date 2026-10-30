@@ -1,5 +1,5 @@
 import React from 'react';
-import { Award, Bot, Cpu, Sparkles, ArrowUpRight, BadgeCheck } from 'lucide-react';
+import { Award, Bot, Cpu, Sparkles, ArrowUpRight, BadgeCheck, ShieldCheck } from 'lucide-react';
 import { certifications } from '../data/portfolioData';
 import AmbientField from './AmbientField';
 
@@ -17,75 +17,85 @@ export default function Certifications() {
   return (
     <section
       id="certifications"
-      className="section certifications-chapter-section"
+      className="section certifications-dark-section cert-scene-section"
       aria-label="Certifications and Workshops"
     >
       <AmbientField tone="dark" variant="dark" />
 
       <div className="container">
+        {/* Editorial Eyebrow */}
         <div className="chapter-header-split cert-header">
           <div className="chapter-header-left">
             <div className="editorial-eyebrow-row dark-eyebrow-row">
               <span className="editorial-section-num dark-num">05</span>
               <span className="editorial-eyebrow-tag dark-eyebrow-tag">
                 <span className="eyebrow-dot rose-dot"></span>
-                CERTIFICATIONS &amp; WORKSHOPS
+                CERTIFICATIONS // CREDENTIAL VAULT &amp; ARCHIVE
               </span>
             </div>
             <h2 className="chapter-main-heading cert-heading">
-              Continuous <em className="serif-italic-rose">Learning.</em>
+              Verified Credentials
+              <br />
+              <em className="serif-italic-rose">&amp; Practical Workshops.</em>
             </h2>
           </div>
           <p className="chapter-header-lead cert-lead">
-            Verified virtual internship credential and practical technical workshops.
+            Virtual internship credentials and specialized technical workshops in AI agents,
+            gesture-based computing, and modern full-stack development.
           </p>
         </div>
 
-        <div className="cert-gallery" data-draw>
-          {/* Featured: IBM | 1M1B */}
+        {/* Credential Vault Stage */}
+        <div className="vault-stage-layout">
+          {/* Featured Monument: IBM | 1M1B AI for Sustainability */}
           <article
             id={`certification-card-${featured.id}`}
-            className="cert-card cert-card-featured scroll-reveal"
-            style={{ '--i': 0 }}
+            className="vault-featured-card"
+            data-glow
+            data-tilt
           >
-            <div className="cert-card-inner" data-tilt data-glow>
-              <div className="cert-glare" aria-hidden="true"></div>
-              <svg
-                className="cert-seal"
-                viewBox="0 0 120 120"
-                fill="none"
-                aria-hidden="true"
-              >
-                <circle className="seal-ring seal-ring-1" pathLength="1" cx="60" cy="60" r="52" />
-                <circle className="seal-ring seal-ring-2" pathLength="1" cx="60" cy="60" r="40" />
-                <path className="seal-ring seal-ring-3" pathLength="1" d="M60 14v10M60 96v10M14 60h10M96 60h10" />
-              </svg>
-
-              <div className="cert-card-top">
-                <div className="cert-icon-box cert-icon-featured" aria-hidden="true">
-                  <FeaturedIcon size={22} strokeWidth={1.6} />
-                </div>
-                <span className="cert-category-pill">
-                  <BadgeCheck size={12} /> {featured.tag}
-                </span>
+            <div className="vault-card-inner">
+              {/* Rotating Holographic Seal */}
+              <div className="vault-seal-halo" aria-hidden="true">
+                <svg className="vault-seal-svg" viewBox="0 0 140 140" fill="none">
+                  <circle className="seal-orbit orbit-outer" cx="70" cy="70" r="62" stroke="#C87D82" strokeWidth="1" strokeDasharray="4 6" />
+                  <circle className="seal-orbit orbit-mid" cx="70" cy="70" r="48" stroke="#762B3D" strokeWidth="1.5" />
+                  <circle className="seal-orbit orbit-inner" cx="70" cy="70" r="34" stroke="#C87D82" strokeWidth="1" strokeDasharray="8 4" />
+                </svg>
               </div>
 
-              <div className="cert-card-body">
-                <h3 className="cert-card-title cert-title-featured">{featured.title}</h3>
-                <p className="cert-card-subtitle">{featured.subtitle}</p>
+              <div className="vault-featured-top">
+                <div className="vault-badge-stack">
+                  <div className="vault-featured-icon" aria-hidden="true">
+                    <FeaturedIcon size={20} strokeWidth={1.8} />
+                  </div>
+                  <span className="vault-issuer-chip">{featured.issuer}</span>
+                  <span className="vault-category-pill">
+                    <BadgeCheck size={13} /> {featured.tag}
+                  </span>
+                </div>
+                <div className="vault-plan-id">
+                  <ShieldCheck size={14} className="shield-icon" />
+                  <span>PLAN ID: {featured.planId}</span>
+                </div>
+              </div>
 
-                <div className="cert-meta-row">
-                  <span className="cert-meta-item">Completed: {featured.completionDate}</span>
+              <div className="vault-featured-body">
+                <h3 className="vault-featured-title">{featured.title}</h3>
+                <h4 className="vault-featured-subtitle">{featured.subtitle}</h4>
+
+                <div className="vault-meta-bar">
+                  <span className="meta-badge">Completed: {featured.completionDate}</span>
                   <span className="meta-dot">•</span>
-                  <span className="cert-meta-item">Plan ID: {featured.planId}</span>
+                  <span className="meta-badge status-verified">Verified Credential</span>
                 </div>
 
-                <p className="cert-card-desc">{featured.description}</p>
+                <p className="vault-featured-desc">{featured.description}</p>
 
                 {featured.highlights && (
-                  <ul className="cert-highlights-list" aria-label="Key internship highlights">
+                  <ul className="vault-highlights-grid" aria-label="Internship Highlights">
                     {featured.highlights.map((h, i) => (
-                      <li key={i} className="cert-highlight-item">
+                      <li key={i} className="vault-highlight-chip">
                         <span className="highlight-bullet" aria-hidden="true">›</span>
                         <span>{h}</span>
                       </li>
@@ -94,70 +104,76 @@ export default function Certifications() {
                 )}
               </div>
 
-              <div className="cert-card-footer">
-                <span className="cert-issuer-label">{featured.issuer}</span>
+              <div className="vault-featured-footer">
+                <div className="vault-footer-telemetry">
+                  <span className="telemetry-dot-live"></span>
+                  <span>SkillsBuild Verified Record</span>
+                </div>
+
                 {featured.certificateUrl && (
                   <a
                     href={featured.certificateUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     id={`cert-verify-link-${featured.id}`}
-                    className="btn btn-burgundy btn-sm cert-featured-cta"
+                    className="btn btn-burgundy btn-sm vault-cta-btn"
                     title={`Open verified certificate for ${featured.title}`}
                   >
-                    <Award size={14} />
-                    <span>View Certificate</span>
-                    <ArrowUpRight size={14} className="btn-external-arrow" />
+                    <Award size={15} />
+                    <span>View Verified Certificate</span>
+                    <ArrowUpRight size={15} className="btn-external-arrow" />
                   </a>
                 )}
               </div>
             </div>
           </article>
 
-          {/* Practical Workshops */}
-          {others.map((cert, idx) => {
-            const Icon = certIconMap[cert.icon] || Award;
-            return (
-              <article
-                key={cert.id}
-                id={`certification-card-${cert.id}`}
-                className={`cert-card cert-card-compact cert-variant-${idx + 1} scroll-reveal`}
-                style={{ '--i': idx + 1 }}
-              >
-                <div className="cert-card-inner" data-tilt data-glow>
-                  <div className="cert-glare" aria-hidden="true"></div>
-                  <div className="cert-card-top">
-                    <div className="cert-icon-box" aria-hidden="true">
-                      <Icon size={18} strokeWidth={1.7} />
+          {/* Workshop Archive Grid: 4 Cards */}
+          <div className="vault-workshops-grid">
+            {others.map((cert) => {
+              const Icon = certIconMap[cert.icon] || Award;
+              return (
+                <article
+                  key={cert.id}
+                  id={`certification-card-${cert.id}`}
+                  className="vault-workshop-card"
+                  data-glow
+                  data-tilt
+                >
+                  <div className="workshop-card-top">
+                    <div className="workshop-icon-box" aria-hidden="true">
+                      <Icon size={19} strokeWidth={1.7} />
                     </div>
-                    <span className="cert-category-pill">{cert.tag}</span>
+                    <span className="workshop-category-tag">{cert.tag}</span>
                   </div>
-                  <div className="cert-card-body">
-                    <h3 className="cert-card-title">{cert.title}</h3>
-                    <p className="cert-card-subtitle">{cert.subtitle}</p>
-                    <p className="cert-card-desc">{cert.description}</p>
+
+                  <div className="workshop-card-body">
+                    <h3 className="workshop-title">{cert.title}</h3>
+                    <h4 className="workshop-issuer">{cert.subtitle}</h4>
+                    <p className="workshop-desc">{cert.description}</p>
                   </div>
-                  <div className="cert-card-footer">
-                    <span className="cert-issuer-label">{cert.issuer}</span>
+
+                  <div className="workshop-card-footer">
+                    <span className="workshop-issuer-badge">{cert.issuer}</span>
                     {cert.certificateUrl && (
                       <a
                         href={cert.certificateUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         id={`cert-verify-link-${cert.id}`}
-                        className="cert-verify-action"
+                        className="workshop-verify-link"
                         title={`View Certificate for ${cert.title}`}
                       >
-                        <Award size={13} className="btn-icon" />
+                        <Award size={13} />
                         <span>View Certificate</span>
-                        <ArrowUpRight size={13} className="link-diag-arrow" />
+                        <ArrowUpRight size={13} className="link-arrow" />
                       </a>
                     )}
                   </div>
-                </div>
-              </article>
-            );
-          })}
+                </article>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
