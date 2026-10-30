@@ -17,8 +17,7 @@ export default function Certifications() {
   return (
     <section
       id="certifications"
-      className="section layer-panel certifications-chapter-section"
-      data-layer="tilt"
+      className="section certifications-chapter-section"
       aria-label="Certifications and Workshops"
     >
       <AmbientField tone="dark" variant="dark" />

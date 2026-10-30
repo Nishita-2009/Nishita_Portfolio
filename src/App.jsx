@@ -26,17 +26,18 @@ export default function App() {
     }
   }, []);
 
-  /* 2. Reveals, draw-in triggers and section activity (IntersectionObserver) */
+  /* 2. Coordinated IntersectionObserver for fluid, stutter-free entry reveals */
   useEffect(() => {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     const revealEls = document.querySelectorAll(
       [
-        '.credential-strip-item-x',
+        '.scroll-reveal',
         '.about-split-layout',
         '.projects-header-split',
         '.projects-interactive-stage',
         '.skills-split-layout',
+        '.skills-console-card',
         '.skill-domain-card',
         '.chapter-header-split',
         '.edu-milestone-card',
@@ -48,16 +49,12 @@ export default function App() {
     const drawEls = document.querySelectorAll('[data-draw]');
     const sections = document.querySelectorAll('section');
 
-    sections.forEach((s) => s.classList.add('section-seen'));
-
     if (reduced) {
       revealEls.forEach((el) => el.classList.add('in-view'));
       drawEls.forEach((el) => el.classList.add('drawn'));
-      sections.forEach((s) => s.classList.add('section-active'));
+      sections.forEach((s) => s.classList.add('section-active', 'section-seen'));
       return undefined;
     }
-    // section-seen is re-evaluated below by the observer (added on first sight only)
-    sections.forEach((s) => s.classList.remove('section-seen'));
 
     const revealObs = new IntersectionObserver(
       (entries, obs) => {
@@ -68,7 +65,7 @@ export default function App() {
           }
         });
       },
-      { rootMargin: '0px 0px -32px 0px', threshold: 0.06 }
+      { rootMargin: '0px 0px -40px 0px', threshold: 0.08 }
     );
     revealEls.forEach((el) => {
       el.classList.add('scroll-reveal');
@@ -84,7 +81,7 @@ export default function App() {
           }
         });
       },
-      { threshold: 0.25 }
+      { threshold: 0.2 }
     );
     drawEls.forEach((el) => drawObs.observe(el));
 
@@ -98,7 +95,7 @@ export default function App() {
           }
         });
       },
-      { rootMargin: '90px 0px 90px 0px', threshold: 0.02 }
+      { rootMargin: '60px 0px 60px 0px', threshold: 0.05 }
     );
     sections.forEach((s) => sectionObs.observe(s));
 
@@ -109,83 +106,7 @@ export default function App() {
     };
   }, []);
 
-  /* 3. Scroll-progress driven layering (writes CSS variables only, no React renders) */
-  useEffect(() => {
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const narrow = window.matchMedia('(max-width: 980px)');
-    const hero = document.getElementById('hero');
-    const layers = Array.from(document.querySelectorAll('.layer-panel'));
-    const sections = Array.from(document.querySelectorAll('#main-content > section'));
-    const cache = new WeakMap();
-    let ticking = false;
-
-    const setVar = (el, name, val) => {
-      const key = name + val;
-      const prev = cache.get(el) || {};
-      if (prev[name] === key) return;
-      prev[name] = key;
-      cache.set(el, prev);
-      if (val === null) el.style.removeProperty(name);
-      else el.style.setProperty(name, val);
-    };
-
-    const update = () => {
-      ticking = false;
-      const vh = window.innerHeight;
-      const off = reduced.matches;
-      const layered = !off && !narrow.matches;
-
-      if (hero) {
-        setVar(
-          hero,
-          '--hero-recede',
-          off ? null : clamp(window.scrollY / (vh * 0.9), 0, 1).toFixed(3)
-        );
-      }
-
-      layers.forEach((el) => {
-        if (!layered) {
-          setVar(el, '--enter', null);
-          return;
-        }
-        const r = el.getBoundingClientRect();
-        let e = clamp((vh - r.top) / (vh * 0.8), 0, 1);
-        e = 1 - Math.pow(1 - e, 3);
-        setVar(el, '--enter', e.toFixed(3));
-      });
-
-      sections.forEach((el) => {
-        if (off) {
-          setVar(el, '--sp', null);
-          return;
-        }
-        const r = el.getBoundingClientRect();
-        if (r.bottom < -200 || r.top > vh + 200) return;
-        const sp = clamp((r.top + r.height / 2 - vh / 2) / (vh + r.height), -0.6, 0.6);
-        setVar(el, '--sp', sp.toFixed(3));
-      });
-    };
-
-    const schedule = () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(update);
-    };
-
-    update();
-    window.addEventListener('scroll', schedule, { passive: true });
-    window.addEventListener('resize', schedule);
-    narrow.addEventListener('change', schedule);
-    reduced.addEventListener('change', schedule);
-    return () => {
-      window.removeEventListener('scroll', schedule);
-      window.removeEventListener('resize', schedule);
-      narrow.removeEventListener('change', schedule);
-      reduced.removeEventListener('change', schedule);
-    };
-  }, []);
-
-  /* 4. Delegated pointer lighting / subtle tilt for [data-glow] and [data-tilt] */
+  /* 3. Delegated pointer lighting / subtle tilt for [data-glow] and [data-tilt] */
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
     let last = null;

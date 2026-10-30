@@ -39,17 +39,13 @@ export default function About() {
             </div>
 
             <h2 className="about-heading">
-              More Than
+              Curious Learner.
               <br />
-              Just <em className="serif-italic-accent">Code</em>
+              Relentless <em className="serif-italic-accent">Builder.</em>
             </h2>
 
             <p className="about-lead-copy">
-              I’m a Computer Science undergraduate at{' '}
-              <strong>BITS Pilani</strong> with a foundation in programming,
-              problem-solving and software development. I enjoy building
-              practical applications, exploring Generative AI and developing
-              technology-driven solutions to real-world problems.
+              Computer Science undergraduate at <strong>BITS Pilani</strong> engineering real-world software, intelligent full-stack systems, and Generative AI applications.
             </p>
 
             {/* Compact Visual Fact Pills (No Wall of Text) */}
@@ -64,11 +60,11 @@ export default function About() {
 
             <div className="about-cta-wrap">
               <a
-                href="#experience"
+                href="#projects"
                 id="about-get-to-know-btn"
                 className="btn btn-capsule-outline"
               >
-                <span>Get to Know Me</span>
+                <span>Explore Selected Projects</span>
                 <ArrowUpRight size={15} className="btn-external-arrow" />
               </a>
             </div>

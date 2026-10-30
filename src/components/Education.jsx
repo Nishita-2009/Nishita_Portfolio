@@ -7,8 +7,7 @@ export default function Education() {
   return (
     <section
       id="education"
-      className="section layer-panel education-chapter-section"
-      data-layer="fold"
+      className="section education-chapter-section"
       aria-label="Academic Education and Training"
     >
       <AmbientField tone="light" variant="light" lights={false} />

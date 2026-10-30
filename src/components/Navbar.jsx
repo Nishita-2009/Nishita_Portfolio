@@ -9,41 +9,57 @@ export default function Navbar() {
   const progressBarRef = useRef(null);
 
   useEffect(() => {
+    let ticking = false;
+    let lastScrolled = false;
+    let lastActive = 'hero';
+
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-      setIsScrolled(scrollY > 18);
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        const scrollY = window.scrollY;
+        const scrolled = scrollY > 20;
+        if (scrolled !== lastScrolled) {
+          lastScrolled = scrolled;
+          setIsScrolled(scrolled);
+        }
 
-      // Update top scroll progress bar directly via DOM ref (zero React re-renders)
-      if (progressBarRef.current) {
-        const docHeight =
-          document.documentElement.scrollHeight - window.innerHeight;
-        const progress =
-          docHeight > 0 ? Math.min(100, Math.max(0, (scrollY / docHeight) * 100)) : 0;
-        progressBarRef.current.style.transform = `scaleX(${(progress / 100).toFixed(4)})`;
-      }
+        // Update top scroll progress bar directly via DOM ref (zero React re-renders)
+        if (progressBarRef.current) {
+          const docHeight =
+            document.documentElement.scrollHeight - window.innerHeight;
+          const progress =
+            docHeight > 0 ? Math.min(100, Math.max(0, (scrollY / docHeight) * 100)) : 0;
+          progressBarRef.current.style.transform = `scaleX(${(progress / 100).toFixed(4)})`;
+        }
 
-      const sectionIds = navLinks.map((link) => link.href.substring(1));
-      const triggerLine = 160;
-      let currentActive = 'hero';
+        const sectionIds = navLinks.map((link) => link.href.substring(1));
+        const triggerLine = 180;
+        let currentActive = 'hero';
 
-      for (const id of sectionIds) {
-        const el = document.getElementById(id);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= triggerLine && rect.bottom > triggerLine) {
-            currentActive = id;
+        for (const id of sectionIds) {
+          const el = document.getElementById(id);
+          if (el) {
+            const rect = el.getBoundingClientRect();
+            if (rect.top <= triggerLine && rect.bottom > triggerLine) {
+              currentActive = id;
+            }
           }
         }
-      }
 
-      if (
-        window.innerHeight + scrollY >=
-        document.documentElement.scrollHeight - 60
-      ) {
-        currentActive = 'contact';
-      }
+        if (
+          window.innerHeight + scrollY >=
+          document.documentElement.scrollHeight - 60
+        ) {
+          currentActive = 'contact';
+        }
 
-      setActiveSection(currentActive);
+        if (currentActive !== lastActive) {
+          lastActive = currentActive;
+          setActiveSection(currentActive);
+        }
+      });
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });

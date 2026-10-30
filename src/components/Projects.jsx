@@ -61,69 +61,7 @@ export default function Projects() {
     const el = viewportRef.current;
     if (!el) return undefined;
 
-    let acc = 0;
-    let locked = false;
-    let lockedAt = 0;
-    let lastAbs = 0;
-    let lastTime = 0;
-    let quietTimer = null;
-
-    const NAV_THRESHOLD = 48;
-
-    const onWheel = (e) => {
-      let dx = e.deltaX;
-      let dy = e.deltaY;
-      if (e.deltaMode === 1) {
-        dx *= 16;
-        dy *= 16;
-      }
-      // Shift + mouse wheel => horizontal
-      if (e.shiftKey && dx === 0) {
-        dx = dy;
-        dy = 0;
-      }
-
-      const horizontalIntent = Math.abs(dx) > Math.abs(dy) * 1.4 && Math.abs(dx) > 0;
-      if (!horizontalIntent) return; // let normal vertical scrolling pass through
-
-      // Horizontal gesture inside the showcase: stop browser history swipe / sideways scroll
-      e.preventDefault();
-
-      const now = performance.now();
-      const absDx = Math.abs(dx);
-
-      if (now - lastTime > 200) acc = 0; // new gesture
-      lastTime = now;
-
-      if (locked) {
-        // A clearly stronger delta after the cooldown means a fresh gesture, not inertia
-        if (now - lockedAt > 450 && absDx > lastAbs * 1.8 && absDx > 24) {
-          locked = false;
-          acc = 0;
-        }
-      }
-      lastAbs = absDx;
-
-      clearTimeout(quietTimer);
-      quietTimer = setTimeout(() => {
-        if (performance.now() - lockedAt >= 350) {
-          locked = false;
-          acc = 0;
-        }
-      }, 130);
-
-      if (locked) return;
-
-      acc += dx;
-      if (Math.abs(acc) >= NAV_THRESHOLD) {
-        goTo(indexRef.current + (acc > 0 ? 1 : -1));
-        locked = true;
-        lockedAt = now;
-        acc = 0;
-      }
-    };
-
-    /* Touch swipe (vertical scroll preserved via touch-action: pan-y) */
+    /* Native touch swipe (vertical scroll 100% preserved via touch-action: pan-y) */
     let tx = 0;
     let ty = 0;
     let tracking = false;
@@ -139,18 +77,15 @@ export default function Projects() {
       const t = e.changedTouches[0];
       const dx = t.clientX - tx;
       const dy = t.clientY - ty;
-      if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.3) {
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) {
         goTo(indexRef.current + (dx < 0 ? 1 : -1));
       }
     };
 
-    el.addEventListener('wheel', onWheel, { passive: false });
     el.addEventListener('touchstart', onTouchStart, { passive: true });
     el.addEventListener('touchend', onTouchEnd, { passive: true });
 
     return () => {
-      clearTimeout(quietTimer);
-      el.removeEventListener('wheel', onWheel);
       el.removeEventListener('touchstart', onTouchStart);
       el.removeEventListener('touchend', onTouchEnd);
     };
@@ -399,8 +334,7 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="section layer-panel projects-dark-section"
-      data-layer="tilt"
+      className="section projects-dark-section"
       data-active-project={activeProject.id}
       aria-label="Featured Projects Showcase"
     >
@@ -549,22 +483,7 @@ export default function Projects() {
                         </div>
 
                         <h3 className="info-panel-title">{project.name}</h3>
-                        <p className="info-panel-summary">{project.overview}</p>
-
-                        <div className="info-panel-highlights-grid">
-                          <div className="info-highlight-box">
-                            <span className="info-highlight-label">
-                              <Target size={12} /> Problem Addressed
-                            </span>
-                            <p className="info-highlight-text">{project.problemAddressed}</p>
-                          </div>
-                          <div className="info-highlight-box">
-                            <span className="info-highlight-label">
-                              <Cpu size={12} /> Implementation
-                            </span>
-                            <p className="info-highlight-text">{project.whatWasBuilt}</p>
-                          </div>
-                        </div>
+                        <p className="info-panel-tagline">{project.tagline || project.overview}</p>
 
                         {project.architectureFlow && (
                           <div className="info-panel-arch-strip" aria-label="System Architecture Pipeline">
@@ -578,12 +497,8 @@ export default function Projects() {
                         )}
 
                         <div className="info-panel-tech-tags" aria-label="Project Technologies">
-                          {project.technologies.map((tech, tIdx) => (
-                            <span
-                              key={tech}
-                              className="project-chip tag-stagger-chip"
-                              style={{ animationDelay: `${420 + tIdx * 45}ms` }}
-                            >
+                          {project.technologies.map((tech) => (
+                            <span key={tech} className="project-chip">
                               {tech}
                             </span>
                           ))}

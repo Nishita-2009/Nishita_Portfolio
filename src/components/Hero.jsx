@@ -56,21 +56,24 @@ export default function Hero() {
     const timers = [];
     let interval = null;
 
-    timers.push(setTimeout(() => setStage(1), 120));
+    timers.push(setTimeout(() => setStage(1), 60));
     timers.push(
       setTimeout(() => {
         let n = 0;
         interval = setInterval(() => {
-          n += 1;
-          setTyped(n);
+          n += 2;
           if (n >= TOTAL) {
+            n = TOTAL;
+            setTyped(TOTAL);
             clearInterval(interval);
-            timers.push(setTimeout(() => setStage(2), 150));
-            timers.push(setTimeout(() => setStage(3), 480));
-            timers.push(setTimeout(() => setCaretGone(true), 1100));
+            timers.push(setTimeout(() => setStage(2), 60));
+            timers.push(setTimeout(() => setStage(3), 160));
+            timers.push(setTimeout(() => setCaretGone(true), 600));
+          } else {
+            setTyped(n);
           }
-        }, 50);
-      }, 420)
+        }, 24);
+      }, 120)
     );
 
     // Failsafe: never leave essential content hidden
@@ -79,7 +82,7 @@ export default function Hero() {
         setTyped(TOTAL);
         setStage(3);
         setCaretGone(true);
-      }, 4500)
+      }, 1500)
     );
 
     return () => {

@@ -26,8 +26,7 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="section layer-panel skills-dark-section"
-      data-layer="slide"
+      className="section skills-dark-section"
       aria-label="Technical Skills and Capabilities"
     >
       <AmbientField tone="dark" variant="dark" lights={false} />

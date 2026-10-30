@@ -4513,86 +4513,61 @@
   font-weight: 600;
 }
 
-/* Hero is a sticky layer that recedes as the next panel rises over it (desktop) */
+/* Hero: Full-screen opening atmosphere with natural native page flow */
 .hero-section {
-  --hero-recede: 0;
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--bg-ivory);
+  overflow: hidden;
   z-index: 1;
-}
-.credentials-strip-wrapper {
-  padding-bottom: calc(1.25rem + 28px);
-}
-@media (min-width: 981px) and (min-height: 780px) {
-  .hero-section {
-    position: sticky;
-    top: 0;
-    height: 100dvh;
-    min-height: 0;
-  }
-  .hero-section .hero-container {
-    transform-origin: 50% 40%;
-    transform: translate3d(0, calc(var(--hero-recede) * -42px), 0)
-      scale(calc(1 - var(--hero-recede) * 0.06));
-    opacity: calc(1 - var(--hero-recede) * 0.75);
-  }
-  .hero-section .credentials-strip-wrapper {
-    opacity: calc(1 - var(--hero-recede) * 0.9);
-  }
-  .hero-section::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: #171817;
-    opacity: calc(var(--hero-recede) * 0.55);
-    pointer-events: none;
-    z-index: 3;
-  }
 }
 
-/* ---------- Layered panels (next section rises over the previous) ---------- */
-.layer-panel {
-  --e: var(--enter, 1);
+.credentials-strip-wrapper {
+  padding-bottom: 1.75rem;
   position: relative;
   z-index: 2;
-  margin-top: -28px;
-  border-radius: 28px 28px 0 0;
-  box-shadow: 0 -26px 54px -22px rgba(0, 0, 0, 0.32);
-  transform-origin: 50% 0;
 }
-.layer-panel.projects-dark-section,
-.layer-panel.skills-dark-section,
-.layer-panel.certifications-chapter-section {
-  border-top: 1px solid rgba(200, 125, 130, 0.2);
-}
-.layer-panel > .container {
+
+/* Fluid Section Transitions: Distinct visual scenes without scroll hijacking or pinning */
+.projects-dark-section {
+  background: #131415;
+  color: var(--text-on-dark);
   position: relative;
-  z-index: 1;
+  border-top: 1px solid rgba(200, 125, 130, 0.18);
+  border-bottom: 1px solid rgba(200, 125, 130, 0.12);
+  overflow: hidden;
 }
-@media (min-width: 981px) {
-  .layer-panel {
-    will-change: transform;
-  }
-  .layer-panel[data-layer='rise'] {
-    transform: translate3d(0, calc((1 - var(--e)) * 56px), 0) scale(calc(0.94 + 0.06 * var(--e)));
-  }
-  .layer-panel[data-layer='tilt'] {
-    transform: perspective(1600px) translate3d(0, calc((1 - var(--e)) * 90px), 0)
-      rotateX(calc((1 - var(--e)) * 7deg)) scale(calc(0.9 + 0.1 * var(--e)));
-  }
-  .layer-panel[data-layer='slide'] {
-    transform: translate3d(calc((1 - var(--e)) * 5vw), calc((1 - var(--e)) * 40px), 0)
-      scale(calc(0.95 + 0.05 * var(--e)));
-  }
-  .layer-panel[data-layer='fold'] {
-    transform: perspective(1400px) translate3d(0, calc((1 - var(--e)) * 50px), 0)
-      rotateX(calc((1 - var(--e)) * -5deg)) scale(calc(0.95 + 0.05 * var(--e)));
-  }
+
+.skills-dark-section {
+  background: linear-gradient(180deg, #181617 0%, #121213 100%);
+  color: var(--text-on-dark);
+  position: relative;
+  border-bottom: 1px solid rgba(200, 125, 130, 0.14);
+  overflow: hidden;
 }
-@media (max-width: 980px) {
-  .layer-panel {
-    margin-top: -20px;
-    border-radius: 20px 20px 0 0;
-    transform: none;
-  }
+
+.education-chapter-section {
+  background: var(--bg-cream);
+  position: relative;
+  overflow: hidden;
+}
+
+.certifications-chapter-section {
+  background: linear-gradient(170deg, #181516 0%, #111112 100%);
+  color: var(--text-on-dark);
+  position: relative;
+  border-top: 1px solid rgba(200, 125, 130, 0.16);
+  border-bottom: 1px solid rgba(200, 125, 130, 0.12);
+  overflow: hidden;
+}
+
+.contact-cream-section {
+  background: var(--bg-ivory);
+  position: relative;
+  overflow: hidden;
 }
 
 /* Section backgrounds that distinguish the layers */
