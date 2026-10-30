@@ -27,6 +27,7 @@ export default function Projects() {
   const dialogRef = useRef(null);
   const closeBtnRef = useRef(null);
   const viewportRef = useRef(null);
+  const stageRef = useRef(null);
   const indexRef = useRef(0);
 
   const activeProject = projects[activeIndex];
@@ -53,15 +54,78 @@ export default function Projects() {
   );
 
   /* ------------------------------------------------------------------
-     Horizontal trackpad / shift+wheel navigation
-     - only reacts when horizontal intent dominates (vertical scroll untouched)
-     - one gesture = one project (lock until the inertia tail has settled)
+     Horizontal trackpad / two-finger swipe & touch navigation
+     - ONLY activates when horizontal movement clearly dominates
+     - Vertical page scrolling is 100% preserved with zero interception
+     - One deliberate swipe = one project transition (inertia-protected)
      ------------------------------------------------------------------ */
   useEffect(() => {
-    const el = viewportRef.current;
+    const el = stageRef.current || viewportRef.current;
     if (!el) return undefined;
 
-    /* Native touch swipe (vertical scroll 100% preserved via touch-action: pan-y) */
+    let deltaXAcc = 0;
+    let isLocked = false;
+    let lockTimer = null;
+    let quietTimer = null;
+
+    const SWIPE_THRESHOLD = 38;
+
+    const onWheel = (e) => {
+      let dx = e.deltaX;
+      let dy = e.deltaY;
+
+      // Normalize lines to pixels if needed
+      if (e.deltaMode === 1) {
+        dx *= 16;
+        dy *= 16;
+      }
+
+      // Shift + mouse wheel turns vertical wheel into horizontal
+      if (e.shiftKey && dx === 0 && dy !== 0) {
+        dx = dy;
+        dy = 0;
+      }
+
+      const absX = Math.abs(dx);
+      const absY = Math.abs(dy);
+
+      // If vertical scroll intent dominates or movement is tiny, let it pass through immediately!
+      if (absX < 12 || absX <= absY * 1.25) {
+        deltaXAcc = 0;
+        return;
+      }
+
+      // User is deliberately swiping horizontally with 2 fingers
+      // Prevent browser back/forward history navigation gesture on horizontal swipe
+      if (e.cancelable) {
+        e.preventDefault();
+      }
+
+      clearTimeout(quietTimer);
+      quietTimer = setTimeout(() => {
+        deltaXAcc = 0;
+        isLocked = false;
+      }, 140);
+
+      if (isLocked) return;
+
+      deltaXAcc += dx;
+
+      if (Math.abs(deltaXAcc) >= SWIPE_THRESHOLD) {
+        const direction = deltaXAcc > 0 ? 1 : -1;
+        goTo(indexRef.current + direction);
+        deltaXAcc = 0;
+        isLocked = true;
+
+        clearTimeout(lockTimer);
+        lockTimer = setTimeout(() => {
+          isLocked = false;
+          deltaXAcc = 0;
+        }, 420);
+      }
+    };
+
+    /* Native touch swipe (mobile) */
     let tx = 0;
     let ty = 0;
     let tracking = false;
@@ -77,15 +141,19 @@ export default function Projects() {
       const t = e.changedTouches[0];
       const dx = t.clientX - tx;
       const dy = t.clientY - ty;
-      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      if (Math.abs(dx) > 38 && Math.abs(dx) > Math.abs(dy) * 1.4) {
         goTo(indexRef.current + (dx < 0 ? 1 : -1));
       }
     };
 
+    el.addEventListener('wheel', onWheel, { passive: false });
     el.addEventListener('touchstart', onTouchStart, { passive: true });
     el.addEventListener('touchend', onTouchEnd, { passive: true });
 
     return () => {
+      clearTimeout(lockTimer);
+      clearTimeout(quietTimer);
+      el.removeEventListener('wheel', onWheel);
       el.removeEventListener('touchstart', onTouchStart);
       el.removeEventListener('touchend', onTouchEnd);
     };
@@ -379,7 +447,7 @@ export default function Projects() {
           </div>
         </div>
 
-        <div className="projects-interactive-stage" onKeyDown={handleKeyDown}>
+        <div ref={stageRef} className="projects-interactive-stage" onKeyDown={handleKeyDown}>
           <div className="projects-story-toolbar">
             <div
               className="projects-selector-tabs"
