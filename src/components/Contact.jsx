@@ -80,7 +80,7 @@ export default function Contact() {
 
       <div className="container contact-container">
         <div className="editorial-eyebrow-row">
-          <span className="editorial-section-num">06</span>
+          <span className="editorial-section-num">07</span>
           <span className="editorial-eyebrow-tag">
             <span className="eyebrow-dot"></span>
             CONTACT
@@ -141,7 +141,7 @@ export default function Contact() {
           aria-label="Direct Contact and Social Profiles"
         >
           {/* 1. Email Card */}
-          <div className="contact-action-card">
+          <div className="contact-action-card" data-glow data-tilt>
             <a
               href={`mailto:${personalInfo.email}`}
               id="contact-email-link"
@@ -191,6 +191,8 @@ export default function Contact() {
             id="contact-linkedin-link"
             className="contact-action-card contact-card-link"
             aria-label="LinkedIn Profile (opens in new tab)"
+            data-glow
+            data-tilt
           >
             <div className="contact-card-primary-zone">
               <div className="contact-card-icon" aria-hidden="true">
@@ -219,6 +221,8 @@ export default function Contact() {
             id="contact-github-link"
             className="contact-action-card contact-card-link"
             aria-label="GitHub Profile (opens in new tab)"
+            data-glow
+            data-tilt
           >
             <div className="contact-card-primary-zone">
               <div className="contact-card-icon" aria-hidden="true">

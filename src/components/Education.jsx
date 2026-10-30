@@ -19,7 +19,7 @@ export default function Education() {
         <div className="chapter-header-split">
           <div className="chapter-header-left">
             <div className="editorial-eyebrow-row">
-              <span className="editorial-section-num">04</span>
+              <span className="editorial-section-num">05</span>
               <span className="editorial-eyebrow-tag">
                 <span className="eyebrow-dot"></span>
                 EDUCATION
@@ -62,6 +62,8 @@ export default function Education() {
                 id={`education-card-${item.id}`}
                 className={`edu-milestone-card edu-step-${idx + 1} scroll-reveal`}
                 style={{ '--i': idx }}
+                data-glow
+                data-tilt
               >
                 <span className="edu-connector" aria-hidden="true"></span>
 

@@ -26,7 +26,7 @@ export default function Certifications() {
         <div className="chapter-header-split cert-header">
           <div className="chapter-header-left">
             <div className="editorial-eyebrow-row dark-eyebrow-row">
-              <span className="editorial-section-num dark-num">05</span>
+              <span className="editorial-section-num dark-num">06</span>
               <span className="editorial-eyebrow-tag dark-eyebrow-tag">
                 <span className="eyebrow-dot rose-dot"></span>
                 CERTIFICATIONS &amp; WORKSHOPS
@@ -48,7 +48,7 @@ export default function Certifications() {
             className="cert-card cert-card-featured scroll-reveal"
             style={{ '--i': 0 }}
           >
-            <div className="cert-card-inner" data-tilt>
+            <div className="cert-card-inner" data-tilt data-glow>
               <div className="cert-glare" aria-hidden="true"></div>
               <svg
                 className="cert-seal"
@@ -124,7 +124,7 @@ export default function Certifications() {
                 className={`cert-card cert-card-compact cert-variant-${idx + 1} scroll-reveal`}
                 style={{ '--i': idx + 1 }}
               >
-                <div className="cert-card-inner" data-tilt>
+                <div className="cert-card-inner" data-tilt data-glow>
                   <div className="cert-glare" aria-hidden="true"></div>
                   <div className="cert-card-top">
                     <div className="cert-icon-box" aria-hidden="true">

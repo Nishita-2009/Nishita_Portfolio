@@ -1911,6 +1911,39 @@
   box-shadow: 0 20px 44px -14px rgba(0, 0, 0, 0.75);
 }
 
+.active-visual-frame::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+  transform: skewX(-25deg);
+  transition: left 750ms ease;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.active-visual-frame:hover::after {
+  left: 140%;
+}
+
+.projects-dark-section[data-active-project='growz'] .active-visual-frame:hover {
+  border-color: rgba(52, 211, 153, 0.65);
+  box-shadow: 0 24px 50px -12px rgba(16, 185, 129, 0.28), 0 0 0 1px rgba(52, 211, 153, 0.2);
+}
+
+.projects-dark-section[data-active-project='opthire'] .active-visual-frame:hover {
+  border-color: rgba(167, 139, 250, 0.65);
+  box-shadow: 0 24px 50px -12px rgba(139, 92, 246, 0.28), 0 0 0 1px rgba(167, 139, 250, 0.2);
+}
+
+.projects-dark-section[data-active-project='sujala-ro-purifiers'] .active-visual-frame:hover {
+  border-color: rgba(56, 189, 248, 0.65);
+  box-shadow: 0 24px 50px -12px rgba(2, 132, 199, 0.28), 0 0 0 1px rgba(56, 189, 248, 0.2);
+}
+
 .active-stage-topbar {
   display: flex;
   align-items: center;
@@ -4859,39 +4892,65 @@ section:not(.section-active) .exp-spine-pulse {
     clip-path: none !important;
   }
 }
-.skill-domain-card {
+/* Shared Premium Card Interaction System ([data-glow] & [data-tilt]) */
+[data-glow] {
   position: relative;
   overflow: hidden;
 }
-.skill-domain-card::before,
-.contact-action-card::before {
+[data-glow]::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 0%), rgba(200, 125, 130, 0.16), transparent 70%);
+  border-radius: inherit;
+  background: radial-gradient(280px circle at var(--mx, 50%) var(--my, 50%), rgba(200, 125, 130, 0.15), transparent 70%);
   opacity: 0;
   transition: opacity var(--transition-base);
   pointer-events: none;
+  z-index: 0;
 }
-.skill-domain-card.is-hovered::before,
-.contact-action-card.is-hovered::before {
+[data-glow].is-hovered::before {
   opacity: 1;
 }
-.skill-domain-card > * {
+[data-glow] > * {
   position: relative;
+  z-index: 1;
 }
-.contact-action-card {
-  position: relative;
-  overflow: hidden;
+
+@media (hover: hover) and (pointer: fine) {
+  [data-tilt] {
+    transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+    transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 220ms ease, border-color 220ms ease;
+  }
+  [data-tilt]:hover {
+    box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.4);
+  }
+  [data-tilt]:active {
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale(0.985);
+  }
 }
-.contact-action-card::before {
-  background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), rgba(113, 48, 61, 0.1), transparent 70%);
+
+.skill-domain-card:hover .skill-card-icon svg,
+.edu-milestone-card:hover .edu-icon-medallion svg,
+.exp-showcase-card:hover .exp-logo-badge svg,
+.contact-action-card:hover .contact-card-icon svg {
+  transform: translateY(-2px) scale(1.08);
+  transition: transform 260ms var(--ease-cinematic);
 }
-.skill-domain-card:hover .skill-card-icon svg {
-  transform: translateY(-1px) rotate(-4deg);
+
+.btn .btn-external-arrow,
+.btn .cta-arrow-icon,
+.cert-verify-action .link-diag-arrow {
+  transition: transform 240ms var(--ease-cinematic);
 }
-.skill-card-icon svg {
-  transition: transform var(--transition-fast);
+.btn:hover .btn-external-arrow,
+.cert-verify-action:hover .link-diag-arrow {
+  transform: translate(3px, -3px);
+}
+.btn:hover .cta-arrow-icon {
+  transform: translateX(4px);
+}
+.btn:active {
+  transform: translateY(0) scale(0.98);
 }
 
 /* ---------- Experience: self-drawing timeline ---------- */

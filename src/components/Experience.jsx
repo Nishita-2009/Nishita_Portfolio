@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowUpRight, Code2, Award, Calendar, CheckCircle2 } from 'lucide-react';
 import { experiences } from '../data/portfolioData';
+import AmbientField from './AmbientField';
 
 export default function Experience() {
   return (
@@ -9,12 +10,13 @@ export default function Experience() {
       className="section experience-chapter-section"
       aria-label="Experience and Internships"
     >
+      <AmbientField tone="light" variant="light" lights={false} />
       <div className="container">
         {/* Chapter Header */}
         <div className="chapter-header-split">
           <div className="chapter-header-left">
             <div className="editorial-eyebrow-row">
-              <span className="editorial-section-num">05</span>
+              <span className="editorial-section-num">04</span>
               <span className="editorial-eyebrow-tag">
                 <span className="eyebrow-dot"></span>
                 EXPERIENCE &amp; INTERNSHIPS
@@ -34,7 +36,7 @@ export default function Experience() {
         </div>
 
         {/* Animated Vertical Timeline Showcase */}
-        <div className="exp-showcase-timeline">
+        <div className="exp-showcase-timeline" data-draw>
           <div className="exp-timeline-spine" aria-hidden="true"></div>
 
           {experiences.map((exp, idx) => (
@@ -42,6 +44,8 @@ export default function Experience() {
               key={exp.id}
               id={`experience-card-${exp.id}`}
               className={`exp-showcase-card stagger-${idx + 1}`}
+              data-glow
+              data-tilt
             >
               {/* Timeline Node Marker */}
               <div className="exp-spine-node" aria-hidden="true">

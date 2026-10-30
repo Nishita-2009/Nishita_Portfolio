@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Projects from './components/Projects';
 import Skills from './components/Skills';
+import Experience from './components/Experience';
 import Education from './components/Education';
 import Certifications from './components/Certifications';
 import Contact from './components/Contact';
@@ -40,6 +41,7 @@ export default function App() {
         '.skills-console-card',
         '.skill-domain-card',
         '.chapter-header-split',
+        '.exp-showcase-card',
         '.edu-milestone-card',
         '.cert-card',
         '.contact-top-banner',
@@ -109,6 +111,7 @@ export default function App() {
   /* 3. Delegated pointer lighting / subtle tilt for [data-glow] and [data-tilt] */
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+    if (window.matchMedia('(pointer: coarse)').matches) return undefined;
     let last = null;
     let raf = null;
 
@@ -134,8 +137,8 @@ export default function App() {
         target.style.setProperty('--my', `${(y * 100).toFixed(1)}%`);
         target.classList.add('is-hovered');
         if (target.hasAttribute('data-tilt')) {
-          target.style.setProperty('--ry', `${((x - 0.5) * 9).toFixed(2)}deg`);
-          target.style.setProperty('--rx', `${((0.5 - y) * 7).toFixed(2)}deg`);
+          target.style.setProperty('--ry', `${((x - 0.5) * 8).toFixed(2)}deg`);
+          target.style.setProperty('--rx', `${((0.5 - y) * 6).toFixed(2)}deg`);
         }
       });
     };
@@ -161,6 +164,7 @@ export default function App() {
         <About />
         <Projects />
         <Skills />
+        <Experience />
         <Education />
         <Certifications />
         <Contact />
