@@ -26,7 +26,7 @@ export default function Certifications() {
         <div className="chapter-header-split cert-header">
           <div className="chapter-header-left">
             <div className="editorial-eyebrow-row dark-eyebrow-row">
-              <span className="editorial-section-num dark-num">06</span>
+              <span className="editorial-section-num dark-num">05</span>
               <span className="editorial-eyebrow-tag dark-eyebrow-tag">
                 <span className="eyebrow-dot rose-dot"></span>
                 CERTIFICATIONS &amp; WORKSHOPS

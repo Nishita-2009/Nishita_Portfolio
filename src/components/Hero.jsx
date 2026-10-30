@@ -22,21 +22,24 @@ const stripIcons = {
 };
 
 const FIRST = personalInfo.firstName;
-const LAST = personalInfo.lastName;
-const TOTAL = FIRST.length + LAST.length;
+const LAST_PARTS = personalInfo.lastName.split(' ');
 
 const prefersReduced = () =>
   typeof window !== 'undefined' &&
   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-function TypedLine({ text, typed, showCaret }) {
-  const visible = text.slice(0, typed);
-  const rest = text.slice(typed);
+function StaggeredWord({ word, startIdx }) {
   return (
-    <span className="hero-name-line">
-      <span>{visible}</span>
-      {showCaret && <span className="type-caret" aria-hidden="true"></span>}
-      <span className="type-rest">{rest}</span>
+    <span className="hero-word">
+      {word.split('').map((char, i) => (
+        <span
+          key={i}
+          className="hero-letter"
+          style={{ '--char-i': startIdx + i }}
+        >
+          {char}
+        </span>
+      ))}
     </span>
   );
 }
@@ -46,48 +49,22 @@ export default function Hero() {
   const rafRef = useRef(null);
 
   const [reduced] = useState(prefersReduced);
-  const [typed, setTyped] = useState(reduced ? TOTAL : 0);
   const [stage, setStage] = useState(reduced ? 3 : 0);
-  const [caretGone, setCaretGone] = useState(reduced);
 
-  // Coordinated 3-stage entrance: label -> typed name -> positioning/CTAs -> geometry
+  // Coordinated 3-stage cinematic entrance: pill -> staggered letters -> copy & CTAs -> live telemetry
   useEffect(() => {
     if (reduced) return undefined;
     const timers = [];
-    let interval = null;
 
     timers.push(setTimeout(() => setStage(1), 60));
-    timers.push(
-      setTimeout(() => {
-        let n = 0;
-        interval = setInterval(() => {
-          n += 2;
-          if (n >= TOTAL) {
-            n = TOTAL;
-            setTyped(TOTAL);
-            clearInterval(interval);
-            timers.push(setTimeout(() => setStage(2), 60));
-            timers.push(setTimeout(() => setStage(3), 160));
-            timers.push(setTimeout(() => setCaretGone(true), 600));
-          } else {
-            setTyped(n);
-          }
-        }, 24);
-      }, 120)
-    );
+    timers.push(setTimeout(() => setStage(2), 420));
+    timers.push(setTimeout(() => setStage(3), 750));
 
     // Failsafe: never leave essential content hidden
-    timers.push(
-      setTimeout(() => {
-        setTyped(TOTAL);
-        setStage(3);
-        setCaretGone(true);
-      }, 1500)
-    );
+    timers.push(setTimeout(() => setStage(3), 1600));
 
     return () => {
       timers.forEach(clearTimeout);
-      if (interval) clearInterval(interval);
     };
   }, [reduced]);
 
@@ -115,8 +92,6 @@ export default function Hero() {
   }, []);
 
   const on = (n) => (stage >= n ? 'is-on' : '');
-  const typingDone = typed >= TOTAL;
-  const caretLine = typed < FIRST.length ? 1 : 2;
 
   return (
     <section
@@ -148,25 +123,29 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Accessible name for screen readers; the typed copy is decorative */}
+          {/* Accessible name for screen readers; the staggered letters are visual */}
           <h1 className="hero-name" id="hero-name">
             <span className="sr-only">{personalInfo.name}</span>
-            <span aria-hidden="true" className="hero-name-typed">
-              <TypedLine
-                text={FIRST}
-                typed={Math.min(typed, FIRST.length)}
-                showCaret={!caretGone && caretLine === 1}
-              />
-              <TypedLine
-                text={LAST}
-                typed={Math.max(0, typed - FIRST.length)}
-                showCaret={!caretGone && caretLine === 2}
-              />
+            <span aria-hidden="true" className="hero-name-stagger">
+              <span className="hero-name-line">
+                <StaggeredWord word={FIRST} startIdx={0} />
+              </span>
+              <span className="hero-name-line">
+                {LAST_PARTS.map((part, pIdx) => (
+                  <React.Fragment key={part}>
+                    {pIdx > 0 && <span className="hero-word-space">&nbsp;</span>}
+                    <StaggeredWord
+                      word={part}
+                      startIdx={FIRST.length + pIdx * 8}
+                    />
+                  </React.Fragment>
+                ))}
+              </span>
             </span>
           </h1>
 
           <p
-            className={`hero-positioning ${typingDone ? 'caret-done' : ''}`}
+            className={`hero-positioning ${stage >= 2 ? 'caret-done' : ''}`}
             id="hero-headline"
           >
             <span className="mask-line">

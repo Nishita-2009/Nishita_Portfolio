@@ -4,7 +4,6 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Projects from './components/Projects';
 import Skills from './components/Skills';
-import Experience from './components/Experience';
 import Education from './components/Education';
 import Certifications from './components/Certifications';
 import Contact from './components/Contact';
@@ -108,7 +107,43 @@ export default function App() {
     };
   }, []);
 
-  /* 3. Delegated pointer lighting / subtle tilt for [data-glow] and [data-tilt] */
+  /* 3. Smooth, GPU-friendly scroll progress for cinematic scene transformations */
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+    const hero = document.getElementById('hero');
+    const sections = Array.from(document.querySelectorAll('#main-content > section'));
+    let ticking = false;
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        const vh = window.innerHeight;
+        const scrollY = window.scrollY;
+
+        // Hero recede progress: 0 at top, 1 when scrolled 1 viewport
+        if (hero) {
+          const heroProg = clamp(scrollY / vh, 0, 1);
+          hero.style.setProperty('--hero-progress', heroProg.toFixed(3));
+        }
+
+        // Section scroll progress
+        for (const sec of sections) {
+          const rect = sec.getBoundingClientRect();
+          if (rect.bottom < 0 || rect.top > vh) continue;
+          const prog = clamp((vh - rect.top) / (vh * 0.9), 0, 1);
+          sec.style.setProperty('--sp', prog.toFixed(3));
+        }
+      });
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  /* 4. Delegated pointer lighting / subtle tilt for [data-glow] and [data-tilt] */
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
     if (window.matchMedia('(pointer: coarse)').matches) return undefined;
@@ -164,7 +199,6 @@ export default function App() {
         <About />
         <Projects />
         <Skills />
-        <Experience />
         <Education />
         <Certifications />
         <Contact />
