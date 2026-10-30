@@ -414,7 +414,7 @@ export default function Projects() {
         <div className="projects-header-split">
           <div className="projects-header-left">
             <div className="editorial-eyebrow-row dark-eyebrow-row">
-              <span className="editorial-section-num dark-num">03</span>
+              <span className="editorial-section-num dark-num">02</span>
               <span className="editorial-eyebrow-tag dark-eyebrow-tag">
                 <span className="eyebrow-dot rose-dot"></span>
                 PROJECTS

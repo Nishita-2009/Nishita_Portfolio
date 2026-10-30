@@ -328,15 +328,32 @@ export const certifications = [
     id: "cert-ibm-1m1b",
     title: "IBM | 1M1B",
     subtitle: "AI for Sustainability Virtual Internship",
-    issuer: "IBM SkillsBuild",
+    issuer: "IBM SkillsBuild in collaboration with 1M1B",
     completionDate: "October 2026",
     planId: "PLAN-56138075980A",
     description:
-      "Virtual internship focused on foundational AI applications, sustainability challenges, and responsible technology solutions through IBM SkillsBuild.",
+      "Completed the IBM 1M1B AI for Sustainability Virtual Internship through IBM SkillsBuild, gaining hands-on exposure to foundational AI applications and sustainable technology solutions.",
+    highlights: [
+      "Followed the structured IBM SkillsBuild internship curriculum.",
+      "Explored AI applications for environmental and sustainability problem-solving."
+    ],
     tag: "Verified Credential",
     certificateUrl:
       "https://drive.google.com/file/d/11JV6W1GhbcYBPdFcZGhYlE43Tj1T5mMD/view?usp=drive_link",
     icon: "award"
+  },
+  {
+    id: "cert-base44",
+    title: "Base44",
+    subtitle: "Hands-On App Building Workshop",
+    issuer: "NIAT & Base44",
+    completionDate: "November 2025",
+    description:
+      "Hands-on workshop for building applications using the Base44 platform.",
+    tag: "App Building",
+    certificateUrl:
+      "https://drive.google.com/file/d/10GkZHwI_5W8_EJ0GHqWnpMQafw8T1cXh/view?usp=sharing",
+    icon: "star"
   },
   {
     id: "cert-ai-agent",
@@ -384,7 +401,6 @@ export const navLinks = [
   { name: "About", href: "#about" },
   { name: "Projects", href: "#projects" },
   { name: "Skills", href: "#skills" },
-  { name: "Experience", href: "#experience" },
   { name: "Education", href: "#education" },
   { name: "Certifications", href: "#certifications" },
   { name: "Contact", href: "#contact" }

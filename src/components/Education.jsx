@@ -20,7 +20,7 @@ export default function Education() {
         <div className="chapter-header-split">
           <div className="chapter-header-left">
             <div className="editorial-eyebrow-row">
-              <span className="editorial-section-num">06</span>
+              <span className="editorial-section-num">04</span>
               <span className="editorial-eyebrow-tag">
                 <span className="eyebrow-dot"></span>
                 EDUCATION

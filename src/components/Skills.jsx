@@ -9,6 +9,7 @@ import {
   ArrowUpRight
 } from 'lucide-react';
 import { coreSkills, additionalTechnologies } from '../data/portfolioData';
+import AmbientField from './AmbientField';
 
 const skillIcons = {
   code: <Code2 size={20} strokeWidth={1.65} />,
@@ -25,9 +26,11 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="section skills-dark-section"
+      className="section layer-panel skills-dark-section"
+      data-layer="slide"
       aria-label="Technical Skills and Capabilities"
     >
+      <AmbientField tone="dark" variant="dark" lights={false} />
       {/* Flowing Burgundy Silk-Wave Linework & Signal Pulses */}
       <svg
         className="dark-section-linework skills-linework"
@@ -107,7 +110,7 @@ export default function Skills() {
           {/* Left Column: Editorial Heading & Summary */}
           <div className="skills-header-col">
             <div className="editorial-eyebrow-row dark-eyebrow-row">
-              <span className="editorial-section-num dark-num">04</span>
+              <span className="editorial-section-num dark-num">03</span>
               <span className="editorial-eyebrow-tag dark-eyebrow-tag">
                 <span className="eyebrow-dot rose-dot"></span>
                 SKILLS
@@ -145,6 +148,8 @@ export default function Skills() {
                 <div
                   key={item.category}
                   className={`skill-domain-card stagger-${(idx % 3) + 1}`}
+                  data-glow
+                  data-tilt
                 >
                   <div className="skill-card-top-row">
                     <div className="skill-card-icon" aria-hidden="true">

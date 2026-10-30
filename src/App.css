@@ -4447,6 +4447,72 @@
   clip-path: circle(80% at 50% 50%);
 }
 
+/* Hero Scroll Indicator */
+.hero-scroll-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.25rem 0;
+  margin-bottom: 0.5rem;
+  z-index: 5;
+  position: relative;
+}
+
+.hero-scroll-pill {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.hero-scroll-pill:hover {
+  color: var(--burgundy);
+  transform: translateY(2px);
+}
+
+.scroll-mouse-track {
+  width: 18px;
+  height: 28px;
+  border: 1.5px solid currentColor;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  padding-top: 4px;
+  opacity: 0.75;
+}
+
+.scroll-mouse-wheel {
+  width: 2.5px;
+  height: 5px;
+  background: currentColor;
+  border-radius: 2px;
+  animation: mouseWheelScroll 1.6s ease-in-out infinite;
+}
+
+@keyframes mouseWheelScroll {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+.scroll-indicator-label {
+  font-weight: 600;
+}
+
 /* Hero is a sticky layer that recedes as the next panel rises over it (desktop) */
 .hero-section {
   --hero-recede: 0;
@@ -5080,17 +5146,28 @@ section:not(.section-active) .exp-spine-pulse {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: 1.25fr 1fr;
-  grid-template-rows: repeat(3, auto);
+  grid-template-columns: 1.18fr 1fr 1fr;
+  grid-template-rows: repeat(2, auto);
   gap: 1.15rem;
 }
 .cert-card-featured {
-  grid-row: 1 / span 3;
+  grid-column: 1;
+  grid-row: 1 / span 2;
 }
 .cert-card {
   transition-delay: calc(var(--i, 0) * 140ms);
 }
-@media (max-width: 860px) {
+@media (max-width: 1040px) and (min-width: 641px) {
+  .cert-gallery {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+  }
+  .cert-card-featured {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+}
+@media (max-width: 640px) {
   .cert-gallery {
     grid-template-columns: 1fr;
     grid-template-rows: none;
@@ -5285,20 +5362,34 @@ section:not(.section-active) .exp-spine-pulse {
 .seal-ring-3 {
   transition-delay: 500ms;
 }
-.cert-variant-1 {
+.cert-variant-1,
+.cert-variant-2,
+.cert-variant-3,
+.cert-variant-4 {
   margin-left: 0;
 }
-.cert-variant-2 {
-  margin-left: 1.25rem;
+.cert-highlights-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.85rem 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
 }
-.cert-variant-3 {
-  margin-left: 0.5rem;
+.cert-highlight-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-on-dark-secondary);
+  line-height: 1.45;
 }
-@media (max-width: 860px) {
-  .cert-variant-2,
-  .cert-variant-3 {
-    margin-left: 0;
-  }
+.highlight-bullet {
+  color: var(--muted-rose);
+  font-weight: 700;
+  font-size: 1.1rem;
+  line-height: 1;
+  margin-top: -1px;
 }
 .cert-heading,
 .cert-header .chapter-main-heading {

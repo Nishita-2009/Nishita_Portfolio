@@ -31,7 +31,7 @@ export default function About() {
           {/* Left Column: Concise Editorial Intro & CTA */}
           <div className="about-text-col">
             <div className="editorial-eyebrow-row">
-              <span className="editorial-section-num">02</span>
+              <span className="editorial-section-num">01</span>
               <span className="editorial-eyebrow-tag">
                 <span className="eyebrow-dash" aria-hidden="true"></span>
                 ABOUT ME

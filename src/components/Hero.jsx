@@ -277,6 +277,15 @@ export default function Hero() {
         </div>
       </div>
 
+      <div className={`hero-scroll-indicator hs ${on(3)}`} aria-hidden="true">
+        <a href="#about" className="hero-scroll-pill" aria-label="Scroll to About section">
+          <span className="scroll-mouse-track">
+            <span className="scroll-mouse-wheel"></span>
+          </span>
+          <span className="scroll-indicator-label">SCROLL</span>
+        </a>
+      </div>
+
       <div className="credentials-strip-wrapper" aria-label="Key Credentials">
         <div className="container">
           <div className="credentials-strip-grid">

@@ -80,7 +80,7 @@ export default function Contact() {
 
       <div className="container contact-container">
         <div className="editorial-eyebrow-row">
-          <span className="editorial-section-num">08</span>
+          <span className="editorial-section-num">06</span>
           <span className="editorial-eyebrow-tag">
             <span className="eyebrow-dot"></span>
             CONTACT

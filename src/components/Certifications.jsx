@@ -27,7 +27,7 @@ export default function Certifications() {
         <div className="chapter-header-split cert-header">
           <div className="chapter-header-left">
             <div className="editorial-eyebrow-row dark-eyebrow-row">
-              <span className="editorial-section-num dark-num">07</span>
+              <span className="editorial-section-num dark-num">05</span>
               <span className="editorial-eyebrow-tag dark-eyebrow-tag">
                 <span className="eyebrow-dot rose-dot"></span>
                 CERTIFICATIONS &amp; WORKSHOPS
@@ -82,6 +82,17 @@ export default function Certifications() {
                 </div>
 
                 <p className="cert-card-desc">{featured.description}</p>
+
+                {featured.highlights && (
+                  <ul className="cert-highlights-list" aria-label="Key internship highlights">
+                    {featured.highlights.map((h, i) => (
+                      <li key={i} className="cert-highlight-item">
+                        <span className="highlight-bullet" aria-hidden="true">›</span>
+                        <span>{h}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
 
               <div className="cert-card-footer">
