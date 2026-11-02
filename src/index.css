@@ -4,44 +4,39 @@
    ========================================================================== */
 
 :root {
-  /* Core Surfaces & Text - Warm Ivory & Cream Reference Palette */
-  --bg-ivory: #FBF3ED;
-  --bg-cream: #F5E7DF;
-  --bg-blush: #EEDBD3;
-  --bg-card-light: #FFFFFF;
+  /* Core Surfaces & Text */
+  --bg-ivory: #F8F3EC;
+  --bg-cream: #F0E7DD;
+  --bg-blush: #EBD0CA;
+  --bg-card-light: #FAF7F2;
   --bg-white: #FFFFFF;
 
-  --text-main: #211817;
-  --text-secondary: #6B6260;
-  --text-muted: #958B88;
+  --text-main: #191716;
+  --text-secondary: #77716D;
+  --text-muted: #8E8882;
 
-  --border-light: rgba(199, 127, 137, 0.22);
-  --border-medium: rgba(120, 24, 47, 0.18);
-  --border-subtle: rgba(76, 16, 35, 0.08);
+  --border-light: #DED1C5;
+  --border-medium: #D0C2B4;
 
   /* Rich Charcoal & Dark Surfaces */
   --bg-charcoal: #171817;
   --bg-dark-secondary: #222321;
   --bg-dark-card: #1E1F1D;
-  --text-on-dark: #FBF3ED;
+  --text-on-dark: #F8F3EC;
   --text-on-dark-secondary: #B0AAA2;
   --border-dark: #2E2F2C;
   --border-dark-hover: #4B4644;
 
-  /* Burgundy & Muted Rose Accents (Reference Matched) */
-  --burgundy: #78182F;
-  --burgundy-deep: #4C1023;
-  --burgundy-core: #380B19;
-  --burgundy-hover: #5D1223;
-  --burgundy-soft: rgba(120, 24, 47, 0.08);
-  --burgundy-border: rgba(120, 24, 47, 0.25);
-  --muted-rose: #C77F89;
-  --muted-rose-soft: rgba(199, 127, 137, 0.15);
-  --glow-rose: rgba(255, 166, 182, 0.5);
+  /* Burgundy & Muted Rose Accents */
+  --burgundy: #762B3D;
+  --burgundy-hover: #5F2130;
+  --burgundy-soft: rgba(118, 43, 61, 0.08);
+  --burgundy-border: rgba(118, 43, 61, 0.25);
+  --muted-rose: #C87D82;
+  --muted-rose-soft: rgba(200, 125, 130, 0.14);
 
   /* Typography */
-  --font-serif: 'Playfair Display', 'DM Serif Display', Georgia, 'Times New Roman', serif;
-  --font-editorial: 'Playfair Display', 'DM Serif Display', Georgia, serif;
+  --font-serif: 'DM Serif Display', Georgia, 'Times New Roman', serif;
   --font-sans: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-script: 'Caveat', 'Segoe Script', cursive;
   --font-mono: ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace;
